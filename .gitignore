@@ -24,3 +24,6 @@ __MACOSX
 *.jpeg
 *.png
 *.jpg
+
+# application.properties ###
+**/src/main/resources/application.properties
