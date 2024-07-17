@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * Controller class that handles requests related to pages
+ * PageController is a controller class that handles requests related to pages.
  */
 @Controller
 public class PageController {
