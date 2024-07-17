@@ -28,14 +28,14 @@ public class PageController {
     }
 
     /**
-     * Direct the user to the Signup page.
+     * Direct the user to the Registration page.
      *
-     * @return name of the signup page.
+     * @return name of the Registration page.
      */
-    @GetMapping("/signup")
-    public String goToSignUpPage() {
-        pageControllerLogger.info("PageControllerLogger: User is now at signup.html.");
-        return "signup";
+    @GetMapping("/registration")
+    public String goToRegistrationPage() {
+        pageControllerLogger.info("PageControllerLogger: User is now at registration.html.");
+        return "registration";
     }
 
     /**
