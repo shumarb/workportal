@@ -13,6 +13,7 @@ class UserProfileTest {
     void setUp() {
         this.userProfile1 = new UserProfile("Sam Ray", "sam_ray33", "sam.ray@gmail.com", "sAM@r2", "User");
     }
+
     @Test
     void test_userProfileInstantiation() {
         assertEquals("Sam Ray", userProfile1.getName());
