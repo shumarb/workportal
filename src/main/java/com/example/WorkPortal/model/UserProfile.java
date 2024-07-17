@@ -1,15 +1,13 @@
 package com.example.WorkPortal.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 /**
  * Class for a person that uses the application.
  * UserProfile is used to avoid confusion between User and Manager roles.
  */
 @Entity
+@Table(name = "user_profile")
 public class UserProfile {
 
     /**
@@ -27,31 +25,41 @@ public class UserProfile {
     /**
      * Name of a UserProfile.
      */
+    @Column(unique = true)
     private String username;
 
     /**
      * Email address of a UserProfile.
      */
+    @Column(unique = true)
     private String email;
 
     /**
      * Password of a UserProfile.
      */
+    @Column(unique = true)
     private String password;
 
     /**
-     * Constructs a new UserProfile with the given name, username, email, and password.
-     *
-     * @param name     The full name of the user.
-     * @param username The unique username used for login.
-     * @param email    The email address associated with the user.
-     * @param password The password for the user account.
+     * Role of a UserProfile (either User or Manager).
      */
-    public UserProfile(String name, String username, String email, String password) {
+    private String role;
+
+    /**
+     * Constructs a new UserProfile with the given name, username, email, password, and role.
+     *
+     * @param name     The name of the UserProfile object.
+     * @param username The unique username of the UserProfile object used for login.
+     * @param email    The email address of the UserProfile object.
+     * @param password The password for the UserProfile object.
+     * @param role     The role for the UserProfile object.
+     */
+    public UserProfile(String name, String username, String email, String password, String role) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     /**
@@ -142,6 +150,24 @@ public class UserProfile {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * Retrieves the role for the UserProfile object.
+     *
+     * @return The role.
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * Sets the password for the UserProfile object.
+     *
+     * @param role The role to set.
+     */
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }
