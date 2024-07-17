@@ -170,4 +170,16 @@ public class UserProfile {
         this.role = role;
     }
 
+    @Override
+    public String toString() {
+        return "UserProfile {" +
+                "id = " + id +
+                ", name = '" + name + '\'' +
+                ", username = '" + username + '\'' +
+                ", email = '" + email + '\'' +
+                ", password = '" + password + '\'' +
+                ", role = '" + role + '\'' +
+                '}';
+    }
+
 }
