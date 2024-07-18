@@ -69,15 +69,6 @@ public class Person {
     }
 
     /**
-     * Retrieves the unique identifier of the user profile.
-     *
-     * @return The ID of the user profile.
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
      * Retrieves the full name of the Person object.
      *
      * @return The full name of the Person object.
@@ -167,6 +158,12 @@ public class Person {
         this.role = role;
     }
 
+    /**
+     * Returns a string representation of a Person entity.
+     *
+     * @return a string containing the id, name, username, email address, password,
+     * and role of a Person entity.
+     */
     @Override
     public String toString() {
         return "Person {" +
