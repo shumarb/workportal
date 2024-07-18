@@ -72,15 +72,6 @@ public class UserProfile {
     }
 
     /**
-     * Sets the unique identifier of the UserProfile object.
-     *
-     * @param id The ID to set.
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    /**
      * Retrieves the full name of the UserProfile object.
      *
      * @return The full name of the UserProfile object.
