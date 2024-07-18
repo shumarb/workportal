@@ -4,6 +4,9 @@
 
 package com.example.WorkPortal.service;
 
+import com.example.WorkPortal.exceptions.UnavailableEmailAddressAndUsernameException;
+import com.example.WorkPortal.exceptions.UnavailableEmailAddressException;
+import com.example.WorkPortal.exceptions.UnavailableUsernameException;
 import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +27,38 @@ public class RegistrationService {
     }
 
     /**
-     * Registers a Person into the database by saving the Person entity.
-     * @param person the Person entity to be saved.
+     * Registers a Person entity in the application..
+     *
+     * @param name the name of the Person
+     * @param username the username of the Person
+     * @param email the email address of the Person
+     * @param password the password of the Person
+     * @param role the role of the Person
      */
-    public void registerPerson(Person person) {
-        this.personRepository.save(person);
+    public void registerPerson(String name,
+                               String username,
+                               String email,
+                               String password,
+                               String role) {
+        this.personRepository.save(new Person(name, username, email, password, role));
     }
 
     /**
-     * Checks that the username and email address of the Person entity is available for registration
+     * Checks if a Person entity's email has been registered earlier.
      *
+     * @return true if email has been registered, otherwise return false.
      */
-    public boolean isAbleToBeRegistered() {
-        return true;
+    public boolean isEmailAddressRegistered(String email) {
+        return this.personRepository.findByEmail(email).isPresent();
     }
+
+    /**
+     * Checks if a Person entity's username has been registered earlier.
+     *
+     * @return true if username has been registered, otherwise return false.
+     */
+    public boolean isUsernameRegistered(String username) {
+        return this.personRepository.findByUsername(username).isPresent();
+    }
+
 }
