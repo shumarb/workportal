@@ -14,7 +14,7 @@ public class LoginPageController {
     /**
      * Logger to monitor operational flow and assist in troubleshooting.
      */
-    private static final Logger loginPageControllerLogger = LogManager.getLogger(IndexPageController.class);
+    private static final Logger loginPageControllerLogger = LogManager.getLogger(IndexController.class);
 
     /**
      * Direction to the Signup page.
