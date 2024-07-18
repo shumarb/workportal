@@ -6,14 +6,16 @@ package com.example.WorkPortal.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-public class RegistrationController {
+@Controller
+public class RegistrationPageController {
 
     /**
      * Logger to monitor operational flow and assist in troubleshooting.
      */
-    private static final Logger registrationControllerLogger = LogManager.getLogger(PageController.class);
+    private static final Logger registrationControllerLogger = LogManager.getLogger(IndexPageController.class);
 
     /**
      * Direction to the Registration page.
@@ -22,7 +24,7 @@ public class RegistrationController {
      */
     @GetMapping("/registration")
     public String goToRegistrationPage() {
-        registrationControllerLogger.info("PageControllerLogger: User is now at registration.html.");
+        registrationControllerLogger.info("RegistrationControllerLogger: User is now at registration.html.");
         return "registration";
     }
 
