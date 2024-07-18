@@ -1,3 +1,7 @@
+/**
+ * PageController is a controller class that handles requests related to pages.
+ */
+
 package com.example.WorkPortal.controller;
 
 import org.apache.logging.log4j.Logger;
@@ -5,9 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-/**
- * PageController is a controller class that handles requests related to pages.
- */
 @Controller
 public class PageController {
 
@@ -17,7 +18,7 @@ public class PageController {
     private static final Logger pageControllerLogger = LogManager.getLogger(PageController.class);
 
     /**
-     * Directs the user to the home page.
+     * Direction to the home page.
      *
      * @return name of the home page.
      */
@@ -28,7 +29,7 @@ public class PageController {
     }
 
     /**
-     * Direct the user to the Registration page.
+     * Direction to the Registration page.
      *
      * @return name of the Registration page.
      */
@@ -39,7 +40,7 @@ public class PageController {
     }
 
     /**
-     * Direct the user to the Signup page.
+     * Direction to the Signup page.
      *
      * @return name of the signup page.
      */

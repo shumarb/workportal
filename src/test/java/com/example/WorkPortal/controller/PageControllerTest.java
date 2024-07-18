@@ -1,3 +1,6 @@
+/**
+ * Unit tests for PageController class methods.
+ */
 package com.example.WorkPortal.controller;
 
 import org.junit.jupiter.api.BeforeEach;

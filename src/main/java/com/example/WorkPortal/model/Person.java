@@ -1,60 +1,60 @@
+/**
+ * Class for a Person entity in the application.
+ */
+
 package com.example.WorkPortal.model;
 
 import jakarta.persistence.*;
 
-/**
- * Class for a person that uses the application.
- * UserProfile is used to avoid confusion between User and Manager roles.
- */
 @Entity
-@Table(name = "user_profile")
-public class UserProfile {
+@Table(name = "person")
+public class Person {
 
     /**
-     * Identification number of a UserProfile.
+     * Identification number of a Person.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     /**
-     * Name of a UserProfile.
+     * Name of a Person.
      */
     private String name;
 
     /**
-     * Name of a UserProfile.
+     * Username of a Person.
      */
     @Column(unique = true)
     private String username;
 
     /**
-     * Email address of a UserProfile.
+     * Email address of a Person.
      */
     @Column(unique = true)
     private String email;
 
     /**
-     * Password of a UserProfile.
+     * Password of a Person.
      */
     @Column(unique = true)
     private String password;
 
     /**
-     * Role of a UserProfile (either User or Manager).
+     * Role of a Person (either User or Manager).
      */
     private String role;
 
     /**
-     * Constructs a new UserProfile with the given name, username, email, password, and role.
+     * Constructs a new Person with the given name, username, email, password, and role.
      *
-     * @param name     The name of the UserProfile object.
-     * @param username The unique username of the UserProfile object used for login.
-     * @param email    The email address of the UserProfile object.
-     * @param password The password for the UserProfile object.
-     * @param role     The role for the UserProfile object.
+     * @param name     The name of the Person object.
+     * @param username The unique username of the Person object used for login.
+     * @param email    The email address of the Person object.
+     * @param password The password for the Person object.
+     * @param role     The role for the Person object.
      */
-    public UserProfile(String name, String username, String email, String password, String role) {
+    public Person(String name, String username, String email, String password, String role) {
         this.name = name;
         this.username = username;
         this.email = email;
@@ -72,16 +72,16 @@ public class UserProfile {
     }
 
     /**
-     * Retrieves the full name of the UserProfile object.
+     * Retrieves the full name of the Person object.
      *
-     * @return The full name of the UserProfile object.
+     * @return The full name of the Person object.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Sets the name of the UserProfile object.
+     * Sets the name of the Person object.
      *
      * @param name The full name to set.
      */
@@ -90,7 +90,7 @@ public class UserProfile {
     }
 
     /**
-     * Retrieves the unique username of the UserProfile object used for login.
+     * Retrieves the unique username of the Person object used for login.
      *
      * @return The username.
      */
@@ -99,7 +99,7 @@ public class UserProfile {
     }
 
     /**
-     * Sets the unique username used by UserProfile object for login.
+     * Sets the unique username used by Person object for login.
      *
      * @param username The username to set.
      */
@@ -108,7 +108,7 @@ public class UserProfile {
     }
 
     /**
-     * Retrieves the email address associated with the UserProfile object.
+     * Retrieves the email address associated with the Person object.
      *
      * @return The email address.
      */
@@ -117,7 +117,7 @@ public class UserProfile {
     }
 
     /**
-     * Sets the email address associated with the UserProfile object.
+     * Sets the email address associated with the Person object.
      *
      * @param email The email address to set.
      */
@@ -126,7 +126,7 @@ public class UserProfile {
     }
 
     /**
-     * Retrieves the password for the UserProfile object.
+     * Retrieves the password for the Person object.
      *
      * @return The password.
      */
@@ -135,7 +135,7 @@ public class UserProfile {
     }
 
     /**
-     * Sets the password for the UserProfile object.
+     * Sets the password for the Person object.
      *
      * @param password The password to set.
      */
@@ -144,7 +144,7 @@ public class UserProfile {
     }
 
     /**
-     * Retrieves the role for the UserProfile object.
+     * Retrieves the role for the Person object.
      *
      * @return The role.
      */
@@ -153,7 +153,7 @@ public class UserProfile {
     }
 
     /**
-     * Sets the password for the UserProfile object.
+     * Sets the password for the Person object.
      *
      * @param role The role to set.
      */
@@ -163,7 +163,7 @@ public class UserProfile {
 
     @Override
     public String toString() {
-        return "UserProfile {" +
+        return "Person {" +
                 "id = " + id +
                 ", name = '" + name + '\'' +
                 ", username = '" + username + '\'' +
