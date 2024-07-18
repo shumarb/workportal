@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
 
     /**
-     * Logger to monitor operational flow and assist in troubleshooting.
+     * Logger to monitor operational flow and assist in troubleshooting for Index page.
      */
-    private static final Logger indexPageControllerLogger = LogManager.getLogger(IndexController.class);
+    private static final Logger indexControllerLogger = LogManager.getLogger(IndexController.class);
 
     /**
      * Navigates to the index page.
@@ -25,7 +25,7 @@ public class IndexController {
      */
     @GetMapping("/")
     public String showIndexPage() {
-        indexPageControllerLogger.info("IndexPageControllerLogger: User is now at index.html.");
+        indexControllerLogger.info("IndexControllerLogger: User is now at index.html.");
         return "index";
     }
 

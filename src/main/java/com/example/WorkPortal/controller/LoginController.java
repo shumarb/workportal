@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LoginController {
     /**
-     * Logger to monitor operational flow and assist in troubleshooting.
+     * Logger to monitor operational flow and assist in troubleshooting for Login page.
      */
-    private static final Logger loginPageControllerLogger = LogManager.getLogger(IndexController.class);
+    private static final Logger loginControllerLogger = LogManager.getLogger(IndexController.class);
 
     /**
      * Navigates to the Login page.
@@ -23,7 +23,7 @@ public class LoginController {
      */
     @GetMapping("/login")
     public String showLoginPage() {
-        loginPageControllerLogger.info("LoginPageControllerLogger: User is now at login.html.");
+        loginControllerLogger.info("LoginControllerLogger: User is now at login.html.");
         return "login";
     }
 

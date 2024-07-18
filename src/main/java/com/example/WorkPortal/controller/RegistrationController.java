@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RegistrationController {
 
     /**
-     * Logger to monitor operational flow and assist in troubleshooting.
+     * Logger to monitor operational flow and assist in troubleshooting for Registration page.
      */
     private static final Logger registrationControllerLogger = LogManager.getLogger(IndexController.class);
 
@@ -35,7 +35,7 @@ public class RegistrationController {
      */
     @GetMapping("/registration")
     public String showRegistrationPage() {
-        registrationControllerLogger.info("PageControllerLogger: User is now at registration.html.");
+        registrationControllerLogger.info("RegistrationControllerLogger: User is now at registration.html.");
         return "registration";
     }
 
@@ -48,8 +48,8 @@ public class RegistrationController {
     @PostMapping("/register")
     public String registerPerson(Person person) {
         this.registrationService.registerPerson(person);
-        registrationControllerLogger.info("PersonControllerLogger: Successful Registration --> {}", person.toString());
-        registrationControllerLogger.info("PersonControllerLogger: User is redirected to login.html.");
+        registrationControllerLogger.info("RegistrationControllerLogger: Successful Registration --> {}", person.toString());
+        registrationControllerLogger.info("RegistrationControllerLogger: User is redirected to login.html.");
         return "redirect:/login";
     }
 
