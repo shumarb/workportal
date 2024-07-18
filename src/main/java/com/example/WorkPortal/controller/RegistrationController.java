@@ -29,12 +29,12 @@ public class RegistrationController {
     }
 
     /**
-     * Direction to the Registration page.
+     * Navigates to the Registration page.
      *
      * @return name of the Registration page.
      */
     @GetMapping("/registration")
-    public String goToRegistrationPage() {
+    public String showRegistrationPage() {
         registrationControllerLogger.info("PageControllerLogger: User is now at registration.html.");
         return "registration";
     }

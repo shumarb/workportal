@@ -19,7 +19,7 @@ class RegistrationControllerTest {
     @BeforeEach
     public void setUp() {
         RegistrationController registrationController = new RegistrationController(registrationService);
-        this.pageName = registrationController.goToRegistrationPage();
+        this.pageName = registrationController.showRegistrationPage();
     }
 
     @Test

@@ -17,12 +17,12 @@ public class LoginController {
     private static final Logger loginPageControllerLogger = LogManager.getLogger(IndexController.class);
 
     /**
-     * Direction to the Signup page.
+     * Navigates to the Login page.
      *
-     * @return name of the signup page.
+     * @return name of the Login page.
      */
     @GetMapping("/login")
-    public String goToLoginPage() {
+    public String showLoginPage() {
         loginPageControllerLogger.info("LoginPageControllerLogger: User is now at login.html.");
         return "login";
     }

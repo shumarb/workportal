@@ -19,12 +19,12 @@ public class IndexController {
     private static final Logger indexPageControllerLogger = LogManager.getLogger(IndexController.class);
 
     /**
-     * Direction to the home page.
+     * Navigates to the index page.
      *
-     * @return name of the home page.
+     * @return name of the index page.
      */
     @GetMapping("/")
-    public String goToIndexPage() {
+    public String showIndexPage() {
         indexPageControllerLogger.info("IndexPageControllerLogger: User is now at index.html.");
         return "index";
     }

@@ -12,7 +12,7 @@ class LoginControllerTest {
     @BeforeEach
     public void setUp() {
         LoginController loginController = new LoginController();
-        this.pageName = loginController.goToLoginPage();
+        this.pageName = loginController.showLoginPage();
     }
 
     @Test

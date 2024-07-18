@@ -15,7 +15,7 @@ class IndexControllerTest {
     @BeforeEach
     public void setUp() {
         IndexController indexController = new IndexController();
-        this.pageName = indexController.goToIndexPage();
+        this.pageName = indexController.showIndexPage();
     }
 
     @Test
