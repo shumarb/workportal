@@ -37,7 +37,6 @@ public class Person {
     /**
      * Password of a Person.
      */
-    @Column(unique = true)
     private String password;
 
     /**
