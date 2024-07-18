@@ -9,10 +9,12 @@ import com.example.WorkPortal.service.RegistrationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-public class RegistrationPageController {
+@Controller
+public class RegistrationController {
 
     /**
      * Logger to monitor operational flow and assist in troubleshooting.
@@ -22,7 +24,7 @@ public class RegistrationPageController {
     @Autowired
     private final RegistrationService registrationService;
 
-    public RegistrationPageController(RegistrationService registrationService) {
+    public RegistrationController(RegistrationService registrationService) {
         this.registrationService = registrationService;
     }
 

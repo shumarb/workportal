@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class IndexPageControllerTest {
+class IndexControllerTest {
 
     private String pageName;
 
     @BeforeEach
     public void setUp() {
-        IndexPageController indexPageController = new IndexPageController();
-        this.pageName = indexPageController.goToIndexPage();
+        IndexController indexController = new IndexController();
+        this.pageName = indexController.goToIndexPage();
     }
 
     @Test

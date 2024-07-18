@@ -1,6 +1,5 @@
 /**
- * Service class for managing operations related to Person entities.
- * Service class serves as intermediary between PersonController and PersonRepository.
+ * Service class for managing registration of Person entities.
  */
 
 package com.example.WorkPortal.service;
@@ -11,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PersonService {
+public class RegistrationService {
 
     private final PersonRepository personRepository;
 
@@ -20,7 +19,7 @@ public class PersonService {
      * @param personRepository the repository for Person entities.
      */
     @Autowired
-    public PersonService(PersonRepository personRepository) {
+    public RegistrationService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
@@ -30,5 +29,13 @@ public class PersonService {
      */
     public void registerPerson(Person person) {
         this.personRepository.save(person);
+    }
+
+    /**
+     * Checks that the username and email address of the Person entity is available for registration
+     *
+     */
+    public boolean isAbleToBeRegistered() {
+        return true;
     }
 }

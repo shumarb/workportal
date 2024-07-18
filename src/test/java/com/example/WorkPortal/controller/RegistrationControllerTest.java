@@ -2,20 +2,24 @@
  * Unit tests for RegistrationPageController class method.
  */
 package com.example.WorkPortal.controller;
+import com.example.WorkPortal.service.RegistrationService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.mockito.Mock;
 import static org.junit.jupiter.api.Assertions.*;
 
-class RegistrationPageControllerTest {
+class RegistrationControllerTest {
 
     private String pageName;
 
+    @Mock
+    private RegistrationService registrationService;
+
     @BeforeEach
     public void setUp() {
-        RegistrationPageController registrationPageController = new RegistrationPageController();
-        this.pageName = registrationPageController.goToRegistrationPage();
+        RegistrationController registrationController = new RegistrationController(registrationService);
+        this.pageName = registrationController.goToRegistrationPage();
     }
 
     @Test

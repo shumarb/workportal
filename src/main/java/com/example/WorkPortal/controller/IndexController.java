@@ -11,12 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class IndexPageController {
+public class IndexController {
 
     /**
      * Logger to monitor operational flow and assist in troubleshooting.
      */
-    private static final Logger indexPageControllerLogger = LogManager.getLogger(IndexPageController.class);
+    private static final Logger indexPageControllerLogger = LogManager.getLogger(IndexController.class);
 
     /**
      * Direction to the home page.

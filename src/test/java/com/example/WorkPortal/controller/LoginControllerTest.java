@@ -5,14 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LoginPageControllerTest {
+class LoginControllerTest {
 
     private String pageName;
 
     @BeforeEach
     public void setUp() {
-        LoginPageController loginPageController = new LoginPageController();
-        this.pageName = loginPageController.goToLoginPage();
+        LoginController loginController = new LoginController();
+        this.pageName = loginController.goToLoginPage();
     }
 
     @Test
