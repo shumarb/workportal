@@ -45,6 +45,13 @@ public class Person {
     private String role;
 
     /**
+     * Default constructor as Hibernate requires it in order to instantiate objects.
+     */
+    public Person() {
+
+    }
+
+    /**
      * Constructs a new Person with the given name, username, email, password, and role.
      *
      * @param name     The name of the Person object.
