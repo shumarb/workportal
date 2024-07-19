@@ -18,8 +18,7 @@ import java.util.regex.Pattern;
 public class RegistrationService {
 
     /**
-     * Logger to monitor operational flow and assist in troubleshooting
-     * for Registration operations.
+     * Logger to monitor operational flow and assist in troubleshooting for Registration operations.
      */
     private static final Logger registrationServiceLogger = LogManager.getLogger(RegistrationService.class);
 
