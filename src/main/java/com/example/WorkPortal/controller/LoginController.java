@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LoginController {
+    
     /**
      * Logger to monitor operational flow and assist in troubleshooting for Login page.
      */
