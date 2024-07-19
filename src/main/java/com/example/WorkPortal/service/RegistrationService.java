@@ -6,6 +6,8 @@ package com.example.WorkPortal.service;
 
 import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.repository.PersonRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,15 @@ import java.util.regex.Pattern;
 @Service
 public class RegistrationService {
 
+    /**
+     * Logger to monitor operational flow and assist in troubleshooting
+     * for Registration operations.
+     */
+    private static final Logger registrationServiceLogger = LogManager.getLogger(RegistrationService.class);
+
+   /**
+     * Repository interface for performing CRUD operations on Person entities.
+     */
     private final PersonRepository personRepository;
 
     /**
@@ -41,6 +52,9 @@ public class RegistrationService {
                                String email,
                                String password,
                                String role) {
+        registrationServiceLogger.info("RegistrationServiceLogger: Currently at registerPerson method. Person entity created. " +
+                                        "Name: {}, Username: {}, Email: {}, Password: {}, Role: {}",
+                                         name, username, email, password, role);
         this.personRepository.save(new Person(name, username, email, password, role));
     }
 
@@ -51,6 +65,7 @@ public class RegistrationService {
      * @return true if email has been registered, false otherwise.
      */
     public boolean isEmailAddressRegistered(String email) {
+        registrationServiceLogger.info("RegistrationServiceLogger: Currently at isEmailAddressRegistered method. Email: {}", email);
         return this.personRepository.findByEmail(email).isPresent();
     }
 
@@ -61,6 +76,7 @@ public class RegistrationService {
      * @return true if username has been registered, false otherwise.
      */
     public boolean isUsernameRegistered(String username) {
+        registrationServiceLogger.info("RegistrationServiceLogger: Currently at isUsernameRegistered method. Email: {}", username);
         return this.personRepository.findByUsername(username).isPresent();
     }
 
@@ -71,6 +87,7 @@ public class RegistrationService {
      * @return true if valid email address, false otherwise.
      */
     public boolean isValidEmailAddress(String email) {
+        registrationServiceLogger.info("RegistrationServiceLogger: Currently at isValidEmailAddress method. Email: {}", email);
         // Regular expression pattern for an email
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
@@ -88,6 +105,8 @@ public class RegistrationService {
      * @return true if valid name format, false otherwise.
      */
     public boolean isValidName(String name) {
+        registrationServiceLogger.info("RegistrationServiceLogger: Currently at isValidName method. Name: {}", name);
+
         // Split in this way in case of two or more consecutive spaces.
         String[] words = name.trim().split("\\s+");
 
@@ -113,6 +132,7 @@ public class RegistrationService {
      * @return true if word has only letters, false otherwise.
      */
     public boolean isAllLetters(String word) {
+        registrationServiceLogger.info("Currently at isAllLetters method. Word: {}", word);
         return word.matches("[a-zA-Z]+");
     }
 
@@ -123,7 +143,7 @@ public class RegistrationService {
      * @return true if the password is valid, false otherwise.
      */
     public boolean isValidPassword(String password) {
-
+        registrationServiceLogger.info("Currently at isValidPassword method. Password: {}", password);
         // Password has at least 5 characters.
         if (password.length() < 5) {
             return false;
@@ -155,6 +175,7 @@ public class RegistrationService {
      * @return true is username is valid, false otherwise.
      */
     public boolean isValidUsername(String username) {
+        registrationServiceLogger.info("Currently at isValidUsername method. Username: {}", username);
         return username.length() >= 5 && !username.contains(" ");
     }
 
@@ -165,6 +186,7 @@ public class RegistrationService {
      * @return true if password has been registered to a Person entity earlier, false otherwise.
      */
     public boolean isPasswordRegistered(String password) {
+        registrationServiceLogger.info("Currently at isPasswordRegistered method. Username: {}", password);
         return this.personRepository.findByPassword(password).isPresent();
     }
 
@@ -175,6 +197,7 @@ public class RegistrationService {
      * @return true if the word has at least 2 characters, false otherwise.
      */
     public boolean doesWordHaveAtLeastThreeCharacters(String word) {
+        registrationServiceLogger.info("Currently at doesWordHaveAtLeastThreeCharacters method. Username: {}", word);
         return word.length() >= 3;
     }
 
