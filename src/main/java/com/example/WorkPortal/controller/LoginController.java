@@ -2,6 +2,7 @@
  * Registration controller is a controller class that handles requests
  * related to the login page.
  */
+
 package com.example.WorkPortal.controller;
 
 import org.apache.logging.log4j.LogManager;

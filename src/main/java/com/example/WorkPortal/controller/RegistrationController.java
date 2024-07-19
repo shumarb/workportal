@@ -2,6 +2,7 @@
  * Registration controller is a controller class that handles requests related to
  * the registration page.
  */
+
 package com.example.WorkPortal.controller;
 
 import com.example.WorkPortal.exceptions.*;
