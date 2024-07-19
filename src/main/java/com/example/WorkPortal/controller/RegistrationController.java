@@ -82,11 +82,6 @@ public class RegistrationController {
                 throw new InvalidUsernameException();
             }
 
-            // Unavailable email address & available username.
-            if (this.registrationService.isEmailAddressRegistered(email) && this.registrationService.isUsernameRegistered(username)) {
-                throw new UnavailableEmailAddressAndUsernameException();
-            }
-
             // Unavailable email address.
             if (this.registrationService.isEmailAddressRegistered(email)) {
                 throw new UnavailableEmailAddressException();
@@ -129,12 +124,6 @@ public class RegistrationController {
             // Error and log messages for invalid username.
             registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid username: {}", username);
             model.addAttribute("error", "Please ensure your username has at least 5 characters.");
-            return "registration";
-
-        } catch (UnavailableEmailAddressAndUsernameException e) {
-            // Error and log messages for both email address and username being unavailable.
-            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Both email address and username are unavailable. Email address: {}, Username: {}", email, username);
-            model.addAttribute("error", "Both username and email address entered are unavailable. Please choose others.");
             return "registration";
 
         } catch (UnavailableEmailAddressException e) {
