@@ -6,7 +6,9 @@
 package com.example.WorkPortal.controller;
 
 import com.example.WorkPortal.exceptions.InvalidUsernameOrPasswordException;
+import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.service.LoginService;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ public class LoginController {
     /**
      * Logger to monitor operational flow and assist in troubleshooting for Login page.
      */
-    private static final Logger loginControllerLogger = LogManager.getLogger(IndexController.class);
+    private static final Logger loginControllerLogger = LogManager.getLogger(LoginController.class);
 
     /**
      * Service handling login.
@@ -53,19 +55,21 @@ public class LoginController {
     /**
      * Handles POST request of the Login page.
      *
+     * @param username the username entered by the user.
+     * @param password the password entered by the user.
+     * @param session the HttpSession to store logged-in person details.
+     * @param model the Model to add error messages.
      * @return Name of the Home page for successful login,
-     * redirection to the Login page showing invalid login message.
+     * or redirection to the Login page showing invalid login message.
      */
     @PostMapping("/login")
-    public String loginPerson(@RequestParam String username, @RequestParam String password, Model model) {
+    public String loginPerson(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         try {
             // Log messages and redirection to home page for successful login.
-            if (this.loginService.loginByCredentials(username, password)) {
-                loginControllerLogger.info("LoginControllerLogger: Successful Login. Valid Username ({}) and Password ({}) " +
-                                                    "matching that of a registered Person entity.", username, password);
-                loginControllerLogger.info("Redirection to Home page.");
-                return "redirect:/home";
-            }
+            Person loggedInPerson = this.loginService.login(username, password);
+            session.setAttribute("loggedInPerson", loggedInPerson);
+            loginControllerLogger.info("LoginControllerLogger: Successful Login for Person: {}. Redirection to Home page.", loggedInPerson.toString());
+            return "redirect:/home";
 
         } catch (InvalidUsernameOrPasswordException e) {
             // Error and log messages for invalid username or password.
@@ -80,8 +84,8 @@ public class LoginController {
             // Error and log messages for unexpected exceptions.
             loginControllerLogger.fatal("LoginControllerLogger: Unsuccessful Login. Unexpected error occurred during login.");
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
+            return "login";
         }
-        return "login";
     }
 
 }

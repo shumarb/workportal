@@ -36,18 +36,19 @@ public class LoginService {
     }
 
     /**
-     * Checks if a Person entity has been registered by username.
+     * Attempts to log in a Person entity with provided username and password.
      *
      * @param username the username of a Person entity to search for.
      * @param password the password of a Person entity to check.
-     * @return true if a Person entity is found by username provided and its password matches that of provided password.
+     * @return Person entity registered earlier.
+     * @throws InvalidUsernameOrPasswordException for incorrect username or password.
      */
-    public boolean loginByCredentials(String username, String password) throws InvalidUsernameOrPasswordException {
+    public Person login(String username, String password) throws InvalidUsernameOrPasswordException {
         loginServiceLogger.info("LoginServiceLogger: Currently at loginByCredentials method. Username: {}, Password: {}", username, password);
-        Optional<Person> personToFind = this.personRepository.findByUsername(username);
-        if (personToFind.isPresent() && personToFind.get().getPassword().equals(password)) {
-            loginServiceLogger.info("LoginServiceLogger: Username and Password match a Person entity registered earlier.");
-            return true;
+        Optional<Person> personOptional= this.personRepository.findByUsername(username);
+        if (personOptional.isPresent() && personOptional.get().getPassword().equals(password)) {
+            loginServiceLogger.info("LoginServiceLogger: Successful Login. Username and Password matches with {}.", personOptional.toString());
+            return personOptional.get();
         }
         loginServiceLogger.error("loginServiceLogger: Invalid Username or Password.");
         throw new InvalidUsernameOrPasswordException();
