@@ -4,6 +4,7 @@
 
 package com.example.WorkPortal.service;
 
+import com.example.WorkPortal.exceptions.InvalidUsernameOrPasswordException;
 import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.repository.PersonRepository;
 import org.apache.logging.log4j.LogManager;
@@ -41,19 +42,15 @@ public class LoginService {
      * @param password the password of a Person entity to check.
      * @return true if a Person entity is found by username provided and its password matches that of provided password.
      */
-    public boolean loginByCredentials(String username, String password) {
+    public boolean loginByCredentials(String username, String password) throws InvalidUsernameOrPasswordException {
         loginServiceLogger.info("LoginServiceLogger: Currently at loginByCredentials method. Username: {}, Password: {}", username, password);
         Optional<Person> personToFind = this.personRepository.findByUsername(username);
-        if (personToFind.isPresent()) {
-            if (personToFind.get().getPassword().equals(password)) {
-                loginServiceLogger.info("LoginServiceLogger: Username and Password match a Person entity registered earlier.");
-                return true;
-            }
-            loginServiceLogger.error("LoginServiceController: Username found but password does not match.");
-            return false;
+        if (personToFind.isPresent() && personToFind.get().getPassword().equals(password)) {
+            loginServiceLogger.info("LoginServiceLogger: Username and Password match a Person entity registered earlier.");
+            return true;
         }
-        loginServiceLogger.error("loginServiceLogger: Username not found. Username: {}", username);
-        return false;
+        loginServiceLogger.error("loginServiceLogger: Invalid Username or Password.");
+        throw new InvalidUsernameOrPasswordException();
     }
 
 }

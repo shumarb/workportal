@@ -59,23 +59,29 @@ public class LoginController {
     @PostMapping("/login")
     public String loginPerson(@RequestParam String username, @RequestParam String password, Model model) {
         try {
+            // Log messages and redirection to home page for successful login.
             if (this.loginService.loginByCredentials(username, password)) {
                 loginControllerLogger.info("LoginControllerLogger: Successful Login. Valid Username ({}) and Password ({}) " +
                                                     "matching that of a registered Person entity.", username, password);
                 loginControllerLogger.info("Redirection to Home page.");
                 return "redirect:/home";
             }
-            throw new InvalidUsernameOrPasswordException();
 
         } catch (InvalidUsernameOrPasswordException e) {
+            // Error and log messages for invalid username or password.
             loginControllerLogger.error("LoginControllerLogger: Unsuccessful Login. " +
                                                  "Invalid Username ({}) or Password ({}). " +
                                                  "Currently at Login page. Error message displayed.",
                                                   username, password);
             model.addAttribute("error", "Invalid userid or password.");
             return "login";
-        }
 
+        } catch (Exception e) {
+            // Error and log messages for unexpected exceptions.
+            loginControllerLogger.fatal("LoginControllerLogger: Unsuccessful Login. Unexpected error occurred during login.");
+            model.addAttribute("error", "Unexpected error occurred. Please try again later.");
+        }
+        return "login";
     }
 
 }
