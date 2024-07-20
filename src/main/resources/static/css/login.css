@@ -41,7 +41,7 @@ form label {
     font-weight: bold;
 }
 
-form input[type="email"],
+form input[type="username"],
 form input[type="password"] {
     width: 100%;
     padding: 10px;
