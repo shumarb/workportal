@@ -18,13 +18,13 @@ public class HomeController {
     private final static Logger homeControllerLogger = LogManager.getLogger(HomeController.class);
 
     /**
-     * Navigates to the Home page.
+     * Handles the GET request of the Home page.
      *
-     * @return name of the Home page.
+     * @return Name of the Home page.
      */
     @GetMapping("/home")
     public String showHome() {
-        homeControllerLogger.info("HomeControllerLogger | Current page: home.html.");
+        homeControllerLogger.info("HomeControllerLogger: Currently at Home page.");
         return "home";
     }
 

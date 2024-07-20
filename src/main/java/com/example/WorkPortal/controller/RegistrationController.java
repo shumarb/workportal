@@ -33,20 +33,20 @@ public class RegistrationController {
     /**
      * Constructs a RegistrationController with the specified RegistrationService.
      *
-     * @param registrationService the service class handling registration.
+     * @param registrationService the Service class handling registration.
      */
     public RegistrationController(RegistrationService registrationService) {
         this.registrationService = registrationService;
     }
 
     /**
-     * Navigates to the Registration page.
+     * Handles the GET request of the Registration page.
      *
-     * @return name of the Registration page.
+     * @return Name of the Registration page.
      */
     @GetMapping("/registration")
     public String showRegistrationPage() {
-        registrationControllerLogger.info("RegistrationControllerLogger: User is now at registration.html.");
+        registrationControllerLogger.info("RegistrationControllerLogger: Currently at Registration page.");
         return "registration";
     }
 
@@ -58,8 +58,8 @@ public class RegistrationController {
      * @param email the email address of the Person.
      * @param password the password of the Person.
      * @param role the role of the Person.
-     * @return Redirection to the login page for successful registration,
-     *         direction to registration page with error message displayed otherwise.
+     * @return Redirection to the Login page for successful registration,
+     *         direction to Registration page with error message displayed otherwise.
      */
     @PostMapping("/register")
     public String registerPerson(@RequestParam("name") String name,
@@ -107,54 +107,65 @@ public class RegistrationController {
 
             // Both username and email address. Proceed with instantiating and saving this Person entity.
             this.registrationService.registerPerson(name, username, email, password, role);
-            registrationControllerLogger.info("RegistrationControllerLogger: Successful Registration. User is redirected to login.html.");
+            registrationControllerLogger.info("RegistrationControllerLogger: Successful Registration. " +
+                                              "User is redirected to Login page.");
             return "redirect:/login";
 
         } catch (InvalidEmailException e) {
             // Error and log messages due to invalid email address.
-            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid email address format: {}", email);
+            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid Email Address: {}. " +
+                                                        "Currently at Registration page. Error message displayed.", email);
             model.addAttribute("error", "Invalid email address.");
             return "registration";
 
         } catch (InvalidNameException e) {
             // Error and log messages due to invalid name.
-            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid name: {}", name);
-            model.addAttribute("error", "Please ensure your name has only 2 words, and each word has at least 3 letters.");
+            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid Name: {}. " +
+                                                        "Currently at Registration page. Error message displayed.", name);
+            model.addAttribute("error", "Please ensure your name has only 2 words," +
+                                                                  " and each word has at least 3 letters.");
             return "registration";
 
         } catch (InvalidPasswordException e) {
             // Error and log messages for invalid password.
-            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid password: {}", password);
-            model.addAttribute("error", "Please ensure your password has at least 2 letters, 2 digits, and 1 special character.");
+            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid Password: {}. " +
+                                                        "Currently at Registration page. Error message displayed.", password);
+            model.addAttribute("error", "Please ensure your password has at least 2 letters, 2 digits," +
+                                                                  " and 1 special character.");
             return "registration";
 
         } catch (InvalidUsernameException e) {
             // Error and log messages for invalid username.
-            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid username: {}", username);
+            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid username: {}. " +
+                                                        "Currently at Registration page. Error message displayed.", username);
             model.addAttribute("error", "Please ensure your username has at least 5 characters.");
             return "registration";
 
         } catch (UnavailableEmailAddressException e) {
             // Error and log messages for unavailable email address.
-            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Email address is unavailable. Email address: {}", email);
+            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Unavailable Email Address: {}. " +
+                                                        "Currently at Registration page. Error message displayed.", email);
             model.addAttribute("error", "Email address entered is unavailable. Please enter another email address.");
             return "registration";
 
         } catch (UnavailablePasswordException e) {
             // Error and log messages for unavailable password.
-            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Password is unavailable. Password: {}", password);
+            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Unavailable Password: {}. " +
+                                                        "Currently at Registration page. Error message displayed.", password);
             model.addAttribute("error", "Password entered is unavailable. Please enter another password.");
             return "registration";
 
         } catch (UnavailableUsernameException e) {
             // Error and log messages for unavailable username.
-            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Username is unavailable. Username: {}", username);
+            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Unavailable Username: {}." +
+                                                        "Currently at Registration page. Error message displayed.", username);
             model.addAttribute("error", "Username entered is unavailable. Please enter another username.");
             return "registration";
 
         } catch (Exception e) {
             // Error and log messages for unexpected exceptions.
-            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Unexpected error occurred during registration.");
+            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. " +
+                                               "Unexpected error occurred during registration.");
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
             return "registration";
         }

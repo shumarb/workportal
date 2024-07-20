@@ -31,7 +31,7 @@ public class LoginController {
     private final LoginService loginService;
 
     /**
-     * Contructs a LoginController with the specified LoginService.
+     * Constructs a LoginController with the specified LoginService.
      *
      * @param loginService the service handling login.
      */
@@ -40,34 +40,38 @@ public class LoginController {
     }
 
     /**
-     * Navigates to the Login page.
+     * Handles the GET request of the Login page.
      *
-     * @return name of the Login page.
+     * @return Name of the Login page.
      */
     @GetMapping("/login")
     public String showLoginPage() {
-        loginControllerLogger.info("LoginControllerLogger: User is now at login.html.");
+        loginControllerLogger.info("LoginControllerLogger: Currently at Login page.");
         return "login";
     }
 
     /**
      * Handles POST request of the Login page.
      *
-     * @return name of the Home page for successful login,
+     * @return Name of the Home page for successful login,
      * redirection to the Login page showing invalid login message.
      */
     @PostMapping("/login")
     public String loginPerson(@RequestParam String username, @RequestParam String password, Model model) {
         try {
             if (this.loginService.loginByCredentials(username, password)) {
-                loginControllerLogger.info("LoginControllerLogger: Successful Login. Username and password matches that of an existing Person entity registered earlier.");
-                loginControllerLogger.info("User is redirected to home.html.");
+                loginControllerLogger.info("LoginControllerLogger: Successful Login. Valid Username ({}) and Password ({}) " +
+                                                    "matching that of a registered Person entity.", username, password);
+                loginControllerLogger.info("Redirection to Home page.");
                 return "redirect:/home";
             }
             throw new InvalidUsernameOrPasswordException();
 
         } catch (InvalidUsernameOrPasswordException e) {
-            loginControllerLogger.info("LoginControllerLogger: Unsuccessful Login. InvalidUsernameOrPasswordException thrown.");
+            loginControllerLogger.error("LoginControllerLogger: Unsuccessful Login. " +
+                                                 "Invalid Username ({}) or Password ({}). " +
+                                                 "Currently at Login page. Error message displayed.",
+                                                  username, password);
             model.addAttribute("error", "Invalid userid or password.");
             return "login";
         }
