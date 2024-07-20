@@ -105,21 +105,21 @@ public class RegistrationController {
                 throw new UnavailableUsernameException();
             }
 
-            // Both username and email address. Proceed with instantiating and saving this Person entity.
+            // Log message and redirection to Login page for successful registration.
             this.registrationService.registerPerson(name, username, email, password, role);
             registrationControllerLogger.info("RegistrationControllerLogger: Successful Registration. " +
                                               "User is redirected to Login page.");
             return "redirect:/login";
 
         } catch (InvalidEmailException e) {
-            // Error and log messages due to invalid email address.
+            // Error and log messages for invalid email address.
             registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid Email Address: {}. " +
                                                         "Currently at Registration page. Error message displayed.", email);
             model.addAttribute("error", "Invalid email address.");
             return "registration";
 
         } catch (InvalidNameException e) {
-            // Error and log messages due to invalid name.
+            // Error and log messages for invalid name.
             registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid Name: {}. " +
                                                         "Currently at Registration page. Error message displayed.", name);
             model.addAttribute("error", "Please ensure your name has only 2 words," +
