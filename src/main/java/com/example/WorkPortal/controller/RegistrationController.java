@@ -164,7 +164,7 @@ public class RegistrationController {
 
         } catch (Exception e) {
             // Error and log messages for unexpected exceptions.
-            registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. " +
+            registrationControllerLogger.fatal("RegistrationControllerLogger: Unsuccessful Registration. " +
                                                "Unexpected error occurred during registration.");
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
             return "registration";
