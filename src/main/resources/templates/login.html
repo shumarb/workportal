@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>WorkPortal</title>
@@ -9,6 +9,12 @@
 <div class="box">
     <a href="/" class="back-link">&#8592; Back</a>
     <h1>Login</h1>
+
+    <!-- Error message for unsuccessful login. -->
+    <div th:if="${error}" class="error-message">
+        <p th:text="=${error}"></p>
+    </div>
+
     <form action="/login" method="post">
         <div>
             <label for="email">Email:</label>
