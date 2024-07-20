@@ -115,30 +115,28 @@ public class RegistrationController {
             // Error and log messages for invalid email address.
             registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid Email Address: {}. " +
                                                         "Currently at Registration page. Error message displayed.", email);
-            model.addAttribute("error", "Invalid email address.");
+            model.addAttribute("error", "Invalid email address entered. Please enter a valid email address.");
             return "registration";
 
         } catch (InvalidNameException e) {
             // Error and log messages for invalid name.
             registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid Name: {}. " +
                                                         "Currently at Registration page. Error message displayed.", name);
-            model.addAttribute("error", "Please ensure your name has only 2 words," +
-                                                                  " and each word has at least 3 letters.");
+            model.addAttribute("error", "Invalid name entered. Please enter a valid name.");
             return "registration";
 
         } catch (InvalidPasswordException e) {
             // Error and log messages for invalid password.
             registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid Password: {}. " +
                                                         "Currently at Registration page. Error message displayed.", password);
-            model.addAttribute("error", "Please ensure your password has at least 2 letters, 2 digits," +
-                                                                  " and 1 special character.");
+            model.addAttribute("error", "Invalid password entered. Please enter a valid password.");
             return "registration";
 
         } catch (InvalidUsernameException e) {
             // Error and log messages for invalid username.
             registrationControllerLogger.error("RegistrationControllerLogger: Unsuccessful Registration. Invalid username: {}. " +
                                                         "Currently at Registration page. Error message displayed.", username);
-            model.addAttribute("error", "Please ensure your username has at least 5 characters.");
+            model.addAttribute("error", "Invalid username entered. Please enter a valid username.");
             return "registration";
 
         } catch (UnavailableEmailAddressException e) {
