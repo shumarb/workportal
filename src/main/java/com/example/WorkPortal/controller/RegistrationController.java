@@ -24,9 +24,17 @@ public class RegistrationController {
      */
     private static final Logger registrationControllerLogger = LogManager.getLogger(IndexController.class);
 
+    /**
+     * Service handling registration.
+     */
     @Autowired
     private final RegistrationService registrationService;
 
+    /**
+     * Constructs a RegistrationController with the specified RegistrationService.
+     *
+     * @param registrationService the service class handling registration.
+     */
     public RegistrationController(RegistrationService registrationService) {
         this.registrationService = registrationService;
     }
