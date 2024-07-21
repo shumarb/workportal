@@ -71,10 +71,10 @@ public class HomeController {
     public String showManagerialCodeOfConduct(HttpSession httpSession, Model model) {
         Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
         try {
-            homeControllerLogger.info("HomeControllerLogger: {} is accessing Managerial Code of Conduct page.", loggedInPerson.toString());
+            homeControllerLogger.info("HomeControllerLogger: Currently at Managerial Code of Conduct page. Accessed by {}", loggedInPerson.toString());
             return "managerial-code-of-conduct";
         } catch (Exception e) {
-            homeControllerLogger.fatal("HomeControllerLogger: {} is unable to access Managerial Code of Conduct page. Redirected to Home page.", loggedInPerson.toString());
+            homeControllerLogger.fatal("HomeControllerLogger: Unable to access Managerial Code of Conduct page for {}. Redirected to Home page.", loggedInPerson.toString());
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
             return "redirect:/home";
         }
