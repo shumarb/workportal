@@ -1,4 +1,4 @@
-/* index.css: Styling for index.html */
+/* access-denied.css: Styling for access-denied.html */
 
 .box {
     position: absolute;
@@ -12,8 +12,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
     /* latest additions */
-    width: 400px;
-    height: 190px;
+    width: 450px;
+    height: 200px;
 }
 
 .box h1 {

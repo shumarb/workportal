@@ -1,8 +1,8 @@
-/* requirements.css: Styling for pages that display requirements */
+/* managerial-code-of-conduct.css: Styling for managerial-code-of-conduct.html */
 
 .box {
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
