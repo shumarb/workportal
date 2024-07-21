@@ -15,6 +15,7 @@ public class CustomErrorController implements ErrorController {
 
     /**
      * Handles error requests and directs users to an error page.
+     *
      * @param httpSession The HTTPSession object to manage session information.
      * @param model The Model object to pass attributes to the view.
      * @return The name of the unavailable page view.
