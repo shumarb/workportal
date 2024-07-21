@@ -88,7 +88,9 @@ public class HomeController {
 
         } catch (Exception e) {
             httpSession.invalidate();
-            homeControllerLogger.fatal("HomeControllerLogger: Unable to access Managerial Code of Conduct page for {}. Redirected to Home page.", loggedInPerson.toString());
+            if (loggedInPerson != null) {
+                homeControllerLogger.error("HomeControllerLogger: Unable to access Managerial Code of Conduct page for {}. Redirected to Home page.", loggedInPerson.toString());
+            }
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
             return "redirect:/home";
         }
