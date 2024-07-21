@@ -1,5 +1,5 @@
 /**
- * Controller class that handles requests related to the home page.
+ * Controller class that handles requests related to the Home page.
  */
 
 package com.example.WorkPortal.controller;

@@ -1,6 +1,5 @@
 /**
- * Registration controller is a controller class that handles requests related to
- * the registration page.
+ * Controller class that handles requests related to the Registration page.
  */
 
 package com.example.WorkPortal.controller;

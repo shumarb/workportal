@@ -1,6 +1,5 @@
 /**
- * PageController is a controller class that handles requests
- * related to the Index page.
+ * Controller class that handles requests related to the Index page.
  */
 
 package com.example.WorkPortal.controller;
