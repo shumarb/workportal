@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <title>WorkPortal</title>
     <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/error-message.css">
 </head>
 <body>
     <div class="box">
         <h1>WorkPortal</h1>
+
+        <!-- Error message for unsuccessful login. -->
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
 
         <a href="/login"><h3>Login</h3></a>
         <a href="/registration"><h3>Register</h3></a>
