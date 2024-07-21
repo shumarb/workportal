@@ -28,13 +28,17 @@ public class HomeController {
      */
     @GetMapping("/home")
     public String showHome(HttpSession httpSession, Model model) {
-        Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
-        if (loggedInPerson == null) {
-            return "redirect:/login";
+        try {
+            Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
+            model.addAttribute("loggedInPerson", loggedInPerson);
+            homeControllerLogger.info("HomeControllerLogger: Login of {} from Login page. Going to Home page.", loggedInPerson.toString());
+            return "home";
+        } catch (Exception e) {
+            httpSession.invalidate();
+            homeControllerLogger.fatal("HomeControllerLogger: Unsuccessful login despite entering correct username and password at Login page.");
+            model.addAttribute("error", "Unexpected error occurred. Please try again later.");
+            return "redirect:/index";
         }
-        model.addAttribute("loggedInPerson", loggedInPerson);
-        homeControllerLogger.info("HomeControllerLogger: Currently at Home page.");
-        return "home";
     }
 
     /**
@@ -43,11 +47,19 @@ public class HomeController {
      * @return Name of the Index page.
      */
     @PostMapping("/")
-    public String logoutOfHome(HttpSession session, Model model) {
-        homeControllerLogger.info("HomeControllerLogger: Logging out from Home page. Going to Index page. Successful logout message displayed.");
-        session.invalidate();
-        model.addAttribute("logout", "You have been successfully logged out.");
-        return "index";
+    public String logoutOfHome(HttpSession httpSession, Model model) {
+        try {
+            Person loggedOutPerson = (Person) httpSession.getAttribute("loggedInPerson");
+            homeControllerLogger.info("HomeControllerLogger: Logout of {} from Home page. Going to Index page. Successful logout message displayed.", loggedOutPerson.toString());
+            httpSession.invalidate();
+            model.addAttribute("logout", "You have been successfully logged out.");
+            return "index";
+        } catch (Exception e) {
+            httpSession.invalidate();
+            homeControllerLogger.fatal("HomeControllerLogger: Unsuccessful logout despite clicking logout button. Redirected to Index page.");
+            model.addAttribute("error", "Unexpected error occurred. Please try again later.");
+            return "redirect:/index";
+        }
     }
 
 }
