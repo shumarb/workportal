@@ -68,7 +68,7 @@ public class LoginController {
             // Log messages and redirection to home page for successful login.
             Person loggedInPerson = this.loginService.login(username, password);
             session.setAttribute("loggedInPerson", loggedInPerson);
-            loginControllerLogger.info("LoginControllerLogger: Successful Login for Person: {}. Redirection to Home page.", loggedInPerson.toString());
+            loginControllerLogger.info("LoginControllerLogger: Successful Login for Person: {}. Going to Home page.", loggedInPerson.toString());
             return "redirect:/home";
 
         } catch (InvalidUsernameOrPasswordException e) {

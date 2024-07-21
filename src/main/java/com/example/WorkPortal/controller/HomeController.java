@@ -44,7 +44,7 @@ public class HomeController {
      */
     @PostMapping("/logout")
     public String logoutOfHome(HttpSession session, Model model) {
-        homeControllerLogger.info("HomeControllerLogger: Logging out from Home page. Going to Index page displaying successful logout message.");
+        homeControllerLogger.info("HomeControllerLogger: Logging out from Home page. Going to Index page. Successful logout message displayed.");
         session.invalidate();
         model.addAttribute("logout", "You have been successfully logged out.");
         return "index";
