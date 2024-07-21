@@ -66,7 +66,11 @@ public class HomeController {
     /**
      * Handles the GET request of Managerial Code of Conduct page.
      *
-     * @return Name of Managerial Code of Conduct page.
+     * @param httpSession   The HttpSession object to retrieve information of a logged-in Person entity.
+     * @param model         The model object to add attributes for view rendering.
+     * @return  If the Person entity's role is a Manager, return the view name of the Managerial Code of Conduct page.
+     *          If the Person entity's role is not a Manager, return the view name of the Access Denied page.
+     *          If an unexpected error occurs during processing, redirection to the Home page with an error message.
      */
     @GetMapping("/managerial-code-of-conduct")
     public String showManagerialCodeOfConduct(HttpSession httpSession, Model model) {
