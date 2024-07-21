@@ -4,6 +4,7 @@
 
 package com.example.WorkPortal.controller;
 
+import com.example.WorkPortal.exceptions.RestrictedAccessException;
 import com.example.WorkPortal.model.Person;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.Logger;
@@ -71,9 +72,22 @@ public class HomeController {
     public String showManagerialCodeOfConduct(HttpSession httpSession, Model model) {
         Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
         try {
-            homeControllerLogger.info("HomeControllerLogger: Currently at Managerial Code of Conduct page. Accessed by {}", loggedInPerson.toString());
-            return "managerial-code-of-conduct";
+            if (loggedInPerson != null && loggedInPerson.getRole().equals("Manager")) {
+                homeControllerLogger.info("HomeControllerLogger: Currently at Managerial Code of Conduct page. Accessed by {}", loggedInPerson.toString());
+                return "managerial-code-of-conduct";
+            } else {
+                throw new RestrictedAccessException();
+            }
+
+        } catch (RestrictedAccessException e) {
+            httpSession.invalidate();
+            homeControllerLogger.error("HomeControllerLogger: Restricted access attempt to Managerial Code of Conduct by {}. Redirected to Error404 page.",
+                                        loggedInPerson == null ? "Unknown user" : loggedInPerson.toString());
+            model.addAttribute("error", "You do not have permission to access this page.");
+            return "access-denied";
+
         } catch (Exception e) {
+            httpSession.invalidate();
             homeControllerLogger.fatal("HomeControllerLogger: Unable to access Managerial Code of Conduct page for {}. Redirected to Home page.", loggedInPerson.toString());
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
             return "redirect:/home";
