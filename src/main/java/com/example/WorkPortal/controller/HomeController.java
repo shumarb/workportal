@@ -19,7 +19,7 @@ public class HomeController {
     /**
      * Logger to monitor operational flow and assist in troubleshooting for Home page.
      */
-    private final static Logger homeControllerLogger = LogManager.getLogger(HomeController.class);
+    private static final Logger homeControllerLogger = LogManager.getLogger(HomeController.class);
 
     /**
      * Handles the GET request of the Home page.
