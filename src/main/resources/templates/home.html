@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>WorkPortal</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/error.css">
     <link rel="stylesheet" type="text/css" href="/static/css/home.css">
 </head>
 <body>
@@ -19,8 +20,13 @@
             </ul>
         </div>
 
+        <!-- Error message for unsuccessful attempt to access managerial code of conduct page. -->
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+
         <div th:if="${loggedInPerson.getRole() == 'Manager'}" class="restricted-link-manager">
-            <a href="#">Special</a>
+            <a href="/managerial-code-of-conduct">Managerial Code of Conduct</a>
         </div>
 
         <!-- Logout -->

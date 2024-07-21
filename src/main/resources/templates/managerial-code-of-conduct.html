@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Managerial Code of Conduct</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/managerial-code-of-conduct.css">
+<body>
+<div class="container">
+    <a href="/home" class="back-link">&#8592; Back</a>
+    <h1>Managerial Code of Conduct</h1>
+
+    <!-- Error message for unsuccessful attempt to return to home page from managerial code of conduct page. -->
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+
+    <div class="code-of-conduct">
+        <p>As a manager, you are expected to adhere to the following code of conduct:</p>
+        <ul>
+            <li><strong>Leadership:</strong> Lead by example and inspire your team.</li>
+            <li><strong>Integrity:</strong> Uphold high ethical standards and honesty in all actions.</li>
+            <li><strong>Communication:</strong> Foster open and transparent communication.</li>
+            <li><strong>Respect:</strong> Treat all team members and stakeholders with respect.</li>
+            <li><strong>Professionalism:</strong> Maintain professionalism in all interactions.</li>
+            <li><strong>Growth:</strong> Support the growth and development of your team members.</li>
+            <li><strong>Compliance:</strong> Ensure compliance with company policies and regulations.</li>
+            <li><strong>Conflict Resolution:</strong> Effectively manage conflicts and promote resolution.</li>
+            <li><strong>Feedback:</strong> Provide constructive feedback and encourage continuous improvement.</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

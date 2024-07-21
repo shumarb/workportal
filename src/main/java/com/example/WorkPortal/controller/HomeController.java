@@ -28,14 +28,14 @@ public class HomeController {
      */
     @GetMapping("/home")
     public String showHome(HttpSession httpSession, Model model) {
+        Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
         try {
-            Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
             model.addAttribute("loggedInPerson", loggedInPerson);
-            homeControllerLogger.info("HomeControllerLogger: Login of {} from Login page. Going to Home page.", loggedInPerson.toString());
+            homeControllerLogger.info("HomeControllerLogger: {} is currently at Home page.", loggedInPerson.toString());
             return "home";
         } catch (Exception e) {
             httpSession.invalidate();
-            homeControllerLogger.fatal("HomeControllerLogger: Unsuccessful login despite entering correct username and password at Login page.");
+            homeControllerLogger.fatal("HomeControllerLogger: Unsuccessful login of {} despite entering correct username and password at Login page.", loggedInPerson.toString());
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
             return "redirect:/index";
         }
@@ -48,17 +48,35 @@ public class HomeController {
      */
     @PostMapping("/")
     public String logoutOfHome(HttpSession httpSession, Model model) {
+        Person loggedOutPerson = (Person) httpSession.getAttribute("loggedInPerson");
         try {
-            Person loggedOutPerson = (Person) httpSession.getAttribute("loggedInPerson");
             homeControllerLogger.info("HomeControllerLogger: Logout of {} from Home page. Going to Index page. Successful logout message displayed.", loggedOutPerson.toString());
             httpSession.invalidate();
             model.addAttribute("logout", "You have been successfully logged out.");
             return "index";
         } catch (Exception e) {
             httpSession.invalidate();
-            homeControllerLogger.fatal("HomeControllerLogger: Unsuccessful logout despite clicking logout button. Redirected to Index page.");
+            homeControllerLogger.fatal("HomeControllerLogger: Unsuccessful logout of {} despite clicking logout button. Redirected to Index page.", loggedOutPerson.toString());
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
             return "redirect:/index";
+        }
+    }
+
+    /**
+     * Handles the GET request of Managerial Code of Conduct page.
+     *
+     * @return Name of Managerial Code of Conduct page.
+     */
+    @GetMapping("/managerial-code-of-conduct")
+    public String showManagerialCodeOfConduct(HttpSession httpSession, Model model) {
+        Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
+        try {
+            homeControllerLogger.info("HomeControllerLogger: {} is accessing Managerial Code of Conduct page.", loggedInPerson.toString());
+            return "managerial-code-of-conduct";
+        } catch (Exception e) {
+            homeControllerLogger.fatal("HomeControllerLogger: {} is unable to access Managerial Code of Conduct page. Redirected to Home page.", loggedInPerson.toString());
+            model.addAttribute("error", "Unexpected error occurred. Please try again later.");
+            return "redirect:/home";
         }
     }
 
