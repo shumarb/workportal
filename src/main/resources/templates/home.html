@@ -8,7 +8,16 @@
 <body>
     <div class="box">
         <h1>Home</h1>
-        <p>Welcome, <span th:text="${loggedInPerson.getName()}"></span></p>
+        <p>Welcome, <span th:text="${loggedInPerson.getName()}"></span>!</p>
+
+        <!-- Section to display Person entity's name, username, and role -->
+        <div class="information-to-display">
+            <ul>
+                <li><strong>Name: </strong><span th:text="${loggedInPerson.getName()}"></span></li>
+                <li><strong>Username: </strong><span th:text="${loggedInPerson.getUsername()}"></span></li>
+                <li><strong>Role: </strong><span th:text="${loggedInPerson.getRole()}"></span></li>
+            </ul>
+        </div>
 
         <!-- Logout -->
         <form action="/" method="post">
