@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>WorkPortal</title>
@@ -8,8 +8,14 @@
 <body>
     <div class="box">
         <h1>WorkPortal</h1>
+
         <a href="/login"><h3>Login</h3></a>
         <a href="/registration"><h3>Register</h3></a>
+
+        <!-- Successful Logout message -->
+        <div th:if="${logout}" class="logout-message">
+            <p th:text="${logout}"></p>
+        </div>
     </div>
 </body>
 </html>
