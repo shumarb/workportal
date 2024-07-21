@@ -50,10 +50,24 @@
 }
 
 .information-to-display {
-    margin-top: 20px; /* Add spacing from above */
+    margin-top: 5px;
+    border-top: 1px solid #ccc;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    text-align: left;
+}
+
+.information-to-display h2 {
+    color: #333;
+    margin-bottom: 10px;
 }
 
 .information-to-display ul {
-    list-style-type: none; /* Remove bullet points */
-    padding-left: 0px; /* Remove default padding */
+    list-style-type: disc;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.information-to-display li {
+    margin-bottom: 10px;
 }
