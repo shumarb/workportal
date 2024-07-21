@@ -19,6 +19,9 @@
             </ul>
         </div>
 
+        <div th:if="${loggedInPerson.getRole() == 'Manager'}" class="restricted-link-manager">
+            <a href="#">Special</a>
+        </div>
         <!-- Logout -->
         <form action="/" method="post">
             <button type="submit">Logout</button>
