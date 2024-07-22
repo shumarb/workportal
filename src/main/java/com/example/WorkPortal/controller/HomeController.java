@@ -25,7 +25,10 @@ public class HomeController {
     /**
      * Handles the GET request of the Home page.
      *
-     * @return Name of the Home page.
+     * @param httpSession       The HttpSession object to retrieve logged-in user information.
+     * @param model             The Model object to add attributes for rendering the view.
+     * @return The view name    "home" for successful retrieval of logged-in Person entity's information,
+     *                          or redirects to "/index" if unexpected errors occur.
      */
     @GetMapping("/home")
     public String showHome(HttpSession httpSession, Model model) {
@@ -43,9 +46,12 @@ public class HomeController {
     }
 
     /**
-     * Handles the GET request of logout button of Home page.
+     * Handles the POST request of logout button of Home page.
      *
-     * @return Name of the Index page.
+     * @param httpSession       The HttpSession object to retrieve logged-in user information.
+     * @param model             The Model object to add attributes for rendering the view.
+     * @return The view name    "index" for successful logout,
+     *                          redirection to "/home" for unexpected errors.
      */
     @PostMapping("/")
     public String logoutOfHome(HttpSession httpSession, Model model) {
@@ -59,18 +65,18 @@ public class HomeController {
             httpSession.invalidate();
             homeControllerLogger.fatal("HomeControllerLogger: Unsuccessful logout of {} despite clicking logout button. Redirected to Index page.", loggedOutPerson.toString());
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
-            return "redirect:/index";
+            return "redirect:/home";
         }
     }
 
     /**
      * Handles the GET request of Managerial Code of Conduct page.
      *
-     * @param httpSession   The HttpSession object to retrieve information of a logged-in Person entity.
-     * @param model         The model object to add attributes for view rendering.
-     * @return  If the Person entity's role is a Manager, return the view name of the Managerial Code of Conduct page.
-     *          If the Person entity's role is not a Manager, return the view name of the Access Denied page.
-     *          If an unexpected error occurs during processing, redirection to the Home page with an error message.
+     * @param httpSession       The HttpSession object to retrieve information of a logged-in Person entity.
+     * @param model             The model object to add attributes for view rendering.
+     * @return the view name    "managerial-code-of-conduct" if the Person entity's role is a Manager,
+     *                          "access-denied" if Person entity's role is not a Manager,
+     *                          Redirects to "/home" if an unexpected error occurs during processing.
      */
     @GetMapping("/managerial-code-of-conduct")
     public String showManagerialCodeOfConduct(HttpSession httpSession, Model model) {
