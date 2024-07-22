@@ -1,5 +1,5 @@
 /**
- * Controller class that handles requests related to the Registration page.
+ * Controller class that handles requests related to the Login page.
  */
 
 package com.example.WorkPortal.controller;
@@ -43,7 +43,7 @@ public class LoginController {
     /**
      * Handles the GET request of the Login page.
      *
-     * @return Name of the Login page.
+     * @return The name of the Login page view.
      */
     @GetMapping("/login")
     public String showLoginPage() {
@@ -54,19 +54,19 @@ public class LoginController {
     /**
      * Handles POST request of the Login page.
      *
-     * @param username the username entered by the user.
-     * @param password the password entered by the user.
-     * @param session the HttpSession to store logged-in person details.
-     * @param model the Model to add error messages.
-     * @return Name of the Home page for successful login,
-     * or redirection to the Login page showing invalid login message.
+     * @param username      The username entered by the user.
+     * @param password      The password entered by the user.
+     * @param httpSession   The HttpSession to store logged-in person details.
+     * @param model         The Model to add error messages.
+     * @return              Name of the Home page view for successful login,
+     *                      Redirection to the name of the Login page view with an invalid login message.
      */
     @PostMapping("/login")
-    public String loginPerson(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
+    public String loginPerson(@RequestParam String username, @RequestParam String password, HttpSession httpSession, Model model) {
         try {
             // Log messages and redirection to home page for successful login.
             Person loggedInPerson = this.loginService.login(username, password);
-            session.setAttribute("loggedInPerson", loggedInPerson);
+            httpSession.setAttribute("loggedInPerson", loggedInPerson);
             loginControllerLogger.info("LoginControllerLogger: Going to Home page after successful login for {}", loggedInPerson.toString());
             return "redirect:/home";
 
