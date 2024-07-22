@@ -15,13 +15,13 @@
             <p th:text="${error}"></p>
         </div>
 
-        <a href="/login"><h3>Login</h3></a>
-        <a href="/registration"><h3>Register</h3></a>
-
         <!-- Successful Logout message -->
         <div th:if="${logout}" class="logout-message">
             <p th:text="${logout}"></p>
         </div>
+
+        <a href="/login"><h3>Login</h3></a>
+        <a href="/registration"><h3>Register</h3></a>
     </div>
 </body>
 </html>

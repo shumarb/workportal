@@ -13,7 +13,7 @@
 
     /* latest additions */
     width: 400px;
-    height: 190px;
+    min-height: 170px;
 }
 
 .box h1 {
