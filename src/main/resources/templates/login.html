@@ -11,9 +11,14 @@
     <a href="/" class="back-link">&#8592; Back</a>
     <h1>Login</h1>
 
-    <!-- Error message for unsuccessful login. -->
+    <!-- Message for unsuccessful login. -->
     <div th:if="${error}" class="error-message">
         <p th:text="${error}"></p>
+    </div>
+
+    <!-- Message for successful registration. -->
+    <div th:if="${successfulRegistrationMessage}" class="successful-registration-message">
+        <p th:text="${successfulRegistrationMessage}"></p>
     </div>
 
     <form action="/login" method="post">

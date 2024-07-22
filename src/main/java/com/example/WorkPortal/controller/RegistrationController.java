@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class RegistrationController {
@@ -66,7 +67,8 @@ public class RegistrationController {
                                  @RequestParam("email") String email,
                                  @RequestParam("password") String password,
                                  @RequestParam("role") String role,
-                                 Model model) {
+                                 Model model,
+                                 RedirectAttributes redirectAttributes) {
 
         try {
             // Invalid email address.
@@ -107,7 +109,8 @@ public class RegistrationController {
             // Log message and redirection to Login page for successful registration.
             this.registrationService.registerPerson(name, username, email, password, role);
             registrationControllerLogger.info("RegistrationControllerLogger: Successful Registration. " +
-                                              "User is redirected to Login page.");
+                                              "User is redirected to Login page. Successful registration message displayed.");
+            redirectAttributes.addFlashAttribute("successfulRegistrationMessage", "Registration successful. Please log in.");
             return "redirect:/login";
 
         } catch (InvalidEmailException e) {
