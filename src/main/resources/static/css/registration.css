@@ -91,3 +91,11 @@ form button:hover {
 .requirements li {
     margin-bottom: 10px;
 }
+
+.registration-button {
+    background-color: green;
+}
+
+.registration-button:hover {
+    background-color: green;
+}
