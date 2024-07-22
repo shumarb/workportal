@@ -85,7 +85,7 @@ public class HomeController {
 
         } catch (RestrictedAccessException e) {
             httpSession.invalidate();
-            homeControllerLogger.error("HomeControllerLogger: Restricted access attempt to Managerial Code of Conduct by {}. Redirected to Error404 page.",
+            homeControllerLogger.error("HomeControllerLogger: Restricted access attempt to Managerial Code of Conduct by {}. Redirected to Access Denied page.",
                                         loggedInPerson == null ? "Unknown user" : loggedInPerson.toString());
             model.addAttribute("error", "You do not have permission to access this page.");
             return "access-denied";
