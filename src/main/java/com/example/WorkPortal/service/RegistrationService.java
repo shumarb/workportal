@@ -1,5 +1,5 @@
 /**
- * Service class for managing registration of Person entities.
+ * Service class for managing registration operations of Person entities.
  */
 
 package com.example.WorkPortal.service;
@@ -28,7 +28,7 @@ public class RegistrationService {
     private final PersonRepository personRepository;
 
     /**
-     * Instantiates a PersonService instance with the provided PersonRepository.
+     * Constructs a RegistrationService instance with the specified PersonRepository.
      *
      * @param personRepository the repository for Person entities.
      */
@@ -40,11 +40,11 @@ public class RegistrationService {
     /**
      * Registers a Person entity in the application.
      *
-     * @param name the name of the Person
-     * @param username the username of the Person
-     * @param email the email address of the Person
-     * @param password the password of the Person
-     * @param role the role of the Person
+     * @param name      The name of the Person.
+     * @param username  The username of the Person.
+     * @param email     The email address of the Person.
+     * @param password  The password of the Person.
+     * @param role      The role of the Person.
      */
     public void registerPerson(String name,
                                String username,
@@ -60,8 +60,8 @@ public class RegistrationService {
     /**
      * Checks if a Person entity's email address has been registered earlier.
      *
-     * @param email the email address of the Person entity.
-     * @return true if email has been registered, false otherwise.
+     * @param email The email address of the Person entity.
+     * @return {@code true} if email has been registered, {@code false} otherwise.
      */
     public boolean isEmailAddressRegistered(String email) {
         registrationServiceLogger.info("RegistrationServiceLogger: Currently at isEmailAddressRegistered method. Email: {}", email);
@@ -71,8 +71,8 @@ public class RegistrationService {
     /**
      * Checks if a Person entity's username has been registered earlier.
      *
-     * @param username the username of the Person entity.
-     * @return true if username has been registered, false otherwise.
+     * @param username The username of the Person entity.
+     * @return {@code true} if username has been registered, {@code false} otherwise.
      */
     public boolean isUsernameRegistered(String username) {
         registrationServiceLogger.info("RegistrationServiceLogger: Currently at isUsernameRegistered method. Email: {}", username);
@@ -82,8 +82,8 @@ public class RegistrationService {
     /**
      * Checks if a Person entity's email is in valid format.
      *
-     * @param email the email address of the Person entity.
-     * @return true if valid email address, false otherwise.
+     * @param email The email address of the Person entity.
+     * @return {@code true} if valid email address, {@code false} otherwise.
      */
     public boolean isValidEmailAddress(String email) {
         registrationServiceLogger.info("RegistrationServiceLogger: Currently at isValidEmailAddress method. Email: {}", email);
@@ -100,8 +100,8 @@ public class RegistrationService {
     /**
      * Checks if a Person entity's name is in valid format.
      *
-     * @param name the name of the Person entity.
-     * @return true if valid name format, false otherwise.
+     * @param name The name of the Person entity.
+     * @return {@code true} if valid name format, {@code false} otherwise.
      */
     public boolean isValidName(String name) {
         registrationServiceLogger.info("RegistrationServiceLogger: Currently at isValidName method. Name: {}", name);
@@ -127,8 +127,8 @@ public class RegistrationService {
     /**
      * Checks if a word contains only letters.
      *
-     * @param word the word to be checked.
-     * @return true if word has only letters, false otherwise.
+     * @param word The word to be checked.
+     * @return {@code true} if word has only letters, {@code false} otherwise.
      */
     public boolean isAllLetters(String word) {
         registrationServiceLogger.info("Currently at isAllLetters method. Word: {}", word);
@@ -138,8 +138,8 @@ public class RegistrationService {
     /**
      * Checks if a password is valid.
      *
-     * @param password the password of the Person entity.
-     * @return true if the password is valid, false otherwise.
+     * @param password The password of the Person entity.
+     * @return {@code true} if the password is valid, {@code false} otherwise.
      */
     public boolean isValidPassword(String password) {
         registrationServiceLogger.info("Currently at isValidPassword method. Password: {}", password);
@@ -170,8 +170,8 @@ public class RegistrationService {
     /**
      * Checks that username is valid.
      *
-     * @param username the username of the Person entity.
-     * @return true is username is valid, false otherwise.
+     * @param username The username of the Person entity.
+     * @return {@code true} is username is valid, {@code false} otherwise.
      */
     public boolean isValidUsername(String username) {
         registrationServiceLogger.info("Currently at isValidUsername method. Username: {}", username);
@@ -181,8 +181,8 @@ public class RegistrationService {
     /**
      * Checks that password has been registered with another Person entity.
      *
-     * @param password the password of the Person entity.
-     * @return true if password has been registered to a Person entity earlier, false otherwise.
+     * @param password The password of the Person entity.
+     * @return {@code true} if password has been registered to a Person entity earlier, {@code false} otherwise.
      */
     public boolean isPasswordRegistered(String password) {
         registrationServiceLogger.info("Currently at isPasswordRegistered method. Username: {}", password);

@@ -1,5 +1,5 @@
 /**
- * Service class for managing login of Person entities.
+ * Service class for managing login operations of Person entities.
  */
 
 package com.example.WorkPortal.service;
@@ -28,7 +28,9 @@ public class LoginService {
     private final PersonRepository personRepository;
 
     /**
-     * Instantiates a LoginService instance with the provided PersonRepository
+     * Constructs a LoginService instance with the specified PersonRepository.
+     *
+     * @param personRepository The repository of Person entities.
      */
     @Autowired
     public LoginService(PersonRepository personRepository) {
@@ -38,9 +40,9 @@ public class LoginService {
     /**
      * Attempts to log in a Person entity with provided username and password.
      *
-     * @param username the username of a Person entity to search for.
-     * @param password the password of a Person entity to check.
-     * @return Person entity registered earlier.
+     * @param username The username of a Person entity to be logged in.
+     * @param password The password of a Person entity to be logged in.
+     * @return Person entity if login is successful,
      * @throws InvalidUsernameOrPasswordException for incorrect username or password.
      */
     public Person login(String username, String password) throws InvalidUsernameOrPasswordException {
