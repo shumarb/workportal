@@ -79,30 +79,12 @@ public class Person {
     }
 
     /**
-     * Sets the name of the Person object.
-     *
-     * @param name The full name to set.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Retrieves the unique username of the Person object used for login.
      *
      * @return The username.
      */
     public String getUsername() {
         return username;
-    }
-
-    /**
-     * Sets the unique username used by Person object for login.
-     *
-     * @param username The username to set.
-     */
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     /**
@@ -115,15 +97,6 @@ public class Person {
     }
 
     /**
-     * Sets the email address associated with the Person object.
-     *
-     * @param email The email address to set.
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
      * Retrieves the password for the Person object.
      *
      * @return The password.
@@ -133,30 +106,12 @@ public class Person {
     }
 
     /**
-     * Sets the password for the Person object.
-     *
-     * @param password The password to set.
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /**
      * Retrieves the role for the Person object.
      *
      * @return The role.
      */
     public String getRole() {
         return role;
-    }
-
-    /**
-     * Sets the password for the Person object.
-     *
-     * @param role The role to set.
-     */
-    public void setRole(String role) {
-        this.role = role;
     }
 
     /**
