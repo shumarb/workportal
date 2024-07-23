@@ -1,6 +1,7 @@
 /**
- * Unit tests for IndexPageController class method.
+ * Unit tests for IndexController.
  */
+
 package com.example.WorkPortal.controller;
 
 import org.junit.jupiter.api.BeforeEach;
