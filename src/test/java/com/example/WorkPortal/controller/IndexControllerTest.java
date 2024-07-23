@@ -4,9 +4,13 @@
 
 package com.example.WorkPortal.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,27 +18,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class IndexControllerTest {
 
-    private String pageName;
+    @InjectMocks
+    private IndexController indexController;
 
-    @BeforeEach
-    public void setUp() {
-        IndexController indexController = new IndexController();
-        this.pageName = indexController.showIndexPage();
-    }
+    private static final Logger indexControllerLogger = LogManager.getLogger(IndexController.class);
 
     @Test
-    void test_retrievesIndexPage() {
-        assertEquals("index", pageName);
-    }
+    void test_showIndexPage() {
+        MockitoAnnotations.openMocks(this);
 
-    @Test
-    void test_doesNotRetrieveLoginPage() {
-        assertNotEquals("login", pageName);
-    }
+        String viewName = indexController.showIndexPage();
 
-    @Test
-    void test_doesNotRetrieveRegistrationPage() {
-        assertNotEquals("registration", pageName);
+        assertEquals("index", viewName);
     }
 
 }
