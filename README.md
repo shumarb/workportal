@@ -19,7 +19,7 @@ It offers essential features such as registration, login, user profile display, 
 
 ## Instructions
 1. Right-click the WorkPortalApplication class file (Location: src/main/java/com/example/WorkPortal/WorkPortalApplication.java)
-2. If there issues with running the application, click the Maven icon on the right, navigate to WorkPortal/Lifecycle, click Mavan clean, followed by Maven install.
+2. If there issues with running the application, click the Maven icon on the right, navigate to WorkPortal/Lifecycle, click Maven clean, followed by Maven install, drop all tables in the schema defined earlier, and repeat Step 1.
 3. Enter localhost:9001/ in your local machine's browser.
 4. Navigate through the application.
 
