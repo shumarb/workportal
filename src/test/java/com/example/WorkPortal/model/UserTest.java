@@ -1,3 +1,7 @@
+/**
+ * Unit tests for {@link User} class methods.
+ */
+
 package com.example.WorkPortal.model;
 
 import org.junit.jupiter.api.Test;
@@ -7,21 +11,28 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class UserTest {
 
+    /**
+     * Tests the default constructor of {@link User}.
+     */
     @Test
     public void test_defaultUserConstructor() {
-        User user = new User();
+        Person user = new User();
         assertNotNull(user);
     }
 
+    /**
+     * Tests the constructor of {@link User} with parameters,
+     * as well as its getter methods.
+     */
     @Test
-    public void test_userConstructorWithParameters() {
+    public void test_userConstructorWithParameters_and_getterMethods() {
         String name = "Ali Hassan";
         String username = "ali_hassan";
         String email = "ali_hassan@gmail.com";
         String password = "MP092!";
         String role = "User";
 
-        User user = new User(name, username, email, password);
+        Person user = new User(name, username, email, password);
 
         assertEquals(name, user.getName());
         assertEquals(username, user.getUsername());
@@ -30,6 +41,9 @@ class UserTest {
         assertEquals(role, user.getRole());
     }
 
+    /**
+     * Tests the {@code toString()} method of {@link User}.
+     */
     @Test
     public void test_toStringMethod() {
         String name = "Mary Jane";
@@ -37,7 +51,8 @@ class UserTest {
         String email = "maryjane@outlook.com";
         String password = "XX34!!";
         String role = "User";
-        User user = new User(name, username, email, password);
+
+        Person user = new User(name, username, email, password);
 
         String expectedString = "Person {"
                                     + "id = " + 0

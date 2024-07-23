@@ -1,48 +1,67 @@
 /**
- * Unit tests for Person class methods.
+ * Unit tests for {@link Person} class methods.
  */
 
 package com.example.WorkPortal.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PersonTest {
 
-    private Person person1;
-
-    @BeforeEach
-    void setUp() {
-        this.person1 = new Person("Sam Ray", "sam_ray33", "sam.ray@gmail.com", "sAM@r2", "User");
+    /**
+     * Tests the default constructor of {@link Person}.
+     */
+    @Test
+    public void test_defaultPersonConstructor() {
+        Person person = new Person();
+        assertNotNull(person);
     }
 
+    /**
+     * Tests the constructor of {@link Person} with parameters,
+     * as well as its getter methods.
+     */
     @Test
-    void test_PersonInstantiation() {
-        assertEquals("Sam Ray", person1.getName());
-        assertEquals("sam_ray33", person1.getUsername());
-        assertEquals("sam.ray@gmail.com", person1.getEmail());
-        assertEquals("sAM@r2", person1.getPassword());
-        assertEquals("User", person1.getRole());
+    public void test_personConstructorWithParameters_and_getterMethods() {
+        String name = "Sam Ray";
+        String username = "sam_ray33";
+        String email = "sam.ray@gmail.com";
+        String password = "sAM@r2";
+        String role = "User";
+
+        Person person = new Person(name, username, email, password, role);
+
+        assertEquals(name, person.getName());
+        assertEquals(username, person.getUsername());
+        assertEquals(email, person.getEmail());
+        assertEquals(password, person.getPassword());
+        assertEquals(role, person.getRole());
     }
 
+    /**
+     * Tests the {@code toString()} method of {@link Person}.
+     */
     @Test
-    void test_settersUpdateAttributesCorrectly() {
-        person1.setName("Luke Lee");
-        assertEquals(person1.getName(), "Luke Lee");
+    void test_toStringMethod() {
+        String name = "May Lim";
+        String username = "may_lim99";
+        String email = "may_lim@gmail.com";
+        String password = "MM@YY1";
+        String role = "Manager";
 
-        person1.setUsername("luke_lee");
-        assertEquals(person1.getUsername(), "luke_lee");
+        Person person = new Person(name, username, email, password, role);
 
-        person1.setEmail("luke.lee@outlook.com");
-        assertEquals(person1.getEmail(), "luke.lee@outlook.com");
-
-        person1.setPassword("MMAaf_414");
-        assertEquals(person1.getPassword(), "MMAaf_414");
-
-        person1.setRole("Manager");
-        assertEquals(person1.getRole(), "Manager");
+        String expectedString = "Person {"
+                + "id = " + 0
+                + ", name = '" + name
+                + "', username = '" + username
+                + "', email = '" + email
+                + "', password = '" + password
+                + "', role = '" + role + "'}";
+        assertEquals(expectedString, person.toString());
     }
 
 }
