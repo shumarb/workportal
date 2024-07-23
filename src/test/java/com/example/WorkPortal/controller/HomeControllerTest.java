@@ -35,7 +35,7 @@ class HomeControllerTest {
     }
 
     @Test
-    void test_showHomePage_success() {
+    void test_showHomePage() {
         // Arrange
         Person loggedInPerson = new User("Ali Hassan", "alihassan", "alihassan@gmail.com", "password");
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInPerson);
@@ -46,7 +46,21 @@ class HomeControllerTest {
         // Assert
         assertEquals("home", viewName);
         verify(model).addAttribute("loggedInPerson", loggedInPerson);
+    }
 
+    @Test
+    void test_logoutOfHome() {
+        // Arrange
+        Person loggedInPerson = new User("Ali Hassan", "alihassan", "alihassan@gmail.com", "password");
+        when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInPerson);
+
+        // Act
+        String viewName = homeController.logoutOfHome(httpSession, model);
+
+        // Assert
+        assertEquals("index", viewName);
+        verify(httpSession).invalidate();
+        verify(model).addAttribute("logout", "You have been successfully logged out.");
     }
 
 }
