@@ -4,7 +4,9 @@
 
 package com.example.WorkPortal.service;
 
+import com.example.WorkPortal.model.Manager;
 import com.example.WorkPortal.model.Person;
+import com.example.WorkPortal.model.User;
 import com.example.WorkPortal.repository.PersonRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -54,7 +56,14 @@ public class RegistrationService {
         registrationServiceLogger.info("RegistrationServiceLogger: Currently at registerPerson method. Person entity created. " +
                                         "Name: {}, Username: {}, Email: {}, Password: {}, Role: {}",
                                          name, username, email, password, role);
-        this.personRepository.save(new Person(name, username, email, password, role));
+        if (role.equals("User")) {
+            this.personRepository.save(new User(name, username, email, password));
+        }
+
+        if (role.equals("Manager")) {
+            this.personRepository.save(new Manager(name, username, email, password));
+        }
+
     }
 
     /**

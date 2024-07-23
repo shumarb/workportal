@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "person")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
 
     /**
