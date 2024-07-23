@@ -12,54 +12,54 @@ import jakarta.persistence.*;
 public class Person {
 
     /**
-     * Identification number of a Person.
+     * Identification number of a Person entity.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     /**
-     * Name of a Person.
+     * Name of a Person entity..
      */
     private String name;
 
     /**
-     * Username of a Person.
+     * Username of a Person entity..
      */
     @Column(unique = true)
     private String username;
 
     /**
-     * Email address of a Person.
+     * Email address of a Person entity..
      */
     @Column(unique = true)
     private String email;
 
     /**
-     * Password of a Person.
+     * Password of a Person entity..
      */
     private String password;
 
     /**
-     * Role of a Person (either User or Manager).
+     * Role of a Person entity..
      */
     private String role;
 
     /**
-     * Default constructor as Hibernate requires it in order to instantiate objects.
+     * Default constructor as required by Hibernate.
      */
     public Person() {
 
     }
 
     /**
-     * Constructs a new Person with the given name, username, email, password, and role.
+     * Constructs a new Person entity with the given name, username, email, password, and role.
      *
-     * @param name     The name of the Person object.
-     * @param username The unique username of the Person object used for login.
-     * @param email    The email address of the Person object.
-     * @param password The password for the Person object.
-     * @param role     The role for the Person object.
+     * @param name     The name of the Person entity.
+     * @param username The unique username of the Person entity used for login.
+     * @param email    The email address of the Person entity.
+     * @param password The password for the Person entity.
+     * @param role     The role for the Person entity.
      */
     public Person(String name, String username, String email, String password, String role) {
         this.name = name;
@@ -70,36 +70,43 @@ public class Person {
     }
 
     /**
-     * Retrieves the full name of the Person object.
+     * Retrieves the identification number of the Person entity.
      *
-     * @return The full name of the Person object.
+     * @return The identification number of the Person entity.
+     */
+    public long getId() { return id; }
+
+    /**
+     * Retrieves the name of the Person entity.
+     *
+     * @return The name of the Person entity.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Retrieves the unique username of the Person object used for login.
+     * Retrieves the unique username of the Person entity.
      *
-     * @return The username.
+     * @return The username of the person entity.
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * Retrieves the email address associated with the Person object.
+     * Retrieves the email address of the Person entity.
      *
-     * @return The email address.
+     * @return The email address of the Person entity.
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * Retrieves the password for the Person object.
+     * Retrieves the password of the Person entity.
      *
-     * @return The password.
+     * @return The password of the Person entity.
      */
     public String getPassword() {
         return password;
@@ -108,7 +115,7 @@ public class Person {
     /**
      * Retrieves the role for the Person object.
      *
-     * @return The role.
+     * @return The role of the Person entity.
      */
     public String getRole() {
         return role;
