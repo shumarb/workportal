@@ -5,7 +5,6 @@
 package com.example.WorkPortal.service;
 
 import com.example.WorkPortal.model.Manager;
-import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.model.User;
 import com.example.WorkPortal.repository.PersonRepository;
 import org.apache.logging.log4j.LogManager;
