@@ -9,6 +9,17 @@
 <body>
     <div class="box">
         <h1>Home</h1>
+
+        <!-- Language Selection Dropdown-->
+        <form>
+            <label>
+                <select name="language">
+                    <option>English</option>
+                    <option>French</option>
+                </select>
+            </label>
+        </form>
+
         <p>Welcome, <span th:text="${loggedInPerson.getName()}"></span>!</p>
 
         <!-- Section to display Person entity's name, username, and role -->
