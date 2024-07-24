@@ -9,22 +9,22 @@
     <a href="/home" class="back-link">&#8592; Back</a>
     <h1>Managerial Code of Conduct</h1>
 
-    <!-- Language Selection Dropdown-->
-    <form>
-        <label>
-            <select name="language">
-                <option>English</option>
-                <option>French</option>
-            </select>
-        </label>
-    </form>
-
-    <!-- Error message for unsuccessful attempt to return to home page from managerial code of conduct page. -->
-    <div th:if="${error}" class="error-message">
-        <p th:text="${error}"></p>
-    </div>
-
     <div class="requirements">
+        <!-- Language Selection Dropdown-->
+        <form>
+            <label>
+                <select name="language">
+                    <option>English</option>
+                    <option>French</option>
+                </select>
+            </label>
+        </form>
+
+        <!-- Error message for unsuccessful attempt to return to home page from managerial code of conduct page. -->
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+
         <p>As a manager, you are expected to adhere to the following code of conduct:</p>
         <ul>
             <li><strong>Leadership:</strong> Lead by example and inspire your team.</li>
