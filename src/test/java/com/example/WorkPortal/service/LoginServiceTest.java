@@ -3,6 +3,7 @@ package com.example.WorkPortal.service;
 import com.example.WorkPortal.exceptions.InvalidUsernameOrPasswordException;
 import com.example.WorkPortal.model.Manager;
 import com.example.WorkPortal.model.Person;
+import com.example.WorkPortal.model.User;
 import com.example.WorkPortal.repository.PersonRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -59,14 +60,40 @@ class LoginServiceTest {
         assertEquals(validUsername, manager.getUsername());
     }
 
+
     @Test
-    void test_loginFailure_invalidUsername() {
+    void test_loginFailure_validUsernameAndInvalidPassword() {
+        // Arrange
+        Person user = new User(validName, validUsername, validEmail, validPassword);
+
+        // Act
+        lenient().when(this.personRepository.findByUsername(user.getUsername())).thenReturn(Optional.of(user));
+
+        // Assert
+        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+            this.loginService.login(validUsername, invalidPassword);
+        });
+    }
+
+    @Test
+    void test_loginFailure_invalidUsernameAndValidPassword() {
         // Arrange and act
         lenient().when(this.personRepository.findByUsername(invalidUsername)).thenReturn(Optional.empty());
 
         // Assert
         assertThrows(InvalidUsernameOrPasswordException.class, () -> {
             this.loginService.login(invalidUsername, validPassword);
+        });
+    }
+
+    @Test
+    void test_loginFailure_invalidUsernameAndInvalidPassword() {
+        // Arrange and act
+        lenient().when(this.personRepository.findByUsername(invalidUsername)).thenReturn(Optional.empty());
+
+        // Assert
+        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+            this.loginService.login(invalidUsername, invalidPassword);
         });
     }
 
