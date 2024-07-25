@@ -17,7 +17,7 @@ Managers have the option to view the Managerial Code of Conduct in either Englis
 3. Select `Open`.
 4. Navigate to the location of the cloned repository.
 5. Create a `schema` (e.g., work_portal) on the MySQL Workbench.
-6. Update application.properties in src/main/resources/:
+6. Update `application.properties` in the `src/main/resources` folder:
    - Line 5: Set `spring.datasource.url=jdbc:mysql://localhost:3306/name-of-your-schema`.
    - Line 6: Set `spring.datasource.username=name-of-your-mysql-username`.
    - Line 7: Set `spring.datasource.username=name-of-your-mysql-password`.
