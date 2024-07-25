@@ -40,5 +40,5 @@ Managers have the option to view the Managerial Code of Conduct in either Englis
    - The `User` table includes the `id` of registered users with the `role` of `User`.
 
 ## Tech Stack
-- Programming: Java
+- Programming: Java.
 - Frameworks/Tools: Spring Boot, JUnit, Git, HTML, CSS, MySQL.
