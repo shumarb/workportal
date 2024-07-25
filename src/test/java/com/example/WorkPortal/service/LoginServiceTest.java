@@ -16,7 +16,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class LoginServiceTest {
@@ -94,6 +93,53 @@ class LoginServiceTest {
         // Assert
         assertThrows(InvalidUsernameOrPasswordException.class, () -> {
             this.loginService.login(invalidUsername, invalidPassword);
+        });
+    }
+
+    @Test
+    void test_loginFailure_nullUsernameAndValidPassword() {
+        // Arrange and act
+        lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
+
+        // Assert
+        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+            this.loginService.login(null, validPassword);
+        });
+    }
+
+    @Test
+    void test_loginFailure_nullUsernameAndInvalidPassword() {
+        // Arrange and act
+        lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
+
+        // Assert
+        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+            this.loginService.login(null, invalidPassword);
+        });
+    }
+
+    @Test
+    void test_loginFailure_validUsernameAndNullPassword() {
+        // Arrange
+        Person manager = new Manager(validName, validUsername, validEmail, validPassword);
+
+        // Act
+        lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(manager));
+
+        // Assert
+        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+            this.loginService.login(validUsername, null);
+        });
+    }
+
+    @Test
+    void test_loginFailure_invalidUsernameAndNullPassword() {
+        // Arrange and act
+        lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
+
+        // Assert
+        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+            this.loginService.login(invalidUsername, null);
         });
     }
 
