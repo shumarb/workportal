@@ -1,21 +1,23 @@
 /* managerial-code-of-conduct.css: Styling for managerial-code-of-conduct.html */
 
 .box {
-    position: absolute;
-    top: 35%;
+    position: relative;
+    top: 40px; /* Fixed distance from the top */
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     text-align: center;
     background-color: #f0f0f0;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 530px;
+    width: 600px; /* Fixed width for consistent size */
+    max-width: 90%; /* Added max-width to ensure responsiveness */
 }
 
 .box h1 {
     color: #333;
     margin-bottom: 20px;
+    font-size: 24px;
 }
 
 .box a {
@@ -42,9 +44,6 @@ form label {
     font-weight: bold;
 }
 
-form input[type="text"],
-form input[type="email"],
-form input[type="password"],
 form select {
     width: 100%;
     padding: 10px;
@@ -52,6 +51,7 @@ form select {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    font-size: 16px;
 }
 
 form button {
@@ -70,16 +70,16 @@ form button:hover {
 }
 
 .requirements {
-    margin-top: 5px;
+    margin-top: 20px;
     border-top: 1px solid #ccc;
-    padding-top: 5px;
-    padding-bottom: 2px;
+    padding-top: 20px;
     text-align: left;
 }
 
 .requirements h2 {
     color: #333;
     margin-bottom: 10px;
+    font-size: 20px;
 }
 
 .requirements ul {
@@ -90,4 +90,5 @@ form button:hover {
 
 .requirements li {
     margin-bottom: 10px;
+    font-size: 16px;
 }
