@@ -51,7 +51,7 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void registerManager_success() {
+    void test_registerManager_success() {
         // Act
         this.registrationService.registerPerson(validName, validUsername, validEmail, validPassword, "Manager");
 
@@ -61,7 +61,7 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void registerUser_success() {
+    void test_registerUser_success() {
         // Act
         this.registrationService.registerPerson(validName, validUsername, validEmail, validPassword, "User");
 
@@ -71,7 +71,7 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void isEmailAddressRegistered_registered() {
+    void test_isEmailAddressRegistered_registered() {
         // Act
         lenient().when(this.personRepository.findByEmail(validEmail)).thenReturn(Optional.of(new User()));
         boolean isEmailAddressRegistered = this.registrationService.isEmailAddressRegistered(validEmail);
@@ -81,7 +81,7 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void isEmailAddressRegistered_notRegistered() {
+    void test_isEmailAddressRegistered_notRegistered() {
         // Act
         lenient().when(this.personRepository.findByEmail(validEmail)).thenReturn(Optional.empty());
         boolean isEmailAddressRegistered = this.registrationService.isEmailAddressRegistered(validEmail);
