@@ -11,10 +11,12 @@
 
     <!-- Language Selection Dropdown-->
     <form th:action="@{/locale}" method="get">
-        <select name="language" onchange="this.form.submit()">
-            <option value="en"  th:selected="${#locale.language == 'en'}" th:text="#{managerialCodeOfConduct.locale.en}"></option>
-            <option value="fr" th:selected="${#locale.language == 'fr'}" th:text="#{managerialCodeOfConduct.locale.fr}"></option>
-        </select>
+        <label>
+            <select name="language" onchange="this.form.submit()">
+                <option value="en"  th:selected="${#locale.language == 'en'}" th:text="#{managerialCodeOfConduct.locale.en}"></option>
+                <option value="fr" th:selected="${#locale.language == 'fr'}" th:text="#{managerialCodeOfConduct.locale.fr}"></option>
+            </select>
+        </label>
     </form>
 
     <!-- Error message for unsuccessful attempt to return to home page from managerial code of conduct page. -->
@@ -33,7 +35,6 @@
             <li><strong th:text="#{managerialCodeOfConduct.growth}"></strong> <span th:text="#{managerialCodeOfConduct.growthText}"></span></li>
             <li><strong th:text="#{managerialCodeOfConduct.feedback}"></strong> <span th:text="#{managerialCodeOfConduct.feedbackText}"></span></li>
         </ul>
-        <!-- ZX23$ -->
     </div>
 </div>
 </body>
