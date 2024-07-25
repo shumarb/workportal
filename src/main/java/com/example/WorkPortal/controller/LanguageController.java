@@ -1,6 +1,7 @@
 /**
  * Controller class for handling language translation operations.
  */
+
 package com.example.WorkPortal.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
