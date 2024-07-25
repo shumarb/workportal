@@ -1,3 +1,6 @@
+/**
+ * Unit tests for LoginController class.
+ */
 package com.example.WorkPortal.controller;
 
 import org.junit.jupiter.api.BeforeEach;

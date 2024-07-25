@@ -1,5 +1,5 @@
 /**
- * Unit tests for IndexController.
+ * Unit tests for IndexController class.
  */
 
 package com.example.WorkPortal.controller;
@@ -12,7 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class IndexControllerTest {

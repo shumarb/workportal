@@ -1,6 +1,7 @@
 /**
- * Unit tests for RegistrationPageController class method.
+ * Unit tests for RegistrationController class.
  */
+
 package com.example.WorkPortal.controller;
 import com.example.WorkPortal.service.RegistrationService;
 

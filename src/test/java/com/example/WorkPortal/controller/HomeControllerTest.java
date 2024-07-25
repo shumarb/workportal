@@ -1,5 +1,5 @@
 /**
- * Unit tests for HomeController.
+ * Unit tests for HomeController class.
  */
 
 package com.example.WorkPortal.controller;
