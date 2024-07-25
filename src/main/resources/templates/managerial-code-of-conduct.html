@@ -11,13 +11,11 @@
 
     <div class="requirements">
         <!-- Language Selection Dropdown-->
-        <form>
-            <label>
-                <select name="language">
-                    <option>English</option>
-                    <option>French</option>
-                </select>
-            </label>
+        <form th:action="@{/locale}" method="get">
+            <select name="language" onchange="this.form.submit()">
+                <option value="en"  th:selected="${#locale.language == 'en'}" th:text="#{managerialCodeOfConduct.locale.en}"></option>
+                <option value="fr" th:selected="${#locale.language == 'fr'}" th:text="#{managerialCodeOfConduct.locale.fr}"></option>
+            </select>
         </form>
 
         <!-- Error message for unsuccessful attempt to return to home page from managerial code of conduct page. -->
@@ -27,15 +25,7 @@
 
         <p>As a manager, you are expected to adhere to the following code of conduct:</p>
         <ul>
-            <li><strong>Leadership:</strong> Lead by example and inspire your team.</li>
-            <li><strong>Integrity:</strong> Uphold high ethical standards and honesty in all actions.</li>
-            <li><strong>Communication:</strong> Foster open and transparent communication.</li>
-            <li><strong>Respect:</strong> Treat all team members and stakeholders with respect.</li>
-            <li><strong>Professionalism:</strong> Maintain professionalism in all interactions.</li>
-            <li><strong>Growth:</strong> Support the growth and development of your team members.</li>
-            <li><strong>Compliance:</strong> Ensure compliance with company policies and regulations.</li>
-            <li><strong>Conflict Resolution:</strong> Effectively manage conflicts and promote resolution.</li>
-            <li><strong>Feedback:</strong> Provide constructive feedback and encourage continuous improvement.</li>
+            <li><strong>Leadership:</strong> <span th:text="#{manager.leadership}">Lead by example and inspire your team.</span></li>
         </ul>
     </div>
 </div>
