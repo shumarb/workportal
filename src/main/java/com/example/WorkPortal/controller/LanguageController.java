@@ -1,3 +1,6 @@
+/**
+ * Controller class for handling language translation operations.
+ */
 package com.example.WorkPortal.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,8 +31,8 @@ public class LanguageController {
             languageControllerLogger.info("LanguageControllerLogger: French language selected.");
             return Locale.FRENCH;
         }
-        languageControllerLogger.info("LanguageControllerLogger: English language selected.");
-        return Locale.ENGLISH;
+        languageControllerLogger.info("LanguageControllerLogger: English (UK) language selected.");
+        return Locale.UK;
     }
 
     /**
