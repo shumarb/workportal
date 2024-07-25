@@ -23,7 +23,7 @@ Managers have the option to view the Managerial Code of Conduct in either Englis
    - Line 7: Set `spring.datasource.username=name-of-your-mysql-password`.
 
 ## Instructions
-1. Right-click the WorkPortalApplication class file (Location: src/main/java/com/example/WorkPortal/WorkPortalApplication.java)
+1. Right-click the `WorkPortalApplication` class file (Location: `src/main/java/com/example/WorkPortal/WorkPortalApplication.java`)
 2. If there issues with running the application:
    - Click the `Maven icon` on the right
    - Navigate to `WorkPortal/Lifecycle`
