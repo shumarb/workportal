@@ -59,4 +59,15 @@ class LoginServiceTest {
         assertEquals(validUsername, manager.getUsername());
     }
 
+    @Test
+    void test_loginFailure_invalidUsername() {
+        // Arrange and act
+        lenient().when(this.personRepository.findByUsername(invalidUsername)).thenReturn(Optional.empty());
+
+        // Assert
+        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+            this.loginService.login(invalidUsername, validPassword);
+        });
+    }
+
 }
