@@ -6,8 +6,8 @@
     <link rel="stylesheet" type="text/css" href="/static/css/managerial-code-of-conduct.css">
 <body>
 <div class="box">
-    <a href="/home" class="back-link">&#8592; Back</a>
-    <h1>Managerial Code of Conduct</h1>
+    <a href="/home" class="back-link" th:text="#{managerialCodeOfConduct.back}">&#8592;</a>
+    <h1 th:text="#{managerialCodeOfConduct.head}"></h1>
 
     <div class="requirements">
         <!-- Language Selection Dropdown-->
@@ -23,10 +23,9 @@
             <p th:text="${error}"></p>
         </div>
 
-        <p>As a manager, you are expected to adhere to the following code of conduct:</p>
-        <ul>
-            <li><strong>Leadership:</strong> <span th:text="#{manager.leadership}">Lead by example and inspire your team.</span></li>
-        </ul>
+        <p th:text="#{managerialCodeOfConduct.description}"></p>
+
+        <!-- ZX23$ -->
     </div>
 </div>
 </body>
