@@ -24,11 +24,11 @@ Managers have the option to view the Managerial Code of Conduct in either Englis
 ## Instructions
 1. Right-click the `WorkPortalApplication` class file (Location: `src/main/java/com/example/WorkPortal/WorkPortalApplication.java`).
 2. Select `Run 'WorkPortalAppl....main()`.
-3. If there issues with running the application:
+3. If there issues with running the application, perform the following before repeating Step 1:
    - Click the `Maven icon` on the right.
    - Navigate to `WorkPortal/Lifecycle`.
    - Click `Clean`, then `Install`.
-   - Drop all tables in the schema and repeat Step 1.
+   - Drop all tables in the schema.
    - Close and reopen IntelliJ IDEA.
 4. Enter `localhost:9001/` in your browser after seeing the message `Started WorkPortalApplication` in the `console`.
 5. Explore the application.
