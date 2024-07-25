@@ -5,7 +5,6 @@
 package com.example.WorkPortal.service;
 
 import com.example.WorkPortal.model.Manager;
-import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.model.User;
 import com.example.WorkPortal.repository.PersonRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,6 +39,7 @@ class RegistrationServiceTest {
 
     @BeforeEach
     void setUp() {
+        // Arrange
         validName = "Ali Hassan";
         validUsername = "ali_hassan";
         validEmail = "ali_hassan@icloud.com";
@@ -54,9 +54,9 @@ class RegistrationServiceTest {
     void test_registerManager_success() {
         // Act
         this.registrationService.registerPerson(validName, validUsername, validEmail, validPassword, "Manager");
+        lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(new Manager()));
 
         // Assert
-        lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(new Manager()));
         assertTrue(this.registrationService.isUsernameRegistered(validUsername));
     }
 
@@ -64,9 +64,9 @@ class RegistrationServiceTest {
     void test_registerUser_success() {
         // Act
         this.registrationService.registerPerson(validName, validUsername, validEmail, validPassword, "User");
+        lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(new User()));
 
         // Assert
-        lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(new User()));
         assertTrue(this.registrationService.isUsernameRegistered(validUsername));
     }
 
@@ -91,34 +91,153 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void isUsernameRegistered() {
+    void test_isUsernameRegistered_registered() {
+        // Act
+        lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(new Manager()));
+        boolean isUserNameRegistered = this.registrationService.isUsernameRegistered(validUsername);
+
+        // Assert
+        assertTrue(isUserNameRegistered);
     }
 
     @Test
-    void isValidEmailAddress() {
+    void test_isUsernameRegistered_notRegistered() {
+        // Act
+        lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.empty());
+        boolean isUserNameRegistered = this.registrationService.isUsernameRegistered(validUsername);
+
+        // Assert
+        assertFalse(isUserNameRegistered);
     }
 
     @Test
-    void isValidName() {
+    void test_isValidEmailAddress_validEmailAddressFormat() {
+        // Act
+        boolean isValidEmailAddress = this.registrationService.isValidEmailAddress(validEmail);
+
+        // Assert
+        assertTrue(isValidEmailAddress);
     }
 
     @Test
-    void isAllLetters() {
+    void test_isValidEmailAddress_invalidEmailAddressFormat() {
+        // Act
+        boolean isValidEmailAddress = this.registrationService.isValidEmailAddress(invalidEmail);
+
+        // Assert
+        assertFalse(isValidEmailAddress);
     }
 
     @Test
-    void isValidPassword() {
+    void isValidName_validNameFormat() {
+        // Act
+        boolean isValidName = this.registrationService.isValidName(validName);
+
+        // Assert
+        assertTrue(isValidName);
     }
 
     @Test
-    void isValidUsername() {
+    void isValidName_invalidNameFormat() {
+        // Act
+        boolean isValidName = this.registrationService.isValidName(invalidName);
+
+        // Assert
+        assertFalse(isValidName);
     }
 
     @Test
-    void isPasswordRegistered() {
+    void isAllLetters_valid() {
+        // Arrange
+        String word = "word";
+
+        // Act
+        boolean isAllLetters = this.registrationService.isAllLetters(word);
+
+        // Assert
+        assertTrue(isAllLetters);
     }
 
     @Test
-    void doesWordHaveAtLeastThreeCharacters() {
+    void isAllLetters_invalid() {
+        // Act
+        boolean isAllLetters = this.registrationService.isAllLetters(validUsername);
+
+        // Assert
+        assertFalse(isAllLetters);
     }
+
+    @Test
+    void isValidPassword_validPassword() {
+        // Act
+        boolean isValidPassword = this.registrationService.isValidPassword(validPassword);
+
+        // Assert
+        assertTrue(isValidPassword);
+    }
+
+    @Test
+    void isValidPassword_invalidPassword() {
+        // Act
+        boolean isValidPassword = this.registrationService.isValidPassword(invalidPassword);
+
+        // Assert
+        assertFalse(isValidPassword);
+    }
+
+    @Test
+    void isValidUsername_valid() {
+        // Act
+        boolean isValidUsername = this.registrationService.isValidUsername(validUsername);
+
+        // Assert
+        assertTrue(isValidUsername);
+    }
+
+    @Test
+    void isValidUsername_invalid() {
+        // Act
+        boolean isValidUsername = this.registrationService.isValidUsername(invalidUsername);
+
+        // Assert
+        assertFalse(isValidUsername);
+    }
+
+    @Test
+    void isPasswordRegistered_registered() {
+        // Act
+        this.registrationService.registerPerson(validName, validUsername, validEmail, validPassword, "Manager");
+        lenient().when(this.personRepository.findByPassword(validPassword)).thenReturn(Optional.of(new Manager()));
+
+        // Assert
+        assertTrue(this.registrationService.isPasswordRegistered(validPassword));
+    }
+
+    @Test
+    void isPasswordRegistered_notRegistered() {
+        // Act
+        lenient().when(this.personRepository.findByPassword(validPassword)).thenReturn((Optional.empty()));
+
+        // Assert
+        assertFalse(this.registrationService.isPasswordRegistered(validPassword));
+    }
+
+    @Test
+    void doesWordHaveAtLeastThreeCharacters_valid() {
+        // Act
+        boolean hasAtLeastThreeCharacters = this.registrationService.isValidUsername(validUsername);
+
+        // Assert
+        assertTrue(hasAtLeastThreeCharacters);
+    }
+
+    @Test
+    void doesWordHaveAtLeastThreeCharacters_invalid() {
+        // Act
+        boolean hasAtLeastThreeCharacters = this.registrationService.isValidUsername(invalidUsername);
+
+        // Assert
+        assertFalse(hasAtLeastThreeCharacters);
+    }
+
 }
