@@ -4,6 +4,7 @@
 
 package com.example.WorkPortal.controller;
 
+import com.example.WorkPortal.exceptions.RestrictedAccessException;
 import com.example.WorkPortal.model.Manager;
 import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.model.User;
@@ -54,6 +55,8 @@ class HomeControllerTest {
 
         // Assert
         assertEquals("home", viewName);
+
+        // Verify
         verify(model).addAttribute("loggedInPerson", loggedInManager);
     }
 
@@ -67,6 +70,8 @@ class HomeControllerTest {
 
         // Assert
         assertEquals("index", viewName);
+
+        // Verify
         verify(httpSession).invalidate();
         verify(model).addAttribute("logout", "You have been successfully logged out.");
     }
@@ -84,7 +89,7 @@ class HomeControllerTest {
     }
 
     @Test
-    void test_showManagerialCodeOfConduct_failure() {
+    void test_showManagerialCodeOfConduct_failure_user() {
         // Arrange
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInUser);
 
