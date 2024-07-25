@@ -1,5 +1,5 @@
 /**
- * Repository interface for managing Person entity.
+ * Repository interface for managing Person entities.
  */
 
 package com.example.WorkPortal.repository;
