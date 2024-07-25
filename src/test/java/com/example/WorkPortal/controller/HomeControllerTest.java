@@ -34,7 +34,7 @@ class HomeControllerTest {
 
     @BeforeEach
     void setUp() {
-        loggedInPerson = new User("Ali Hassan", "alihassan", "alihassan@gmail.com", "password");
+        loggedInPerson = new User("Ali Hassan", "ali_hassan", "alihassan@gmail.com", "password");
         MockitoAnnotations.openMocks(this);
     }
 
