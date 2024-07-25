@@ -1,6 +1,7 @@
 # WorkPortal
 ## Overview
 WorkPortal is a Management System designed for managing Users and Managers.
+
 It offers essential features such as registration, login, user profile display, access to exclusive Managerial Code of Conduct pages, and logout functionality.
 Managers have the option to view the Managerial Code of Conduct in either English or French languages.
 
