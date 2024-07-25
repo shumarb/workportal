@@ -2,8 +2,8 @@
 ## Overview
 WorkPortal is a Management System designed for management of Users and Managers.
 
-It offers essential features such as registration, login, user profile display, access to exclusive Managerial Code of Conduct pages, and logout functionality.
-Managers have the option to view the Managerial Code of Conduct in either English or French languages.
+The application features registration, login, user profile display, and logout functionalities. 
+Managers have exclusive access to the Managerial Code of Conduct page, which is available in both English and French languages.
 
 ## Prerequisites
 - Java 17 or later.
