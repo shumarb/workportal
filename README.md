@@ -12,10 +12,10 @@ Managers have the option to view the Managerial Code of Conduct in either Englis
 - MySQL, and MySQL Workbench.
 
 ## Setup
-1. Clone this repository.
+1. `Clone` this repository.
 2. Open the `IntelliJ IDE`.
 3. Select `Open`.
-4. Navigate to the location of the cloned repository cloned.
+4. Navigate to the location of the cloned repository.
 5. Create a `schema` (e.g., work_portal) on the MySQL Workbench.
 6. Update application.properties in src/main/resources/:
    - Line 5: Set `spring.datasource.url=jdbc:mysql://localhost:3306/name-of-your-schema`.
