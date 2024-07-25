@@ -76,7 +76,7 @@ public class LoginController {
                                                  "Invalid Username ({}) or Password ({}). " +
                                                  "Currently at Login page. Error message displayed.",
                                                   username, password);
-            model.addAttribute("error", "Invalid userid or password.");
+            model.addAttribute("error", "Invalid userid or password");
             return "login";
 
         } catch (Exception e) {
