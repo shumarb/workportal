@@ -2,7 +2,7 @@
 ## Overview
 WorkPortal is a Management System designed for the management of Users and Managers, implemented using the MVC (Model-View-Controller) architectural pattern.
 
-The application features registration, login, user profile display, and logout functionalities.
+The application features registration, login, user profile, and logout functionalities.
 Managers have exclusive access to the Managerial Code of Conduct page, which is available in both English and French languages.
 
 ## Prerequisites
