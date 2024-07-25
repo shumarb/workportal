@@ -71,7 +71,23 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void isEmailAddressRegistered() {
+    void isEmailAddressRegistered_registered() {
+        // Act
+        lenient().when(this.personRepository.findByEmail(validEmail)).thenReturn(Optional.of(new User()));
+        boolean isEmailAddressRegistered = this.registrationService.isEmailAddressRegistered(validEmail);
+
+        // Assert
+        assertTrue(isEmailAddressRegistered);
+    }
+
+    @Test
+    void isEmailAddressRegistered_notRegistered() {
+        // Act
+        lenient().when(this.personRepository.findByEmail(validEmail)).thenReturn(Optional.empty());
+        boolean isEmailAddressRegistered = this.registrationService.isEmailAddressRegistered(validEmail);
+
+        // Assert
+        assertFalse(isEmailAddressRegistered);
     }
 
     @Test
