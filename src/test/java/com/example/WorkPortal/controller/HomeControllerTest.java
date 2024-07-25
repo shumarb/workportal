@@ -21,6 +21,9 @@ import static org.mockito.Mockito.when;
 class HomeControllerTest {
 
     @Mock
+    Person loggedInPerson;
+
+    @Mock
     private HttpSession httpSession;
 
     @Mock
@@ -31,13 +34,13 @@ class HomeControllerTest {
 
     @BeforeEach
     void setUp() {
+        loggedInPerson = new User("Ali Hassan", "alihassan", "alihassan@gmail.com", "password");
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void test_showHomePage() {
+    void test_showHomePage_success() {
         // Arrange
-        Person loggedInPerson = new User("Ali Hassan", "alihassan", "alihassan@gmail.com", "password");
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInPerson);
 
         // Act
@@ -51,7 +54,6 @@ class HomeControllerTest {
     @Test
     void test_logoutOfHome() {
         // Arrange
-        Person loggedInPerson = new User("Ali Hassan", "alihassan", "alihassan@gmail.com", "password");
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInPerson);
 
         // Act
