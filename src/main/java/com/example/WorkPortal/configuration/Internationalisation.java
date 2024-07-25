@@ -3,9 +3,8 @@
  * Implements {@link WebMvcConfigurer} to customize Spring MVC configuration.
  */
 
-package com.example.WorkPortal.Configuration;
+package com.example.WorkPortal.configuration;
 
-import com.example.WorkPortal.controller.LanguageController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
