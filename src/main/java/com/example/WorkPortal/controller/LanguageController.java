@@ -24,6 +24,7 @@ public class LanguageController {
 
     /**
      * Determines the Locale based on the specified language parameter.
+     *
      * @param language The language perimeter ('en' for English, 'fr' for French).
      * @return The Locale object corresponding to the language parameter.
      */
@@ -38,6 +39,7 @@ public class LanguageController {
 
     /**
      * Sets the locale for provided HTTP Servlet Request and Response based on provided locale.
+     *
      * @param httpServletRequest    The HTTP Servlet Request object.
      * @param httpServletResponse   The HTTP Servlet Request object.
      * @param locale The locale to be set.
