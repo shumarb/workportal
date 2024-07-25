@@ -1,3 +1,7 @@
+/**
+ * Unit tests for LoginService class.
+ */
+
 package com.example.WorkPortal.service;
 
 import com.example.WorkPortal.exceptions.InvalidUsernameOrPasswordException;
