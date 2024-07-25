@@ -9,22 +9,24 @@
     <a href="/home" class="back-link" th:text="#{managerialCodeOfConduct.back}">&#8592;</a>
     <h1 th:text="#{managerialCodeOfConduct.head}"></h1>
 
+    <!-- Language Selection Dropdown-->
+    <form th:action="@{/locale}" method="get">
+        <select name="language" onchange="this.form.submit()">
+            <option value="en"  th:selected="${#locale.language == 'en'}" th:text="#{managerialCodeOfConduct.locale.en}"></option>
+            <option value="fr" th:selected="${#locale.language == 'fr'}" th:text="#{managerialCodeOfConduct.locale.fr}"></option>
+        </select>
+    </form>
+
+    <!-- Error message for unsuccessful attempt to return to home page from managerial code of conduct page. -->
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+
     <div class="requirements">
-        <!-- Language Selection Dropdown-->
-        <form th:action="@{/locale}" method="get">
-            <select name="language" onchange="this.form.submit()">
-                <option value="en"  th:selected="${#locale.language == 'en'}" th:text="#{managerialCodeOfConduct.locale.en}"></option>
-                <option value="fr" th:selected="${#locale.language == 'fr'}" th:text="#{managerialCodeOfConduct.locale.fr}"></option>
-            </select>
-        </form>
-
-        <!-- Error message for unsuccessful attempt to return to home page from managerial code of conduct page. -->
-        <div th:if="${error}" class="error-message">
-            <p th:text="${error}"></p>
-        </div>
-
         <p th:text="#{managerialCodeOfConduct.description}"></p>
-
+        <ul>
+            <li><strong th:text="#{managerialCodeOfConduct.leadership}"></strong> <span th:text="#{managerialCodeOfConduct.leadershipText}"></span></li>
+        </ul>
         <!-- ZX23$ -->
     </div>
 </div>
