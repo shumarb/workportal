@@ -6,6 +6,8 @@ package com.example.WorkPortal.controller;
 
 import com.example.WorkPortal.exceptions.RestrictedAccessException;
 import com.example.WorkPortal.model.Person;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -13,9 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Locale;
 
 @Controller
-public class HomeController {
+public class HomeController extends LanguageController {
 
     /**
      * Logger to monitor operational flow and assist in troubleshooting for Home page.
@@ -104,6 +109,24 @@ public class HomeController {
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
             return "redirect:/home";
         }
+    }
+
+    /**
+     * Handles the GET request for changing of language on the Managerial Code of Conduct page.
+     *
+     * @param language The language parameter indicating the selected language ('en' for English, 'fr' for French).
+     * @param httpServletRequest The HTTP request object.
+     * @param httpServletResponse The HTTP response object.
+     * @return Name of the view for the Managerial Code of Conduct page showing its content in the selected languages.
+     * @throws IllegalStateException If no LocaleResolver is found in the application context.
+     */
+    @GetMapping("/locale")
+    public String changeLocale(@RequestParam String language,
+                               HttpServletRequest httpServletRequest,
+                               HttpServletResponse httpServletResponse) {
+        Locale locale = switchLocale(language);
+        setLocale(httpServletRequest, httpServletResponse, locale);
+        return "redirect:/managerial-code-of-conduct";
     }
 
 }
