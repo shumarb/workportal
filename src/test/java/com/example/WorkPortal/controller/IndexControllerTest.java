@@ -13,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @ExtendWith(MockitoExtension.class)
 class IndexControllerTest {
@@ -29,6 +30,24 @@ class IndexControllerTest {
         String viewName = indexController.showIndexPage();
 
         assertEquals("index", viewName);
+    }
+
+    @Test
+    void test_doesNotShowLoginPage() {
+        MockitoAnnotations.openMocks(this);
+
+        String viewName = indexController.showIndexPage();
+
+        assertNotEquals("login", viewName);
+    }
+
+    @Test
+    void test_doesNotShowRegistrationPage() {
+        MockitoAnnotations.openMocks(this);
+
+        String viewName = indexController.showIndexPage();
+
+        assertNotEquals("registration", viewName);
     }
 
 }
