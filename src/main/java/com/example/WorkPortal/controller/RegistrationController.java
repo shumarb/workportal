@@ -46,7 +46,7 @@ public class RegistrationController {
      */
     @GetMapping("/registration")
     public String showRegistrationPage() {
-        registrationControllerLogger.info("RegistrationControllerLogger: Currently at Registration page.");
+        this.registrationControllerLogger.info("RegistrationControllerLogger: Currently at Registration page.");
         return "registration";
     }
 
@@ -71,6 +71,12 @@ public class RegistrationController {
                                  RedirectAttributes redirectAttributes) {
 
         try {
+            registrationControllerLogger.info("Registration attempt. "
+                                                        + "Name: {}"
+                                                        + ", Username: {}"
+                                                        + ", Email: {}"
+                                                        + ", Password: {}"
+                                                        + ", Role: {}.", name, username, email, password, role);
             // Invalid email address.
             if (!this.registrationService.isValidEmailAddress(email)) {
                 throw new InvalidEmailException();

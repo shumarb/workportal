@@ -65,9 +65,10 @@ public class LoginController {
     public String loginPerson(@RequestParam String username, @RequestParam String password, HttpSession httpSession, Model model) {
         try {
             // Log messages and redirection to home page for successful login.
+            loginControllerLogger.info("LoginControllerLogger: Login attempt. Username: {}, Password: {}.", username, password);
             Person loggedInPerson = this.loginService.login(username, password);
             httpSession.setAttribute("loggedInPerson", loggedInPerson);
-            loginControllerLogger.info("LoginControllerLogger: Going to Home page after successful login for {}", loggedInPerson.toString());
+            loginControllerLogger.info("LoginControllerLogger: Going to Home page after successful login for {}.", loggedInPerson.toString());
             return "redirect:/home";
 
         } catch (InvalidUsernameOrPasswordException e) {
