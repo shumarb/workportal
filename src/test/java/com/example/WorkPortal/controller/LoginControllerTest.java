@@ -6,6 +6,7 @@ package com.example.WorkPortal.controller;
 import com.example.WorkPortal.exceptions.InvalidUsernameOrPasswordException;
 import com.example.WorkPortal.model.Manager;
 import com.example.WorkPortal.model.Person;
+import com.example.WorkPortal.model.User;
 import com.example.WorkPortal.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,12 +24,8 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class LoginControllerTest {
 
-    String validName;
     String validUsername;
-    String validEmail;
     String validPassword;
-    String invalidUsername;
-    String invalidPassword;
 
     @Mock
     private HttpSession httpSession;
@@ -45,12 +42,8 @@ class LoginControllerTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        validName = "Ali Hassan";
         validUsername = "ali_hassan";
-        validEmail = "ali_hassan@yahoo.com";
         validPassword = "TY43#";
-        invalidUsername = "ad";
-        invalidPassword = "12";
     }
 
     @Test
