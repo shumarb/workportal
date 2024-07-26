@@ -4,7 +4,6 @@
 
 package com.example.WorkPortal.controller;
 
-import com.example.WorkPortal.exceptions.RestrictedAccessException;
 import com.example.WorkPortal.model.Manager;
 import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.model.User;
@@ -17,7 +16,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
