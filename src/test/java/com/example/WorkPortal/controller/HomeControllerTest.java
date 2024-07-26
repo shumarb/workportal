@@ -55,8 +55,6 @@ class HomeControllerTest {
 
         // Assert
         assertEquals("home", viewName);
-
-        // Verify
         verify(model).addAttribute("loggedInPerson", loggedInManager);
     }
 
@@ -70,8 +68,6 @@ class HomeControllerTest {
 
         // Assert
         assertEquals("index", viewName);
-
-        // Verify
         verify(httpSession).invalidate();
         verify(model).addAttribute("logout", "You have been successfully logged out.");
     }
