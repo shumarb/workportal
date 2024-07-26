@@ -82,7 +82,7 @@ class CustomErrorControllerTest {
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(null);
 
         // Act
-        String viewName = this.customErrorController.handleError(httpSession, model);
+        String viewName = customErrorController.handleError(httpSession, model);
 
         // Assert
         assertEquals("unavailable", viewName);

@@ -46,7 +46,7 @@ public class RegistrationController {
      */
     @GetMapping("/registration")
     public String showRegistrationPage() {
-        this.registrationControllerLogger.info("RegistrationControllerLogger: Currently at Registration page.");
+        registrationControllerLogger.info("RegistrationControllerLogger: Currently at Registration page.");
         return "registration";
     }
 

@@ -49,7 +49,7 @@ class HomeControllerTest {
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
         // Act
-        String viewName = this.homeController.showHome(httpSession, model);
+        String viewName = homeController.showHome(httpSession, model);
 
         // Assert
         assertEquals("home", viewName);
@@ -62,7 +62,7 @@ class HomeControllerTest {
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
         // Act
-        String viewName = this.homeController.logoutOfHome(httpSession, model);
+        String viewName = homeController.logoutOfHome(httpSession, model);
 
         // Assert
         assertEquals("index", viewName);
@@ -76,7 +76,7 @@ class HomeControllerTest {
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
         // Act
-        String viewName = this.homeController.showManagerialCodeOfConduct(httpSession, model);
+        String viewName = homeController.showManagerialCodeOfConduct(httpSession, model);
 
         // Assert
         assertEquals("managerial-code-of-conduct", viewName);
@@ -88,7 +88,7 @@ class HomeControllerTest {
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInUser);
 
         // Act
-        String viewName = this.homeController.showManagerialCodeOfConduct(httpSession, model);
+        String viewName = homeController.showManagerialCodeOfConduct(httpSession, model);
 
         // Assert
         assertEquals("access-denied", viewName);

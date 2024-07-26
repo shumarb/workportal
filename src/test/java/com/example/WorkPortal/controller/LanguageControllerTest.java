@@ -37,7 +37,7 @@ class LanguageControllerTest {
     @Test
     void test_switchLocale_ukEnglish() {
         // Act
-        Locale result = this.languageController.switchLocale("en");
+        Locale result = languageController.switchLocale("en");
 
         // Assert
         assertEquals(Locale.UK, result);

@@ -73,10 +73,10 @@ class LoginControllerTest {
     @Test
     void test_loginPerson_unexpectedError() throws InvalidUsernameOrPasswordException {
         // Arrange
-        lenient().when(this.loginService.login(validUsername, validPassword)).thenThrow(new RuntimeException());
+        lenient().when(loginService.login(validUsername, validPassword)).thenThrow(new RuntimeException());
 
         // Act
-        String viewName = this.loginController.loginPerson(validUsername, validPassword, httpSession, model);
+        String viewName = loginController.loginPerson(validUsername, validPassword, httpSession, model);
 
         // Assert
         assertEquals("login", viewName);
