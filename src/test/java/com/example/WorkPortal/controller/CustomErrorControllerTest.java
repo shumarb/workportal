@@ -1,3 +1,7 @@
+/**
+ * Unit tests for CustomErrorController class.
+ */
+
 package com.example.WorkPortal.controller;
 
 import com.example.WorkPortal.model.Manager;
