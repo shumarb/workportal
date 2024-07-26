@@ -5,12 +5,12 @@
 package com.example.WorkPortal.controller;
 import com.example.WorkPortal.service.RegistrationService;
 
-import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -46,6 +46,9 @@ class RegistrationControllerTest {
 
     @BeforeEach
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        registrationController = new RegistrationController(registrationService);
+
         validName = "Ali Hassan";
         validUsername = "ali_hassan";
         validEmail = "ali_hassan@icloud.com";
@@ -162,6 +165,34 @@ class RegistrationControllerTest {
         verify(model).addAttribute("error", "Invalid username entered. Please enter a valid username.");
     }
 
+    @Test
+    void test_registerPerson_unavailableEmail() {
+        // Arrange
+        when(registrationService.isValidEmailAddress(validEmail)).thenReturn(true);
+        when(registrationService.isValidName(validName)).thenReturn(true);
+        when(registrationService.isValidPassword(validPassword)).thenReturn(true);
+        when(registrationService.isValidUsername(validUsername)).thenReturn(true);
+        when(registrationService.isEmailAddressRegistered(validEmail)).thenReturn(true);
 
+        // Act
+        String viewName = registrationController.registerPerson(validName, validUsername, validEmail, validPassword, "Manager", model, redirectAttributes);
+
+        // Assert
+        assertEquals("registration", viewName);
+        verify(model).addAttribute("error", "Email address entered is unavailable. Please enter another email address.");
+    }
+
+    @Test
+    void test_registerPerson_unexpectedException() {
+        // Arrange
+        when(registrationService.isValidEmailAddress(validEmail)).thenThrow(new RuntimeException());
+
+        // Act
+        String viewName = registrationController.registerPerson(validName, validUsername, validEmail, validPassword, "Manager", model, redirectAttributes);
+
+        // Assert
+        assertEquals("registration", viewName);
+        verify(model).addAttribute("error", "Unexpected error occurred. Please try again later.");
+    }
 
 }
