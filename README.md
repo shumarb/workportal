@@ -6,7 +6,7 @@ The application features registration, login, user profile, and logout functiona
 Managers have exclusive access to the Managerial Code of Conduct page, which is available in both English and French languages.
 
 ## Prerequisites
-- Java 17 or later.
+- Java 17.
 - Git.
 - IntelliJ IDEA.
 - MySQL, and MySQL Workbench.
