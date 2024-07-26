@@ -41,4 +41,4 @@ Managers have exclusive access to the Managerial Code of Conduct page, which is 
 
 ## Tech Stack
 - Programming: Java.
-- Frameworks/Tools: Spring Boot, JUnit, Git, HTML, CSS, MySQL.
+- Frameworks/Tools: Spring Boot, JUnit, Mockito, Git, HTML, CSS, MySQL.
