@@ -4,9 +4,6 @@
 package com.example.WorkPortal.controller;
 
 import com.example.WorkPortal.exceptions.InvalidUsernameOrPasswordException;
-import com.example.WorkPortal.model.Manager;
-import com.example.WorkPortal.model.Person;
-import com.example.WorkPortal.model.User;
 import com.example.WorkPortal.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
