@@ -16,34 +16,34 @@ public class Person {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    protected long id;
 
     /**
      * Name of a Person entity..
      */
-    private String name;
+    protected String name;
 
     /**
      * Username of a Person entity..
      */
     @Column(unique = true)
-    private String username;
+    protected String username;
 
     /**
      * Email address of a Person entity..
      */
     @Column(unique = true)
-    private String email;
+    protected String email;
 
     /**
      * Password of a Person entity..
      */
-    private String password;
+    protected String password;
 
     /**
      * Role of a Person entity..
      */
-    private String role;
+    protected String role;
 
     /**
      * Default constructor as required by Hibernate.
