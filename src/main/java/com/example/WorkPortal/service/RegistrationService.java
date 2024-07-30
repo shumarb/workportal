@@ -4,6 +4,7 @@
 
 package com.example.WorkPortal.service;
 
+import com.example.WorkPortal.exceptions.*;
 import com.example.WorkPortal.model.Manager;
 import com.example.WorkPortal.model.User;
 import com.example.WorkPortal.repository.PersonRepository;
@@ -51,10 +52,41 @@ public class RegistrationService {
                                String username,
                                String email,
                                String password,
-                               String role) {
-        registrationServiceLogger.info("RegistrationServiceLogger: Currently at registerPerson method. Person entity created. " +
-                                        "Name: {}, Username: {}, Email: {}, Password: {}, Role: {}",
-                                         name, username, email, password, role);
+                               String role) throws  InvalidNameException,
+                                                    InvalidUsernameException,
+                                                    InvalidEmailException,
+                                                    InvalidPasswordException,
+                                                    UnavailableUsernameException,
+                                                    UnavailableEmailAddressException,
+                                                    UnavailablePasswordException {
+        if (!isValidName(name)) {
+            throw new InvalidNameException();
+        }
+
+        if (!isValidUsername(username)) {
+            throw new InvalidUsernameException();
+        }
+
+        if (!isValidEmailAddress(email)) {
+            throw new InvalidEmailException();
+        }
+
+        if (!isValidPassword(password)) {
+            throw new InvalidPasswordException();
+        }
+
+        if (isUsernameRegistered(username)) {
+            throw new UnavailableUsernameException();
+        }
+
+        if (isEmailAddressRegistered(email)) {
+            throw new UnavailableEmailAddressException();
+        }
+
+        if (isPasswordRegistered(password)) {
+            throw new UnavailablePasswordException();
+        }
+
         if (role.equals("User")) {
             this.personRepository.save(new User(name, username, email, password));
         }
@@ -63,6 +95,8 @@ public class RegistrationService {
             this.personRepository.save(new Manager(name, username, email, password));
         }
 
+        registrationServiceLogger.info("RegistrationServiceLogger: Currently at registerPerson method. Person entity created. " +
+                        "Name: {}, Username: {}, Email: {}, Password: {}, Role: {}", name, username, email, password, role);
     }
 
     /**

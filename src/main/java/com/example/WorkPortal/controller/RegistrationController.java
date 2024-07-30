@@ -70,50 +70,15 @@ public class RegistrationController {
                                  Model model,
                                  RedirectAttributes redirectAttributes) {
 
+        registrationControllerLogger.info("Registration attempt. "
+                + "Name: {}, "
+                + "Username: {}, "
+                + "Email: {}, "
+                + "Password: {}, "
+                + "Role: {}.", name, username, email, password, role);
+
         try {
-            registrationControllerLogger.info("Registration attempt. "
-                                                        + "Name: {}"
-                                                        + ", Username: {}"
-                                                        + ", Email: {}"
-                                                        + ", Password: {}"
-                                                        + ", Role: {}.", name, username, email, password, role);
-            // Invalid email address.
-            if (!this.registrationService.isValidEmailAddress(email)) {
-                throw new InvalidEmailException();
-            }
-
-            // Invalid name.
-            if (!this.registrationService.isValidName(name)) {
-                throw new InvalidNameException();
-            }
-
-            // Invalid username.
-            if (!this.registrationService.isValidPassword(password)) {
-                throw new InvalidPasswordException();
-            }
-
-            // Invalid password.
-            if (!this.registrationService.isValidUsername(username)) {
-                throw new InvalidUsernameException();
-            }
-
-            // Unavailable email address.
-            if (this.registrationService.isEmailAddressRegistered(email)) {
-                throw new UnavailableEmailAddressException();
-            }
-
-            // Unavailable password.
-            if (this.registrationService.isPasswordRegistered(password)) {
-                throw new UnavailablePasswordException();
-            }
-
-            // Unavailable username.
-            if (this.registrationService.isUsernameRegistered(username)) {
-                throw new UnavailableUsernameException();
-            }
-
-            // Log message and redirection to Login page for successful registration.
-            this.registrationService.registerPerson(name, username, email, password, role);
+            registrationService.registerPerson(name, username, email, password, role);
             registrationControllerLogger.info("RegistrationControllerLogger: Successful Registration. " +
                                               "User is redirected to Login page. Successful registration message displayed.");
             redirectAttributes.addFlashAttribute("successfulRegistrationMessage", "Registration successful. Please log in.");
