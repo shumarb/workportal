@@ -4,6 +4,7 @@
 
 package com.example.WorkPortal.service;
 
+import com.example.WorkPortal.exceptions.*;
 import com.example.WorkPortal.model.Manager;
 import com.example.WorkPortal.model.User;
 import com.example.WorkPortal.repository.PersonRepository;
@@ -51,7 +52,7 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void test_registerManager_success() {
+    void test_registerManager_success() throws InvalidNameException, UnavailablePasswordException, UnavailableEmailAddressException, InvalidPasswordException, InvalidUsernameException, InvalidEmailException, UnavailableUsernameException {
         // Act
         this.registrationService.registerPerson(validName, validUsername, validEmail, validPassword, "Manager");
         lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(new Manager()));
@@ -61,7 +62,7 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void test_registerUser_success() {
+    void test_registerUser_success() throws InvalidNameException, UnavailablePasswordException, UnavailableEmailAddressException, InvalidPasswordException, InvalidUsernameException, InvalidEmailException, UnavailableUsernameException {
         // Act
         this.registrationService.registerPerson(validName, validUsername, validEmail, validPassword, "User");
         lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(new User()));
@@ -204,7 +205,7 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void isPasswordRegistered_registered() {
+    void isPasswordRegistered_registered() throws InvalidNameException, UnavailablePasswordException, UnavailableEmailAddressException, InvalidPasswordException, InvalidUsernameException, InvalidEmailException, UnavailableUsernameException {
         // Act
         this.registrationService.registerPerson(validName, validUsername, validEmail, validPassword, "Manager");
         lenient().when(this.personRepository.findByPassword(validPassword)).thenReturn(Optional.of(new Manager()));
