@@ -43,7 +43,7 @@ public class LoginController {
     /**
      * Handles the GET request of the Login page.
      *
-     * @return The name of the Login page view.
+     * @return The view name of the Login page.
      */
     @GetMapping("/login")
     public String showLoginPage() {
@@ -59,7 +59,7 @@ public class LoginController {
      * @param httpSession   The HttpSession to store logged-in person details.
      * @param model         The Model to add error messages.
      * @return              Name of the Home page view for successful login,
-     *                      Redirection to the name of the Login page view with an invalid login message.
+     *                      or redirection to the name of the Login page view with an invalid login message for unsuccessful login.
      */
     @PostMapping("/login")
     public String loginPerson(@RequestParam String username, @RequestParam String password, HttpSession httpSession, Model model) {
