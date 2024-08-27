@@ -40,10 +40,10 @@ public class LoginService {
     /**
      * Attempts to log in a Person entity with provided username and password.
      *
-     * @param username The username of a Person entity to be logged in.
-     * @param password The password of a Person entity to be logged in.
-     * @return Person entity if login is successful,
-     * @throws InvalidUsernameOrPasswordException for incorrect username or password.
+     * @param username                              The username of a Person entity to be logged in.
+     * @param password                              The password of a Person entity to be logged in.
+     * @return                                      Person entity for successful login.
+     * @throws InvalidUsernameOrPasswordException   for incorrect username or password.
      */
     public Person login(String username, String password) throws InvalidUsernameOrPasswordException {
         logger.info("Currently at login method. Username: {}, Password: {}", username, password);
