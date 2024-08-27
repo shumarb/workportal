@@ -52,9 +52,14 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void test_registerManager_success() throws InvalidNameException, UnavailablePasswordException, UnavailableEmailAddressException, InvalidPasswordException, InvalidUsernameException, InvalidEmailException, UnavailableUsernameException {
+    void test_registerManager_success() throws  InvalidNameException,
+                                                InvalidPasswordException,
+                                                InvalidUsernameException,
+                                                InvalidEmailException,
+                                                UnavailableEmailAddressException,
+                                                UnavailableUsernameException {
         // Act
-        this.registrationService.registerPerson(validName, validUsername, validEmail, validPassword, "Manager");
+        this.registrationService.registration(validName, validUsername, validEmail, validPassword, "Manager");
         lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(new Manager()));
 
         // Assert
@@ -62,9 +67,14 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void test_registerUser_success() throws InvalidNameException, UnavailablePasswordException, UnavailableEmailAddressException, InvalidPasswordException, InvalidUsernameException, InvalidEmailException, UnavailableUsernameException {
+    void test_registerUser_success() throws InvalidNameException,
+                                            InvalidPasswordException,
+                                            InvalidUsernameException,
+                                            InvalidEmailException,
+                                            UnavailableEmailAddressException,
+                                            UnavailableUsernameException {
         // Act
-        this.registrationService.registerPerson(validName, validUsername, validEmail, validPassword, "User");
+        this.registrationService.registration(validName, validUsername, validEmail, validPassword, "User");
         lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(new User()));
 
         // Assert
@@ -205,9 +215,14 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void isPasswordRegistered_registered() throws InvalidNameException, UnavailablePasswordException, UnavailableEmailAddressException, InvalidPasswordException, InvalidUsernameException, InvalidEmailException, UnavailableUsernameException {
+    void isPasswordRegistered_registered() throws   InvalidNameException,
+                                                    InvalidPasswordException,
+                                                    InvalidUsernameException,
+                                                    InvalidEmailException,
+                                                    UnavailableEmailAddressException,
+                                                    UnavailableUsernameException {
         // Act
-        this.registrationService.registerPerson(validName, validUsername, validEmail, validPassword, "Manager");
+        this.registrationService.registration(validName, validUsername, validEmail, validPassword, "Manager");
         lenient().when(this.personRepository.findByPassword(validPassword)).thenReturn(Optional.of(new Manager()));
 
         // Assert

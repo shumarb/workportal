@@ -6,6 +6,7 @@ package com.example.WorkPortal.service;
 
 import com.example.WorkPortal.exceptions.*;
 import com.example.WorkPortal.model.Manager;
+import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.model.User;
 import com.example.WorkPortal.repository.PersonRepository;
 import org.apache.logging.log4j.LogManager;
@@ -48,17 +49,18 @@ public class RegistrationService {
      * @param password  The password of the Person.
      * @param role      The role of the Person.
      */
-    public void registerPerson(String name,
-                               String username,
-                               String email,
-                               String password,
-                               String role) throws  InvalidNameException,
+    public Person registration(String name,
+                             String username,
+                             String email,
+                             String password,
+                             String role) throws  InvalidNameException,
                                                     InvalidUsernameException,
                                                     InvalidEmailException,
                                                     InvalidPasswordException,
                                                     UnavailableUsernameException,
-                                                    UnavailableEmailAddressException,
-                                                    UnavailablePasswordException {
+                                                    UnavailableEmailAddressException {
+        Person person = null;
+
         if (!isValidName(name)) {
             throw new InvalidNameException();
         }
@@ -83,20 +85,20 @@ public class RegistrationService {
             throw new UnavailableEmailAddressException();
         }
 
-        if (isPasswordRegistered(password)) {
-            throw new UnavailablePasswordException();
-        }
-
         if (role.equals("User")) {
-            this.personRepository.save(new User(name, username, email, password));
+            person = new User(name, username, email, password);
+            this.personRepository.save(person);
         }
 
         if (role.equals("Manager")) {
-            this.personRepository.save(new Manager(name, username, email, password));
+            person = new Manager(name, username, email, password);
+            this.personRepository.save(person);
         }
 
-        registrationServiceLogger.info("RegistrationServiceLogger: Currently at registerPerson method. Person entity created. " +
+        registrationServiceLogger.info("RegistrationServiceLogger: Currently at registration method. Person entity created. " +
                         "Name: {}, Username: {}, Email: {}, Password: {}, Role: {}", name, username, email, password, role);
+
+        return person;
     }
 
     /**
