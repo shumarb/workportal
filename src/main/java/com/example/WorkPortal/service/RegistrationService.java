@@ -23,7 +23,7 @@ public class RegistrationService {
     /**
      * Logger to monitor operational flow and assist in troubleshooting for Registration operation.
      */
-    private static final Logger registrationServiceLogger = LogManager.getLogger(RegistrationService.class);
+    private static final Logger logger = LogManager.getLogger(RegistrationService.class);
 
    /**
      * Repository interface for performing CRUD operations on Person entities.
@@ -53,12 +53,13 @@ public class RegistrationService {
                              String username,
                              String email,
                              String password,
-                             String role) throws  InvalidNameException,
+                             String role) throws    InvalidNameException,
                                                     InvalidUsernameException,
                                                     InvalidEmailException,
                                                     InvalidPasswordException,
                                                     UnavailableUsernameException,
                                                     UnavailableEmailAddressException {
+        logger.info("Currently at registration method. Name: {}, Username: {}, Email: {}, Password: {}, Role: {}", name, username, email, password, role);
         Person person = null;
 
         if (!isValidName(name)) {
@@ -95,8 +96,9 @@ public class RegistrationService {
             this.personRepository.save(person);
         }
 
-        registrationServiceLogger.info("RegistrationServiceLogger: Currently at registration method. Person entity created. " +
-                        "Name: {}, Username: {}, Email: {}, Password: {}, Role: {}", name, username, email, password, role);
+        if (person != null) {
+            logger.info("Successful registration of {}", person.toString());
+        }
 
         return person;
     }
@@ -104,22 +106,22 @@ public class RegistrationService {
     /**
      * Checks if a Person entity's email address has been registered earlier.
      *
-     * @param email The email address of the Person entity.
-     * @return {@code true} if email has been registered, {@code false} otherwise.
+     * @param email         The email address of the Person entity.
+     * @return              {@code true} if email has been registered, {@code false} otherwise.
      */
     public boolean isEmailAddressRegistered(String email) {
-        registrationServiceLogger.info("RegistrationServiceLogger: Currently at isEmailAddressRegistered method. Email: {}", email);
+        logger.info("Currently at isEmailAddressRegistered method. Email: {}", email);
         return this.personRepository.findByEmail(email).isPresent();
     }
 
     /**
      * Checks if a Person entity's username has been registered earlier.
      *
-     * @param username The username of the Person entity.
-     * @return {@code true} if username has been registered, {@code false} otherwise.
+     * @param username  The username of the Person entity.
+     * @return          {@code true} if username has been registered, {@code false} otherwise.
      */
     public boolean isUsernameRegistered(String username) {
-        registrationServiceLogger.info("RegistrationServiceLogger: Currently at isUsernameRegistered method. Email: {}", username);
+        logger.info("Currently at isUsernameRegistered method. Email: {}", username);
         return this.personRepository.findByUsername(username).isPresent();
     }
 
@@ -127,10 +129,10 @@ public class RegistrationService {
      * Checks if a Person entity's email is in valid format.
      *
      * @param email The email address of the Person entity.
-     * @return {@code true} if valid email address, {@code false} otherwise.
+     * @return      {@code true} if valid email address, {@code false} otherwise.
      */
     public boolean isValidEmailAddress(String email) {
-        registrationServiceLogger.info("RegistrationServiceLogger: Currently at isValidEmailAddress method. Email: {}", email);
+        logger.info("Currently at isValidEmailAddress method. Email: {}", email);
         // Regular expression pattern for an email
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
@@ -144,11 +146,11 @@ public class RegistrationService {
     /**
      * Checks if a Person entity's name is in valid format.
      *
-     * @param name The name of the Person entity.
-     * @return {@code true} if valid name format, {@code false} otherwise.
+     * @param name  The name of the Person entity.
+     * @return      {@code true} if valid name format, {@code false} otherwise.
      */
     public boolean isValidName(String name) {
-        registrationServiceLogger.info("RegistrationServiceLogger: Currently at isValidName method. Name: {}", name);
+        logger.info("Currently at isValidName method. Name: {}", name);
 
         // Split in this way in case of two or more consecutive spaces.
         String[] words = name.trim().split("\\s+");
@@ -171,22 +173,22 @@ public class RegistrationService {
     /**
      * Checks if a word contains only letters.
      *
-     * @param word The word to be checked.
-     * @return {@code true} if word has only letters, {@code false} otherwise.
+     * @param word  The word to be checked.
+     * @return      {@code true} if word has only letters, {@code false} otherwise.
      */
     public boolean isAllLetters(String word) {
-        registrationServiceLogger.info("Currently at isAllLetters method. Word: {}", word);
+        logger.info("Currently at isAllLetters method. Word: {}", word);
         return word.matches("[a-zA-Z]+");
     }
 
     /**
      * Checks if a password is valid.
      *
-     * @param password The password of the Person entity.
-     * @return {@code true} if the password is valid, {@code false} otherwise.
+     * @param password  The password of the Person entity.
+     * @return          {@code true} if the password is valid, {@code false} otherwise.
      */
     public boolean isValidPassword(String password) {
-        registrationServiceLogger.info("Currently at isValidPassword method. Password: {}", password);
+        logger.info("Currently at isValidPassword method. Password: {}", password);
         // Password has at least 5 characters.
         if (password.length() < 5) {
             return false;
@@ -208,40 +210,59 @@ public class RegistrationService {
             }
         }
 
+        if (letterCount < 2) {
+            logger.error("Invalid password due to number of letters in password: {}", letterCount);
+        } else if (digitCount < 2) {
+            logger.error("Invalid password due to number of digits in password: {}", digitCount);
+        } else if (specialCharacterCount < 2) {
+            logger.error("Invalid password due to number of special characters in password: {}", specialCharacterCount);
+        } else {
+            logger.info("Valid password");
+        }
+
         return letterCount >= 2 && digitCount >= 2 && specialCharacterCount >= 1;
     }
 
     /**
      * Checks that username is valid.
      *
-     * @param username The username of the Person entity.
-     * @return {@code true} is username is valid, {@code false} otherwise.
+     * @param username  The username of the Person entity.
+     * @return          {@code true} is username is valid, {@code false} otherwise.
      */
     public boolean isValidUsername(String username) {
-        registrationServiceLogger.info("Currently at isValidUsername method. Username: {}", username);
-        return username.length() >= 5 && !username.contains(" ");
-    }
+        logger.info("Currently at isValidUsername method. Username: {}", username);
+        boolean isUsernameLengthAtLeastFive = username.length() >= 5;
+        boolean doesUsernameNotContainSpace = username.contains(" ");
 
-    /**
-     * Checks that password has been registered with another Person entity.
-     *
-     * @param password The password of the Person entity.
-     * @return {@code true} if password has been registered to a Person entity earlier, {@code false} otherwise.
-     */
-    public boolean isPasswordRegistered(String password) {
-        registrationServiceLogger.info("Currently at isPasswordRegistered method. Username: {}", password);
-        return this.personRepository.findByPassword(password).isPresent();
+        if (!isUsernameLengthAtLeastFive) {
+            logger.error("Invalid username as its length is less than 5.");
+        }
+        if (!doesUsernameNotContainSpace) {
+            logger.error("Invalid username as it contains a space.");
+        }
+
+        if (isUsernameLengthAtLeastFive && doesUsernameNotContainSpace) {
+            logger.info("Valid username.");
+            return true;
+        }
+        return false;
     }
 
     /**
      * Checks if a word has at least 2 characters.
      *
-     * @param word the word to be checked.
-     * @return true if the word has at least 2 characters, false otherwise.
+     * @param word      The word to be checked.
+     * @return          {@code true} if the word has at least 2 characters, {@code false} otherwise.
      */
     public boolean doesWordHaveAtLeastThreeCharacters(String word) {
-        registrationServiceLogger.info("Currently at doesWordHaveAtLeastThreeCharacters method. Username: {}", word);
-        return word.length() >= 3;
+        logger.info("Currently at doesWordHaveAtLeastThreeCharacters method. Username: {}", word);
+        boolean result = word.length() >= 3;
+        if (result) {
+            logger.info("Word has at least 3 words.");
+        } else {
+            logger.error("Word has less than 3 words.");
+        }
+        return result;
     }
 
 }
