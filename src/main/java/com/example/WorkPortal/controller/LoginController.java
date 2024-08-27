@@ -65,7 +65,7 @@ public class LoginController {
     public String loginPerson(@RequestParam String username, @RequestParam String password, HttpSession httpSession, Model model) {
         try {
             // Log messages and redirection to home page for successful login.
-            logger.info("Login attempt. Username: {}, Password: {}.", username, password);
+            logger.info("Login attempt. Username: {}, Password: {}", username, password);
             Person loggedInPerson = this.loginService.login(username, password);
             httpSession.setAttribute("loggedInPerson", loggedInPerson);
             logger.info("Successful login of {}. Going to Home page.", loggedInPerson.toString());
@@ -73,7 +73,7 @@ public class LoginController {
 
         } catch (InvalidUsernameOrPasswordException e) {
             // Error and log messages for invalid username or password.
-            logger.error("Unsuccessful Login due to invalid Username ({}) or Password ({}). "
+            logger.error("Unsuccessful Login due to invalid username ({}) or password ({}). "
                                     + "Showing Login page with error message displayed.", username, password);
             model.addAttribute("error", "Invalid userid or password");
             return "login";
