@@ -23,7 +23,7 @@ public class LoginController {
     /**
      * Logger to monitor operational flow and assist in troubleshooting for Login page.
      */
-    private static final Logger loginControllerLogger = LogManager.getLogger(LoginController.class);
+    private static final Logger logger = LogManager.getLogger(LoginController.class);
 
     /**
      * Service handling login.
@@ -47,7 +47,7 @@ public class LoginController {
      */
     @GetMapping("/login")
     public String showLoginPage() {
-        loginControllerLogger.info("LoginControllerLogger: Currently at Login page.");
+        logger.info("Currently at Login page.");
         return "login";
     }
 
@@ -65,24 +65,22 @@ public class LoginController {
     public String loginPerson(@RequestParam String username, @RequestParam String password, HttpSession httpSession, Model model) {
         try {
             // Log messages and redirection to home page for successful login.
-            loginControllerLogger.info("LoginControllerLogger: Login attempt. Username: {}, Password: {}.", username, password);
+            logger.info("Login attempt. Username: {}, Password: {}.", username, password);
             Person loggedInPerson = this.loginService.login(username, password);
             httpSession.setAttribute("loggedInPerson", loggedInPerson);
-            loginControllerLogger.info("LoginControllerLogger: Going to Home page after successful login for {}.", loggedInPerson.toString());
+            logger.info("Successful login of {}. Going to Home page.", loggedInPerson.toString());
             return "redirect:/home";
 
         } catch (InvalidUsernameOrPasswordException e) {
             // Error and log messages for invalid username or password.
-            loginControllerLogger.error("LoginControllerLogger: Unsuccessful Login. " +
-                                                 "Invalid Username ({}) or Password ({}). " +
-                                                 "Currently at Login page. Error message displayed.",
-                                                  username, password);
+            logger.error("Unsuccessful Login due to invalid Username ({}) or Password ({}). "
+                                    + "Showing Login page with error message displayed.", username, password);
             model.addAttribute("error", "Invalid userid or password");
             return "login";
 
         } catch (Exception e) {
             // Error and log messages for unexpected exceptions.
-            loginControllerLogger.fatal("LoginControllerLogger: Unsuccessful Login. Unexpected error occurred during login.");
+            logger.fatal("Unsuccessful Login. Unexpected error occurred during login.");
             model.addAttribute("error", "Unexpected error occurred. Please try again later.");
             return "login";
         }
