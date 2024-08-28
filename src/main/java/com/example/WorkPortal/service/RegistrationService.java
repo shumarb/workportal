@@ -214,7 +214,7 @@ public class RegistrationService {
             logger.error("Invalid password due to number of letters in password: {}", letterCount);
         } else if (digitCount < 2) {
             logger.error("Invalid password due to number of digits in password: {}", digitCount);
-        } else if (specialCharacterCount < 2) {
+        } else if (specialCharacterCount < 1) {
             logger.error("Invalid password due to number of special characters in password: {}", specialCharacterCount);
         } else {
             logger.info("Valid password");
@@ -231,17 +231,17 @@ public class RegistrationService {
      */
     public boolean isValidUsername(String username) {
         logger.info("Currently at isValidUsername method. Username: {}", username);
-        boolean isUsernameLengthAtLeastFive = username.length() >= 5;
-        boolean doesUsernameNotContainSpace = username.contains(" ");
+        boolean isUsernameLengthLessThanFive = username.length() < 5;
+        boolean doesUsernameContainSpace = username.contains(" ");
 
-        if (!isUsernameLengthAtLeastFive) {
+        if (isUsernameLengthLessThanFive) {
             logger.error("Invalid username as its length is less than 5.");
         }
-        if (!doesUsernameNotContainSpace) {
+        if (doesUsernameContainSpace) {
             logger.error("Invalid username as it contains a space.");
         }
 
-        if (isUsernameLengthAtLeastFive && doesUsernameNotContainSpace) {
+        if (!isUsernameLengthLessThanFive && !doesUsernameContainSpace) {
             logger.info("Valid username.");
             return true;
         }
