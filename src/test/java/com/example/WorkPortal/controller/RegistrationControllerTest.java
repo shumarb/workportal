@@ -63,7 +63,7 @@ class RegistrationControllerTest {
     @Test
     void test_retrievesRegistrationPage() {
         // Act
-        String viewName = registrationController.registerPerson(validName, validUsername, validEmail, validPassword, "User", model, redirectAttributes);
+        String viewName = registrationController.registration(validName, validUsername, validEmail, validPassword, "User", model, redirectAttributes);
 
         // Assert
         assertEquals("registration", viewName);
@@ -72,7 +72,7 @@ class RegistrationControllerTest {
     @Test
     void test_doesNotRetrieveIndexPage() {
         // Act
-        String viewName = registrationController.registerPerson(validName, validUsername, validEmail, validPassword, "Manager", model, redirectAttributes);
+        String viewName = registrationController.registration(validName, validUsername, validEmail, validPassword, "Manager", model, redirectAttributes);
 
         // Assert
         assertNotEquals("index", viewName);
@@ -81,14 +81,14 @@ class RegistrationControllerTest {
     @Test
     void test_doesNotRetrieveLoginPage() {
         // Act
-        String viewName = registrationController.registerPerson(validName, validUsername, validEmail, validPassword, "User", model, redirectAttributes);
+        String viewName = registrationController.registration(validName, validUsername, validEmail, validPassword, "User", model, redirectAttributes);
 
         // Assert
         assertNotEquals("login", viewName);
     }
 
     @Test
-    void test_registerPerson_success() throws Exception {
+    void test_registration_success() throws Exception {
         // Arrange
         when(registrationService.isValidEmailAddress(validEmail)).thenReturn(true);
         when(registrationService.isValidName(validName)).thenReturn(true);
@@ -99,21 +99,21 @@ class RegistrationControllerTest {
         when(registrationService.isUsernameRegistered(validUsername)).thenReturn(false);
 
         // Act
-        String viewName = registrationController.registerPerson(validName, validUsername, validEmail, validPassword, "User", model, redirectAttributes);
+        String viewName = registrationController.registration(validName, validUsername, validEmail, validPassword, "User", model, redirectAttributes);
 
         // Assert
         assertEquals("redirect:/login", viewName);
-        verify(registrationService).registerPerson(validName, validUsername, validEmail, validPassword, "User");
+        verify(registrationService).registration(validName, validUsername, validEmail, validPassword, "User");
         verify(redirectAttributes).addFlashAttribute("successfulRegistrationMessage", "Registration successful. Please log in.");
     }
 
     @Test
-    void test_registerPerson_invalidEmail() {
+    void test_registration_invalidEmail() {
         // Arrange
         when(registrationService.isValidEmailAddress(invalidEmail)).thenReturn(false);
 
         // Act
-        String viewName = registrationController.registerPerson(validName, validUsername, invalidEmail, validPassword, "Manager", model, redirectAttributes);
+        String viewName = registrationController.registration(validName, validUsername, invalidEmail, validPassword, "Manager", model, redirectAttributes);
 
         // Assert
         assertEquals("registration", viewName);
@@ -121,13 +121,13 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registerPerson_invalidName() {
+    void test_registration_invalidName() {
         // Arrange
         when(registrationService.isValidEmailAddress(validEmail)).thenReturn(true);
         when(registrationService.isValidName(invalidName)).thenReturn(false);
 
         // Act
-        String viewName = registrationController.registerPerson(invalidName, validUsername, validEmail, validPassword, "User", model, redirectAttributes);
+        String viewName = registrationController.registration(invalidName, validUsername, validEmail, validPassword, "User", model, redirectAttributes);
 
         // Assert
         assertEquals("registration", viewName);
@@ -135,14 +135,14 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registerPerson_invalidPassword() {
+    void test_registration_invalidPassword() {
         // Arrange
         when(registrationService.isValidEmailAddress(validEmail)).thenReturn(true);
         when(registrationService.isValidName(validName)).thenReturn(true);
         when(registrationService.isValidPassword(invalidPassword)).thenReturn(false);
 
         // Act
-        String viewName = registrationController.registerPerson(validName, validUsername, validEmail, invalidPassword, "Manager", model, redirectAttributes);
+        String viewName = registrationController.registration(validName, validUsername, validEmail, invalidPassword, "Manager", model, redirectAttributes);
 
         // Assert
         assertEquals("registration", viewName);
@@ -150,7 +150,7 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registerPerson_invalidUsername() {
+    void test_registration_invalidUsername() {
         // Arrange
         when(registrationService.isValidEmailAddress(validEmail)).thenReturn(true);
         when(registrationService.isValidName(validName)).thenReturn(true);
@@ -158,7 +158,7 @@ class RegistrationControllerTest {
         when(registrationService.isValidUsername(invalidUsername)).thenReturn(false);
 
         // Act
-        String viewName = registrationController.registerPerson(validName, invalidUsername, validEmail, validPassword, "User", model, redirectAttributes);
+        String viewName = registrationController.registration(validName, invalidUsername, validEmail, validPassword, "User", model, redirectAttributes);
 
         // Assert
         assertEquals("registration", viewName);
@@ -166,7 +166,7 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registerPerson_unavailableEmail() {
+    void test_registration_unavailableEmail() {
         // Arrange
         when(registrationService.isValidEmailAddress(validEmail)).thenReturn(true);
         when(registrationService.isValidName(validName)).thenReturn(true);
@@ -175,7 +175,7 @@ class RegistrationControllerTest {
         when(registrationService.isEmailAddressRegistered(validEmail)).thenReturn(true);
 
         // Act
-        String viewName = registrationController.registerPerson(validName, validUsername, validEmail, validPassword, "Manager", model, redirectAttributes);
+        String viewName = registrationController.registration(validName, validUsername, validEmail, validPassword, "Manager", model, redirectAttributes);
 
         // Assert
         assertEquals("registration", viewName);
@@ -183,12 +183,12 @@ class RegistrationControllerTest {
     }
 
     @Test
-    void test_registerPerson_unexpectedException() {
+    void test_registration_unexpectedException() {
         // Arrange
         when(registrationService.isValidEmailAddress(validEmail)).thenThrow(new RuntimeException());
 
         // Act
-        String viewName = registrationController.registerPerson(validName, validUsername, validEmail, validPassword, "Manager", model, redirectAttributes);
+        String viewName = registrationController.registration(validName, validUsername, validEmail, validPassword, "Manager", model, redirectAttributes);
 
         // Assert
         assertEquals("registration", viewName);

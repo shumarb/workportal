@@ -19,7 +19,7 @@ public class CustomErrorController implements ErrorController {
     /**
      * Logger to monitor operational flow and assist in troubleshooting.
      */
-    private static final Logger customErrorControllerLogger = LogManager.getLogger(CustomErrorController.class);
+    private static final Logger logger = LogManager.getLogger(CustomErrorController.class);
 
     /**
      * Handles error requests and directs users to an error page.
@@ -31,7 +31,7 @@ public class CustomErrorController implements ErrorController {
     @RequestMapping("/error")
     public String handleError(HttpSession httpSession, Model model) {
         Person loggedInPerson = (Person) httpSession.getAttribute("loggedInPerson");
-        customErrorControllerLogger.error("{} is trying to access a non-existent page or Home page without logging in.",
+        logger.error("{} is trying to access a non-existent page or Home page without logging in.",
                                             loggedInPerson == null ? "Unknown user" : loggedInPerson.toString());
         httpSession.invalidate();
         model.addAttribute("error", "The page you are looking for is unavailable.");

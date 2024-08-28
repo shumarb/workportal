@@ -15,16 +15,16 @@ public class IndexController {
     /**
      * Logger to monitor operational flow and assist in troubleshooting for Index page.
      */
-    private static final Logger indexControllerLogger = LogManager.getLogger(IndexController.class);
+    private static final Logger logger = LogManager.getLogger(IndexController.class);
 
     /**
      * Handles the GET request of the Index page.
      *
-     * @return Name of the Index page.
+     * @return The view name for the Index page.
      */
     @GetMapping("/")
     public String showIndexPage() {
-        indexControllerLogger.info("IndexControllerLogger: Currently at Index page.");
+        logger.info("Currently at Index page.");
         return "index";
     }
 

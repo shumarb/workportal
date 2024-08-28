@@ -24,7 +24,7 @@ public class Internationalisation implements WebMvcConfigurer {
     /**
      * Logger to monitor operational flow and assist in troubleshooting for change in language on a page.
      */
-    private static final Logger internationalisationLogger = LogManager.getLogger(Internationalisation.class);
+    private static final Logger logger = LogManager.getLogger(Internationalisation.class);
 
     /**
      * Defines the locale resolver bean for session-based locale management.
@@ -36,7 +36,7 @@ public class Internationalisation implements WebMvcConfigurer {
     public LocaleResolver localeResolver() {
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
         sessionLocaleResolver.setDefaultLocale(Locale.UK);
-        internationalisationLogger.info("InternationalisationLogger: SessionLocaleResolver has been created with default locale of {}",Locale.UK);
+        logger.info("SessionLocaleResolver has been created with default locale of {}",Locale.UK);
         return sessionLocaleResolver;
     }
 
@@ -50,7 +50,7 @@ public class Internationalisation implements WebMvcConfigurer {
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
         localeChangeInterceptor.setParamName("language");
-        internationalisationLogger.info("InternationalisationLogger: LocaleChangeInterceptor has been created with parameter name of {}", "language");
+        logger.info("LocaleChangeInterceptor has been created with parameter name of {}", "language");
         return localeChangeInterceptor;
     }
 
@@ -62,7 +62,7 @@ public class Internationalisation implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
-        internationalisationLogger.info("InternationalisationLogger: LocaleChangeInterceptor has been added to InterceptorRegistry.");
+        logger.info("LocaleChangeInterceptor has been added to InterceptorRegistry.");
     }
 
     /**
@@ -74,8 +74,7 @@ public class Internationalisation implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
-        internationalisationLogger.info("InternationalisationLogger: Resource handler configured for classpath: {}", "/static/**");
-
+        logger.info("Resource handler configured for classpath: {}", "/static/**");
     }
 
 }

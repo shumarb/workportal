@@ -20,7 +20,7 @@ public class LoginService {
     /**
      * Logger to monitor operations flow and assist in troubleshooting for Login operation.
      */
-    private static final Logger loginServiceLogger = LogManager.getLogger(LoginService.class);
+    private static final Logger logger = LogManager.getLogger(LoginService.class);
 
     /**
      * Repository interface for performing CRUD operations on Person entities.
@@ -40,19 +40,19 @@ public class LoginService {
     /**
      * Attempts to log in a Person entity with provided username and password.
      *
-     * @param username The username of a Person entity to be logged in.
-     * @param password The password of a Person entity to be logged in.
-     * @return Person entity if login is successful,
-     * @throws InvalidUsernameOrPasswordException for incorrect username or password.
+     * @param username                              The username of a Person entity to be logged in.
+     * @param password                              The password of a Person entity to be logged in.
+     * @return                                      Person entity for successful login.
+     * @throws InvalidUsernameOrPasswordException   for incorrect username or password.
      */
     public Person login(String username, String password) throws InvalidUsernameOrPasswordException {
-        loginServiceLogger.info("LoginServiceLogger: Currently at loginByCredentials method. Username: {}, Password: {}", username, password);
+        logger.info("Currently at login method. Username: {}, Password: {}", username, password);
         Optional<Person> personOptional= this.personRepository.findByUsername(username);
         if (personOptional.isPresent() && personOptional.get().getPassword().equals(password)) {
-            loginServiceLogger.info("LoginServiceLogger: Successful Login. Username and Password matches with {}.", personOptional.toString());
+            logger.info("Successful Login. Username and Password matches with {}.", personOptional.toString());
             return personOptional.get();
         }
-        loginServiceLogger.error("loginServiceLogger: Invalid Username or Password.");
+        logger.error("Invalid username or password.");
         throw new InvalidUsernameOrPasswordException();
     }
 
