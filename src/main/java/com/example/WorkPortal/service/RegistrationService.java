@@ -178,7 +178,13 @@ public class RegistrationService {
      */
     public boolean isAllLetters(String word) {
         logger.info("Currently at isAllLetters method. Word: {}", word);
-        return word.matches("[a-zA-Z]+");
+        boolean result = word.matches("[a-zA-Z]+");
+        if (result) {
+            logger.info("Valid word: {}", word);
+        } else {
+            logger.error("Invalid word: {}", word);
+        }
+        return result;
     }
 
     /**
@@ -191,6 +197,7 @@ public class RegistrationService {
         logger.info("Currently at isValidPassword method. Password: {}", password);
         // Password has at least 5 characters.
         if (password.length() < 5) {
+            logger.error("Invalid password ({}) as its length is less than 5.", password);
             return false;
         }
 
@@ -211,16 +218,18 @@ public class RegistrationService {
         }
 
         if (letterCount < 2) {
-            logger.error("Invalid password due to number of letters in password: {}", letterCount);
+            logger.error("Invalid password due to number of letters in password({}): {}", password, letterCount);
+            return false;
         } else if (digitCount < 2) {
-            logger.error("Invalid password due to number of digits in password: {}", digitCount);
+            logger.error("Invalid password due to number of digits in password ({}): {}", password, digitCount);
+            return false;
         } else if (specialCharacterCount < 1) {
-            logger.error("Invalid password due to number of special characters in password: {}", specialCharacterCount);
+            logger.error("Invalid password due to number of special characters in password({}): {}", password, specialCharacterCount);
+            return false;
         } else {
-            logger.info("Valid password");
+            logger.info("Valid password: {}", password);
+            return true;
         }
-
-        return letterCount >= 2 && digitCount >= 2 && specialCharacterCount >= 1;
     }
 
     /**
@@ -235,14 +244,14 @@ public class RegistrationService {
         boolean doesUsernameContainSpace = username.contains(" ");
 
         if (isUsernameLengthLessThanFive) {
-            logger.error("Invalid username as its length is less than 5.");
+            logger.error("Invalid username as its length is less than 5: {}", username);
         }
         if (doesUsernameContainSpace) {
-            logger.error("Invalid username as it contains a space.");
+            logger.error("Invalid username as it contains a space{}", username);
         }
 
         if (!isUsernameLengthLessThanFive && !doesUsernameContainSpace) {
-            logger.info("Valid username.");
+            logger.info("Valid username: {}", username);
             return true;
         }
         return false;
@@ -258,9 +267,9 @@ public class RegistrationService {
         logger.info("Currently at doesWordHaveAtLeastThreeCharacters method. Username: {}", word);
         boolean result = word.length() >= 3;
         if (result) {
-            logger.info("Word has at least 3 words.");
+            logger.info("Word has at least 3 characters: {}", word);
         } else {
-            logger.error("Word has less than 3 words.");
+            logger.error("Word has less than 3 characters: {}", word);
         }
         return result;
     }
