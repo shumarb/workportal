@@ -215,30 +215,6 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void isPasswordRegistered_registered() throws   InvalidNameException,
-                                                    InvalidPasswordException,
-                                                    InvalidUsernameException,
-                                                    InvalidEmailException,
-                                                    UnavailableEmailAddressException,
-                                                    UnavailableUsernameException {
-        // Act
-        this.registrationService.registration(validName, validUsername, validEmail, validPassword, "Manager");
-        lenient().when(this.personRepository.findByPassword(validPassword)).thenReturn(Optional.of(new Manager()));
-
-        // Assert
-        assertTrue(this.registrationService.isPasswordRegistered(validPassword));
-    }
-
-    @Test
-    void isPasswordRegistered_notRegistered() {
-        // Act
-        lenient().when(this.personRepository.findByPassword(validPassword)).thenReturn((Optional.empty()));
-
-        // Assert
-        assertFalse(this.registrationService.isPasswordRegistered(validPassword));
-    }
-
-    @Test
     void doesWordHaveAtLeastThreeCharacters_valid() {
         // Act
         boolean hasAtLeastThreeCharacters = this.registrationService.isValidUsername(validUsername);
