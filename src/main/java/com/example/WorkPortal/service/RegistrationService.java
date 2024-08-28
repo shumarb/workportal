@@ -197,6 +197,7 @@ public class RegistrationService {
         logger.info("Currently at isValidPassword method. Password: {}", password);
         // Password has at least 5 characters.
         if (password.length() < 5) {
+            logger.error("Invalid password ({}) as its length is less than 5.", password);
             return false;
         }
 
