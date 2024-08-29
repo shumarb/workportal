@@ -4,8 +4,7 @@
 
 package com.example.WorkPortal.controller;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,32 +20,29 @@ class IndexControllerTest {
     @InjectMocks
     private IndexController indexController;
 
-    private static final Logger indexControllerLogger = LogManager.getLogger(IndexController.class);
+    String viewName;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        viewName = null;
+    }
 
     @Test
-    void test_showIndexPage() {
-        MockitoAnnotations.openMocks(this);
-
-        String viewName = indexController.showIndexPage();
-
+    void testShowIndexPage() {
+        viewName = indexController.showIndexPage();
         assertEquals("index", viewName);
     }
 
     @Test
-    void test_doesNotShowLoginPage() {
-        MockitoAnnotations.openMocks(this);
-
-        String viewName = indexController.showIndexPage();
-
+    void testDoesNotShowLoginPage() {
+        viewName = indexController.showIndexPage();
         assertNotEquals("login", viewName);
     }
 
     @Test
-    void test_doesNotShowRegistrationPage() {
-        MockitoAnnotations.openMocks(this);
-
-        String viewName = indexController.showIndexPage();
-
+    void testDoesNotShowRegistrationPage() {
+        viewName = indexController.showIndexPage();
         assertNotEquals("registration", viewName);
     }
 
