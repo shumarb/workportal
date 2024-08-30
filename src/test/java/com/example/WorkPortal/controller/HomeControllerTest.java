@@ -36,11 +36,14 @@ class HomeControllerTest {
     @InjectMocks
     private HomeController homeController;
 
+    String viewName;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         loggedInManager = new Manager("Ali Hassan", "ali_hassan", "alihassan@gmail.com", "PO98!");
         loggedInUser = new User("Imran Khan", "imran_khan", "imrankhan@gmail.com", "VC34$");
+        viewName = null;
     }
 
     @Test
@@ -49,7 +52,7 @@ class HomeControllerTest {
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
         // Act
-        String viewName = homeController.showHome(httpSession, model);
+        viewName = homeController.showHome(httpSession, model);
 
         // Assert
         assertEquals("home", viewName);
@@ -62,7 +65,7 @@ class HomeControllerTest {
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
         // Act
-        String viewName = homeController.logoutOfHome(httpSession, model);
+        viewName = homeController.logoutOfHome(httpSession, model);
 
         // Assert
         assertEquals("index", viewName);
@@ -76,7 +79,7 @@ class HomeControllerTest {
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
         // Act
-        String viewName = homeController.showManagerialCodeOfConduct(httpSession, model);
+        viewName = homeController.showManagerialCodeOfConduct(httpSession, model);
 
         // Assert
         assertEquals("managerial-code-of-conduct", viewName);
@@ -88,7 +91,7 @@ class HomeControllerTest {
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInUser);
 
         // Act
-        String viewName = homeController.showManagerialCodeOfConduct(httpSession, model);
+        viewName = homeController.showManagerialCodeOfConduct(httpSession, model);
 
         // Assert
         assertEquals("access-denied", viewName);
