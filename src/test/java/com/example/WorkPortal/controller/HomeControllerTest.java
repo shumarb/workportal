@@ -44,7 +44,7 @@ class HomeControllerTest {
     }
 
     @Test
-    void test_showHomePage_success() {
+    void testShowHomePageSuccess() {
         // Arrange
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
@@ -57,7 +57,7 @@ class HomeControllerTest {
     }
 
     @Test
-    void test_logoutOfHome() {
+    void testLogoutOfHomeSuccess() {
         // Arrange
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
@@ -71,7 +71,7 @@ class HomeControllerTest {
     }
 
     @Test
-    void test_showManagerialCodeOfConduct_success() {
+    void testShowManagerialCodeOfConductSuccess() {
         // Arrange
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
@@ -83,7 +83,7 @@ class HomeControllerTest {
     }
 
     @Test
-    void test_showManagerialCodeOfConduct_failure_user() {
+    void testShowManagerialCodeOfConductFailureForUser() {
         // Arrange
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInUser);
 
