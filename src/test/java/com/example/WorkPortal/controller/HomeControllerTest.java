@@ -74,7 +74,7 @@ class HomeControllerTest {
     }
 
     @Test
-    void testShowManagerialCodeOfConductSuccess() {
+    void testShowManagerialCodeOfConductSuccessForManager() {
         // Arrange
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
