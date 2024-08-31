@@ -35,7 +35,7 @@ class LanguageControllerTest {
     }
 
     @Test
-    void test_switchLocale_ukEnglish() {
+    void testSwitchLocaleForUkEnglish() {
         // Act
         Locale result = languageController.switchLocale("en");
 
