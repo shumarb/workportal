@@ -117,8 +117,8 @@ public class RegistrationController {
      * @param errorInput    The input causing the error.
      */
     public void handlesRegistrationError(Model model, String errorMessage, String errorInput) {
-        model.addAttribute("error", errorMessage);
         logger.error("Registration error with input: {} | {}", errorInput, errorMessage);
+        model.addAttribute("error", errorMessage);
     }
 
 }
