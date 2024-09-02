@@ -53,7 +53,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void test_doesNotShowIndexPage() {
+    void testDoesNotShowIndexPage() {
         // Act
         String viewName = this.loginController.showLoginPage();
 
@@ -62,7 +62,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void test_doesNotShowRegistrationPage() {
+    void testDoesNotShowRegistrationPage() {
         // Act
         String viewName = this.loginController.showLoginPage();
 
@@ -71,7 +71,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void test_loginPerson_unexpectedError() throws InvalidUsernameOrPasswordException {
+    void testUnsuccessfulLoginDueToUnexpectedError() throws InvalidUsernameOrPasswordException {
         // Arrange
         lenient().when(loginService.login(validUsername, validPassword)).thenThrow(new RuntimeException());
 
