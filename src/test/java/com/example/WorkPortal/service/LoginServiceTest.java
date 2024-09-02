@@ -4,7 +4,7 @@
 
 package com.example.WorkPortal.service;
 
-import com.example.WorkPortal.exceptions.InvalidUsernameOrPasswordException;
+import com.example.WorkPortal.exceptions.UnsuccessfulLoginException;
 import com.example.WorkPortal.model.Manager;
 import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.model.User;
@@ -52,7 +52,7 @@ class LoginServiceTest {
     }
 
     @Test
-    void test_loginSuccess() throws InvalidUsernameOrPasswordException {
+    void test_loginSuccess() throws UnsuccessfulLoginException {
         // Arrange
         Person manager = new Manager(validName, validUsername, validEmail, validPassword);
 
@@ -73,7 +73,7 @@ class LoginServiceTest {
         lenient().when(this.personRepository.findByUsername(user.getUsername())).thenReturn(Optional.of(user));
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(validUsername, invalidPassword);
         });
     }
@@ -84,7 +84,7 @@ class LoginServiceTest {
         lenient().when(this.personRepository.findByUsername(invalidUsername)).thenReturn(Optional.empty());
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(invalidUsername, validPassword);
         });
     }
@@ -95,7 +95,7 @@ class LoginServiceTest {
         lenient().when(this.personRepository.findByUsername(invalidUsername)).thenReturn(Optional.empty());
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(invalidUsername, invalidPassword);
         });
     }
@@ -106,7 +106,7 @@ class LoginServiceTest {
         lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(null, validPassword);
         });
     }
@@ -117,7 +117,7 @@ class LoginServiceTest {
         lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(null, invalidPassword);
         });
     }
@@ -131,7 +131,7 @@ class LoginServiceTest {
         lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(manager));
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(validUsername, null);
         });
     }
@@ -142,7 +142,7 @@ class LoginServiceTest {
         lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(invalidUsername, null);
         });
     }

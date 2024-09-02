@@ -4,7 +4,7 @@
 
 package com.example.WorkPortal.controller;
 
-import com.example.WorkPortal.exceptions.InvalidUsernameOrPasswordException;
+import com.example.WorkPortal.exceptions.UnsuccessfulLoginException;
 import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.service.LoginService;
 import jakarta.servlet.http.HttpSession;
@@ -71,7 +71,7 @@ public class LoginController {
             logger.info("Successful login of {}. Going to Home page.", loggedInPerson.toString());
             return "redirect:/home";
 
-        } catch (InvalidUsernameOrPasswordException e) {
+        } catch (UnsuccessfulLoginException e) {
             // Error and log messages for invalid username or password.
             logger.error("Unsuccessful Login due to invalid username ({}) or password ({}). "
                                     + "Showing Login page with error message displayed.", username, password);
