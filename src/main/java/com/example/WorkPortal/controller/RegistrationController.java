@@ -4,7 +4,12 @@
 
 package com.example.WorkPortal.controller;
 
-import com.example.WorkPortal.exceptions.*;
+import com.example.WorkPortal.exceptions.InvalidEmailException;
+import com.example.WorkPortal.exceptions.InvalidNameException;
+import com.example.WorkPortal.exceptions.InvalidPasswordException;
+import com.example.WorkPortal.exceptions.InvalidUsernameException;
+import com.example.WorkPortal.exceptions.UnavailableEmailAddressException;
+import com.example.WorkPortal.exceptions.UnavailableUsernameException;
 import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.service.RegistrationService;
 import org.apache.logging.log4j.LogManager;
