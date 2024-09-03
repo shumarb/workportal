@@ -14,7 +14,7 @@ class ManagerTest {
      * Tests the default constructor of {@link Manager}.
      */
     @Test
-    public void test_defaultUserConstructor() {
+    public void testDefaultUserConstructor() {
         Person manager = new Manager();
         assertNotNull(manager);
     }
@@ -24,7 +24,7 @@ class ManagerTest {
      * as well as its getter methods.
      */
     @Test
-    public void test_userConstructorWithParameters_and_getterMethods() {
+    public void testUserConstructorWithParametersAndGetterMethods() {
         String name = "Ali Hassan";
         String username = "ali_hassan";
         String email = "ali_hassan@gmail.com";
@@ -44,7 +44,7 @@ class ManagerTest {
      * Tests the {@code toString()} method of {@link Manager}.
      */
     @Test
-    public void test_toStringMethod() {
+    public void testToStringMethod() {
         String name = "Mary Jane";
         String username = "maryjane";
         String email = "maryjane@outlook.com";
@@ -60,6 +60,7 @@ class ManagerTest {
                 + "', email = '" + email
                 + "', password = '" + password
                 + "', role = '" + role + "'}";
+
         assertEquals(expectedString, manager.toString());
     }
 }
