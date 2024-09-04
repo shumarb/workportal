@@ -52,7 +52,7 @@ class LoginServiceTest {
     }
 
     @Test
-    void test_loginSuccess() throws UnsuccessfulLoginException {
+    void testLoginSuccess() {
         // Arrange
         Person manager = new Manager(validName, validUsername, validEmail, validPassword);
 
@@ -65,7 +65,7 @@ class LoginServiceTest {
 
 
     @Test
-    void test_loginFailure_validUsernameAndInvalidPassword() {
+    void testLoginFailureDueToValidUsernameAndInvalidPassword() {
         // Arrange
         Person user = new User(validName, validUsername, validEmail, validPassword);
 
@@ -79,7 +79,7 @@ class LoginServiceTest {
     }
 
     @Test
-    void test_loginFailure_invalidUsernameAndValidPassword() {
+    void testLoginFailureDueToInvalidUsernameAndValidPassword() {
         // Arrange and act
         lenient().when(this.personRepository.findByUsername(invalidUsername)).thenReturn(Optional.empty());
 
@@ -90,7 +90,7 @@ class LoginServiceTest {
     }
 
     @Test
-    void test_loginFailure_invalidUsernameAndInvalidPassword() {
+    void testLoginFailureDueToInvalidUsernameAndInvalidPassword() {
         // Arrange and act
         lenient().when(this.personRepository.findByUsername(invalidUsername)).thenReturn(Optional.empty());
 
@@ -101,7 +101,7 @@ class LoginServiceTest {
     }
 
     @Test
-    void test_loginFailure_nullUsernameAndValidPassword() {
+    void testLoginFailureDueToNullUsernameAndValidPassword() {
         // Arrange and act
         lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
 
@@ -112,7 +112,7 @@ class LoginServiceTest {
     }
 
     @Test
-    void test_loginFailure_nullUsernameAndInvalidPassword() {
+    void testLoginFailureDueToNullUsernameAndInvalidPassword() {
         // Arrange and act
         lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
 
@@ -123,7 +123,7 @@ class LoginServiceTest {
     }
 
     @Test
-    void test_loginFailure_validUsernameAndNullPassword() {
+    void testLoginFailureDueToValidUsernameAndNullPassword() {
         // Arrange
         Person manager = new Manager(validName, validUsername, validEmail, validPassword);
 
@@ -137,7 +137,7 @@ class LoginServiceTest {
     }
 
     @Test
-    void test_loginFailure_invalidUsernameAndNullPassword() {
+    void testLoginFailureDueToInvalidUsernameAndNullPassword() {
         // Arrange and act
         lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
 
