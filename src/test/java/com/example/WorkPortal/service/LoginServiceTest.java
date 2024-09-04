@@ -4,7 +4,7 @@
 
 package com.example.WorkPortal.service;
 
-import com.example.WorkPortal.exceptions.InvalidUsernameOrPasswordException;
+import com.example.WorkPortal.exceptions.UnsuccessfulLoginException;
 import com.example.WorkPortal.model.Manager;
 import com.example.WorkPortal.model.Person;
 import com.example.WorkPortal.model.User;
@@ -52,7 +52,7 @@ class LoginServiceTest {
     }
 
     @Test
-    void test_loginSuccess() throws InvalidUsernameOrPasswordException {
+    void testLoginSuccess() {
         // Arrange
         Person manager = new Manager(validName, validUsername, validEmail, validPassword);
 
@@ -65,7 +65,7 @@ class LoginServiceTest {
 
 
     @Test
-    void test_loginFailure_validUsernameAndInvalidPassword() {
+    void testLoginFailureDueToValidUsernameAndInvalidPassword() {
         // Arrange
         Person user = new User(validName, validUsername, validEmail, validPassword);
 
@@ -73,57 +73,57 @@ class LoginServiceTest {
         lenient().when(this.personRepository.findByUsername(user.getUsername())).thenReturn(Optional.of(user));
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(validUsername, invalidPassword);
         });
     }
 
     @Test
-    void test_loginFailure_invalidUsernameAndValidPassword() {
+    void testLoginFailureDueToInvalidUsernameAndValidPassword() {
         // Arrange and act
         lenient().when(this.personRepository.findByUsername(invalidUsername)).thenReturn(Optional.empty());
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(invalidUsername, validPassword);
         });
     }
 
     @Test
-    void test_loginFailure_invalidUsernameAndInvalidPassword() {
+    void testLoginFailureDueToInvalidUsernameAndInvalidPassword() {
         // Arrange and act
         lenient().when(this.personRepository.findByUsername(invalidUsername)).thenReturn(Optional.empty());
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(invalidUsername, invalidPassword);
         });
     }
 
     @Test
-    void test_loginFailure_nullUsernameAndValidPassword() {
+    void testLoginFailureDueToNullUsernameAndValidPassword() {
         // Arrange and act
         lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(null, validPassword);
         });
     }
 
     @Test
-    void test_loginFailure_nullUsernameAndInvalidPassword() {
+    void testLoginFailureDueToNullUsernameAndInvalidPassword() {
         // Arrange and act
         lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(null, invalidPassword);
         });
     }
 
     @Test
-    void test_loginFailure_validUsernameAndNullPassword() {
+    void testLoginFailureDueToValidUsernameAndNullPassword() {
         // Arrange
         Person manager = new Manager(validName, validUsername, validEmail, validPassword);
 
@@ -131,18 +131,18 @@ class LoginServiceTest {
         lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(manager));
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(validUsername, null);
         });
     }
 
     @Test
-    void test_loginFailure_invalidUsernameAndNullPassword() {
+    void testLoginFailureDueToInvalidUsernameAndNullPassword() {
         // Arrange and act
         lenient().when(this.personRepository.findByUsername(null)).thenReturn(Optional.empty());
 
         // Assert
-        assertThrows(InvalidUsernameOrPasswordException.class, () -> {
+        assertThrows(UnsuccessfulLoginException.class, () -> {
             this.loginService.login(invalidUsername, null);
         });
     }

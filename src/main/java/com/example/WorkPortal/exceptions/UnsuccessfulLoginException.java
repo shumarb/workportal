@@ -4,6 +4,6 @@
 
 package com.example.WorkPortal.exceptions;
 
-public class InvalidUsernameOrPasswordException extends Exception {
+public class UnsuccessfulLoginException extends Exception {
 
 }

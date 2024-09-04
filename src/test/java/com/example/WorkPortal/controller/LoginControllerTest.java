@@ -3,7 +3,7 @@
  */
 package com.example.WorkPortal.controller;
 
-import com.example.WorkPortal.exceptions.InvalidUsernameOrPasswordException;
+import com.example.WorkPortal.exceptions.UnsuccessfulLoginException;
 import com.example.WorkPortal.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,7 +53,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void test_doesNotShowIndexPage() {
+    void testDoesNotShowIndexPage() {
         // Act
         String viewName = this.loginController.showLoginPage();
 
@@ -62,7 +62,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void test_doesNotShowRegistrationPage() {
+    void testDoesNotShowRegistrationPage() {
         // Act
         String viewName = this.loginController.showLoginPage();
 
@@ -71,7 +71,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void test_loginPerson_unexpectedError() throws InvalidUsernameOrPasswordException {
+    void testUnsuccessfulLoginDueToUnexpectedError() throws UnsuccessfulLoginException {
         // Arrange
         lenient().when(loginService.login(validUsername, validPassword)).thenThrow(new RuntimeException());
 

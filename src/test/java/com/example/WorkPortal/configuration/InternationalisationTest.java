@@ -26,7 +26,7 @@ class InternationalisationTest {
     }
 
     @Test
-    void test_localeChangeInterceptor() {
+    void testLocaleChangeInterceptor() {
         // Act
         LocaleChangeInterceptor localeChangeInterceptor = internationalisation.localeChangeInterceptor();
 

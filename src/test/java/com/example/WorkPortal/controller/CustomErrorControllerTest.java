@@ -51,7 +51,7 @@ class CustomErrorControllerTest {
     }
 
     @Test
-    void test_handleError_withLoggedInPerson_user() {
+    void testErrorHandlingForLoggedInPersonAsUser() {
         // Arrange
         Person user = new User(validName, validUsername, validEmail, validPassword);
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(user);
@@ -66,7 +66,7 @@ class CustomErrorControllerTest {
     }
 
     @Test
-    void test_handleError_withLoggedInPerson_manager() {
+    void testErrorHandlingForLoggedInPersonAsManager() {
         // Arrange
         Person manager = new Manager(validName, validUsername, validEmail, validPassword);
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(manager);
@@ -81,7 +81,7 @@ class CustomErrorControllerTest {
     }
 
     @Test
-    void test_handleError_withoutLoggedInPerson() {
+    void testErrorHandlingWithoutLoggedInPerson() {
         // Arrange
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(null);
 

@@ -36,20 +36,23 @@ class HomeControllerTest {
     @InjectMocks
     private HomeController homeController;
 
+    String viewName;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         loggedInManager = new Manager("Ali Hassan", "ali_hassan", "alihassan@gmail.com", "PO98!");
         loggedInUser = new User("Imran Khan", "imran_khan", "imrankhan@gmail.com", "VC34$");
+        viewName = null;
     }
 
     @Test
-    void test_showHomePage_success() {
+    void testShowHomePageSuccess() {
         // Arrange
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
         // Act
-        String viewName = homeController.showHome(httpSession, model);
+        viewName = homeController.showHome(httpSession, model);
 
         // Assert
         assertEquals("home", viewName);
@@ -57,12 +60,12 @@ class HomeControllerTest {
     }
 
     @Test
-    void test_logoutOfHome() {
+    void testLogoutOfHomeSuccess() {
         // Arrange
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
         // Act
-        String viewName = homeController.logoutOfHome(httpSession, model);
+        viewName = homeController.logoutOfHome(httpSession, model);
 
         // Assert
         assertEquals("index", viewName);
@@ -71,24 +74,24 @@ class HomeControllerTest {
     }
 
     @Test
-    void test_showManagerialCodeOfConduct_success() {
+    void testShowManagerialCodeOfConductSuccessForManager() {
         // Arrange
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInManager);
 
         // Act
-        String viewName = homeController.showManagerialCodeOfConduct(httpSession, model);
+        viewName = homeController.showManagerialCodeOfConduct(httpSession, model);
 
         // Assert
         assertEquals("managerial-code-of-conduct", viewName);
     }
 
     @Test
-    void test_showManagerialCodeOfConduct_failure_user() {
+    void testShowManagerialCodeOfConductFailureForUser() {
         // Arrange
         when(httpSession.getAttribute("loggedInPerson")).thenReturn(loggedInUser);
 
         // Act
-        String viewName = homeController.showManagerialCodeOfConduct(httpSession, model);
+        viewName = homeController.showManagerialCodeOfConduct(httpSession, model);
 
         // Assert
         assertEquals("access-denied", viewName);
