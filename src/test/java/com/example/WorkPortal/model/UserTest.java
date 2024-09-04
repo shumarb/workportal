@@ -15,7 +15,7 @@ class UserTest {
      * Tests the default constructor of {@link User}.
      */
     @Test
-    public void test_defaultUserConstructor() {
+    public void testDefaultUserConstructor() {
         Person user = new User();
         assertNotNull(user);
     }
@@ -25,7 +25,7 @@ class UserTest {
      * as well as its getter methods.
      */
     @Test
-    public void test_userConstructorWithParameters_and_getterMethods() {
+    public void testUserConstructorWithParametersAndGetters() {
         String name = "Ali Hassan";
         String username = "ali_hassan";
         String email = "ali_hassan@gmail.com";
@@ -45,7 +45,7 @@ class UserTest {
      * Tests the {@code toString()} method of {@link User}.
      */
     @Test
-    public void test_toStringMethod() {
+    public void testToString() {
         String name = "Mary Jane";
         String username = "maryjane";
         String email = "maryjane@outlook.com";
