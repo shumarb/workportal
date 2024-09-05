@@ -4,7 +4,12 @@
 
 package com.example.WorkPortal.service;
 
-import com.example.WorkPortal.exceptions.*;
+import com.example.WorkPortal.exceptions.InvalidNameException;
+import com.example.WorkPortal.exceptions.InvalidPasswordException;
+import com.example.WorkPortal.exceptions.InvalidUsernameException;
+import com.example.WorkPortal.exceptions.InvalidEmailException;
+import com.example.WorkPortal.exceptions.UnavailableEmailAddressException;
+import com.example.WorkPortal.exceptions.UnavailableUsernameException;
 import com.example.WorkPortal.model.Manager;
 import com.example.WorkPortal.model.User;
 import com.example.WorkPortal.repository.PersonRepository;
@@ -17,12 +22,27 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
 class RegistrationServiceTest {
 
+    @Mock
+    private PersonRepository personRepository;
+
+    @InjectMocks
+    private RegistrationService registrationService;
+
+    boolean hasAtLeastThreeCharacters;
+    boolean isAllLetters;
+    boolean isEmailAddressRegistered;
+    boolean isValidEmailAddress;
+    boolean isValidName;
+    boolean isValidPassword;
+    boolean isValidUsername;
+    boolean isUsernameRegistered;
     String validName;
     String validUsername;
     String validEmail;
@@ -31,12 +51,6 @@ class RegistrationServiceTest {
     String invalidUsername;
     String invalidEmail;
     String invalidPassword;
-
-    @Mock
-    private PersonRepository personRepository;
-
-    @InjectMocks
-    private RegistrationService registrationService;
 
     @BeforeEach
     void setUp() {
@@ -68,11 +82,11 @@ class RegistrationServiceTest {
 
     @Test
     void testSuccessfulRegistrationForUser() throws InvalidNameException,
-                                            InvalidPasswordException,
-                                            InvalidUsernameException,
-                                            InvalidEmailException,
-                                            UnavailableEmailAddressException,
-                                            UnavailableUsernameException {
+                                                    InvalidPasswordException,
+                                                    InvalidUsernameException,
+                                                    InvalidEmailException,
+                                                    UnavailableEmailAddressException,
+                                                    UnavailableUsernameException {
         // Act
         this.registrationService.registration(validName, validUsername, validEmail, validPassword, "User");
         lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(new User()));
@@ -85,7 +99,7 @@ class RegistrationServiceTest {
     void testIsEmailAddressRegisteredReturnsTrueForRegisteredEmailAddress() {
         // Act
         lenient().when(this.personRepository.findByEmail(validEmail)).thenReturn(Optional.of(new User()));
-        boolean isEmailAddressRegistered = this.registrationService.isEmailAddressRegistered(validEmail);
+        isEmailAddressRegistered = this.registrationService.isEmailAddressRegistered(validEmail);
 
         // Assert
         assertTrue(isEmailAddressRegistered);
@@ -95,7 +109,7 @@ class RegistrationServiceTest {
     void testIsEmailAddressRegisteredReturnsFalseForUnregisteredEmailAddress() {
         // Act
         lenient().when(this.personRepository.findByEmail(validEmail)).thenReturn(Optional.empty());
-        boolean isEmailAddressRegistered = this.registrationService.isEmailAddressRegistered(validEmail);
+        isEmailAddressRegistered = this.registrationService.isEmailAddressRegistered(validEmail);
 
         // Assert
         assertFalse(isEmailAddressRegistered);
@@ -105,7 +119,7 @@ class RegistrationServiceTest {
     void testIsUsernameRegisteredReturnsTrueForRegisteredUsername() {
         // Act
         lenient().when(this.personRepository.findByUsername(validUsername)).thenReturn(Optional.of(new Manager()));
-        boolean isUsernameRegistered = this.registrationService.isUsernameRegistered(validUsername);
+        isUsernameRegistered = this.registrationService.isUsernameRegistered(validUsername);
 
         // Assert
         assertTrue(isUsernameRegistered);
@@ -124,7 +138,7 @@ class RegistrationServiceTest {
     @Test
     void testIsValidEmailAddressReturnsTrueForValidEmailAddress() {
         // Act
-        boolean isValidEmailAddress = this.registrationService.isValidEmailAddress(validEmail);
+        isValidEmailAddress = this.registrationService.isValidEmailAddress(validEmail);
 
         // Assert
         assertTrue(isValidEmailAddress);
@@ -133,7 +147,7 @@ class RegistrationServiceTest {
     @Test
     void testIsValidEmailAddressForInvalidEmailAddress() {
         // Act
-        boolean isValidEmailAddress = this.registrationService.isValidEmailAddress(invalidEmail);
+        isValidEmailAddress = this.registrationService.isValidEmailAddress(invalidEmail);
 
         // Assert
         assertFalse(isValidEmailAddress);
@@ -142,7 +156,7 @@ class RegistrationServiceTest {
     @Test
     void testIsValidNameReturnsTrueForValidName() {
         // Act
-        boolean isValidName = this.registrationService.isValidName(validName);
+        isValidName = this.registrationService.isValidName(validName);
 
         // Assert
         assertTrue(isValidName);
@@ -151,7 +165,7 @@ class RegistrationServiceTest {
     @Test
     void testIsValidNameReturnsTrueForInvalidName() {
         // Act
-        boolean isValidName = this.registrationService.isValidName(invalidName);
+        isValidName = this.registrationService.isValidName(invalidName);
 
         // Assert
         assertFalse(isValidName);
@@ -159,11 +173,8 @@ class RegistrationServiceTest {
 
     @Test
     void testIsAllLettersReturnsTrueForWordContainingOnlyLetters() {
-        // Arrange
-        String word = "word";
-
         // Act
-        boolean isAllLetters = this.registrationService.isAllLetters(word);
+        boolean isAllLetters = this.registrationService.isAllLetters("word");
 
         // Assert
         assertTrue(isAllLetters);
@@ -172,7 +183,7 @@ class RegistrationServiceTest {
     @Test
     void testIsAllLettersReturnsFalseForWordNotContainingOnlyLetters() {
         // Act
-        boolean isAllLetters = this.registrationService.isAllLetters(validUsername);
+        isAllLetters = this.registrationService.isAllLetters(validUsername);
 
         // Assert
         assertFalse(isAllLetters);
@@ -190,7 +201,7 @@ class RegistrationServiceTest {
     @Test
     void testIsValidPasswordReturnsFalseForInvalidPassword() {
         // Act
-        boolean isValidPassword = this.registrationService.isValidPassword(invalidPassword);
+        isValidPassword = this.registrationService.isValidPassword(invalidPassword);
 
         // Assert
         assertFalse(isValidPassword);
@@ -199,7 +210,7 @@ class RegistrationServiceTest {
     @Test
     void testIsValidUsernameReturnsTrueForValidUsername() {
         // Act
-        boolean isValidUsername = this.registrationService.isValidUsername(validUsername);
+        isValidUsername = this.registrationService.isValidUsername(validUsername);
 
         // Assert
         assertTrue(isValidUsername);
@@ -208,7 +219,7 @@ class RegistrationServiceTest {
     @Test
     void testIsValidUsernameReturnsFalseForInvalidUsername() {
         // Act
-        boolean isValidUsername = this.registrationService.isValidUsername(invalidUsername);
+        isValidUsername = this.registrationService.isValidUsername(invalidUsername);
 
         // Assert
         assertFalse(isValidUsername);
@@ -217,7 +228,7 @@ class RegistrationServiceTest {
     @Test
     void testDoesWordHaveAtLeastThreeCharactersReturnsTrueForWordContainingAtLeastThreeCharacters() {
         // Act
-        boolean hasAtLeastThreeCharacters = this.registrationService.isValidUsername(validUsername);
+        hasAtLeastThreeCharacters = this.registrationService.isValidUsername(validUsername);
 
         // Assert
         assertTrue(hasAtLeastThreeCharacters);
@@ -226,7 +237,7 @@ class RegistrationServiceTest {
     @Test
     void testDoesWordHaveAtLeastThreeCharactersReturnsFalseForWordContainingLessThanThreeCharacters() {
         // Act
-        boolean hasAtLeastThreeCharacters = this.registrationService.isValidUsername(invalidUsername);
+        hasAtLeastThreeCharacters = this.registrationService.isValidUsername(invalidUsername);
 
         // Assert
         assertFalse(hasAtLeastThreeCharacters);
