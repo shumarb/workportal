@@ -42,6 +42,7 @@ public class HomeController extends LanguageController {
             model.addAttribute("loggedInPerson", loggedInPerson);
             logger.info("Currently at Home page. Accessed by {}", loggedInPerson.toString());
             return "home";
+
         } catch (Exception e) {
             httpSession.invalidate();
             logger.fatal("Unsuccessful login of {} despite entering correct username and password at Login page.", loggedInPerson.toString());
